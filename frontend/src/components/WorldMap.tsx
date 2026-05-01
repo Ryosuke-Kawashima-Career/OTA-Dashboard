@@ -7,6 +7,7 @@ import { fetchRegions } from '../api/regions'
 import { RivalMarkersLayer } from './RivalMarkersLayer'
 import { useKpiStore } from '../stores/kpiStore'
 import { useRegionDetailStore } from '../stores/regionDetailStore'
+import { useTimePeriodStore } from '../stores/timePeriodStore'
 import {
   KPI_DEFINITIONS,
   type RegionFeatureCollection,
@@ -36,13 +37,14 @@ function renderTooltipHtml(props: RegionProperties, kpiLabel: string, kpiValue: 
 export function WorldMap() {
   const selectedKpi = useKpiStore((s) => s.selectedKpi)
   const openRegion = useRegionDetailStore((s) => s.openRegion)
+  const selectedSnapshot = useTimePeriodStore((s) => s.selected)
   const [data, setData] = useState<RegionFeatureCollection | null>(null)
   const [error, setError] = useState<string | null>(null)
   const geoJsonRef = useRef<L.GeoJSON | null>(null)
 
   useEffect(() => {
     let cancelled = false
-    fetchRegions()
+    fetchRegions(selectedSnapshot)
       .then((json) => {
         if (!cancelled) setData(json)
       })
@@ -55,7 +57,7 @@ export function WorldMap() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [selectedSnapshot])
 
   const extent = useMemo(() => {
     if (!data) return null
@@ -100,14 +102,16 @@ export function WorldMap() {
       },
       click: () => {
         if (props.iso_code) {
-          void openRegion(props.iso_code)
+          void openRegion(props.iso_code, selectedSnapshot)
         }
       },
     })
   }
 
-  // Re-mount the GeoJSON layer when KPI changes so styles + tooltips refresh.
-  const layerKey = `${selectedKpi}-${data?.features.length ?? 0}`
+  // Re-mount the GeoJSON layer when KPI or snapshot changes so styles,
+  // tooltips, and click handlers (which close over selectedSnapshot) all
+  // observe the latest values.
+  const layerKey = `${selectedKpi}-${selectedSnapshot ?? 'none'}-${data?.features.length ?? 0}`
 
   return (
     <div className="world-map">

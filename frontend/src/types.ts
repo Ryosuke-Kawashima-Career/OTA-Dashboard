@@ -25,7 +25,9 @@ export interface Rival {
   id: string
   name: string
   hq_country: string | null
-  category: string | null
+  // Multiple categories per rival — some OTAs serve both B2C and B2B
+  // (e.g. Expedia + Expedia Partner Solutions, Traveloka + Traveloka for Business).
+  categories: string[]
   business_model: string | null
   ai_strategy: string | null
   website: string | null
@@ -56,9 +58,12 @@ export interface DemographicSegment {
 export interface RivalRankingEntry {
   rival_id: string
   name: string
-  category: string | null
+  categories: string[]
   market_share_pct: number
   booking_volume: number | null
+  // Worldwide rank by total booking_volume across all regions for the same
+  // snapshot month. `null` only when the rival has no global volume that month.
+  global_rank: number | null
 }
 
 export interface RegionDetail {
@@ -72,6 +77,24 @@ export interface RegionDetail {
   top_routes: TopRoute[]
   demographics: DemographicSegment[]
   rival_ranking: RivalRankingEntry[]
+}
+
+export interface HottestGrowthRegion {
+  iso_code: string
+  name: string
+  demand_index: number
+}
+
+export interface GlobalKpis {
+  markets_covered: number
+  tracked_rivals: number
+  hottest_growth_region: HottestGrowthRegion | null
+  snapshot_month: string | null
+}
+
+export interface SnapshotsResponse {
+  months: string[]
+  latest: string | null
 }
 
 export const KPI_DEFINITIONS: Record<KpiKey, KpiDefinition> = {

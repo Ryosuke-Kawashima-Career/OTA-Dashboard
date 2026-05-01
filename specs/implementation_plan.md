@@ -97,32 +97,70 @@ Build a world-map-based competitive intelligence dashboard for the OTA president
 
 ---
 
-### Phase 4 — KPI Header + Comparison View
+### Phase 4 — KPI Header + Comparison View ✅ [COMPLETED 2026-04-30]
 
 **Goal:** Satisfy FR-04 and FR-05.
 
-| Task | Output | Acceptance | Verification |
-|---|---|---|---|
-| Backend /api/kpis/global | API | Returns 3 global KPIs | `curl` JSON verify |
-| KPI header bar | Header component | Updates when filters change | Filter integration test |
-| Multi-select picker | Select widget | Enforces max 3 countries | Manual selection edge-case test |
-| Comparison table | Table | Columns align per selection | Cross-reference table data |
-| Highlight winner cell | Visual diff | Highest value is green | Manual data check |
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-4.1 | Backend `/api/kpis/global` | [backend/app/routers/kpis.py](../backend/app/routers/kpis.py) | Returns `markets_covered`, `tracked_rivals`, `hottest_growth_region`, `snapshot_month`; latency < 200ms | `curl -sw '\n%{time_total}s\n' http://localhost:8000/api/kpis/global` → 30 / 9 / US (92) / 2026-04-01 in 33ms | ✅ |
+| T-4.2 | KPI header bar | [KpiHeaderBar.tsx](../frontend/src/components/KpiHeaderBar.tsx) + [api/globalKpis.ts](../frontend/src/api/globalKpis.ts) | Three-tile bar; "Tracked Rivals" recomputes live from `rivalStore.activeCategories` | Toggle category chips → `filteredRivalCount` re-renders without re-fetch | ✅ |
+| T-4.3 | Multi-select picker | [ComparisonPicker.tsx](../frontend/src/components/ComparisonPicker.tsx) + [comparisonStore.ts](../frontend/src/stores/comparisonStore.ts) | Unlimited selection; chips removable; restricted to seeded regions; `<select>` disables only when every seeded region is already picked | `addRegion` no-ops on duplicates; dropdown shows only `demand_index !== null` regions | ✅ |
+| T-4.4 | Comparison table | [ComparisonPanel.tsx](../frontend/src/components/ComparisonPanel.tsx) | 5 metric rows × N region columns aligned by `selectedIsos` order; renders only when ≥2 regions picked; panel auto-sizes with `min-width 520px` / `max-width calc(100vw - 32px)` and the table scrolls horizontally past that bound | `buildComparisonRows` unit tests assert column order and values per region | ✅ |
+| T-4.5 | Highlight winner cell | [comparison.ts](../frontend/src/utils/comparison.ts) + [comparison.test.ts](../frontend/src/utils/comparison.test.ts) | Highest value gets `comparison-table__cell--winner` (green); ties produce no winner; null/NaN never wins | `npm test` — 13/13 comparison tests pass (37/37 total) | ✅ |
 
-**Milestone:** President can compare 3 regions in a table with a single click flow.
+**Milestone:** President can compare up to 3 regions in a table with row-level winner highlighting; KPI header bar reflects rival-category filter live. Verified via `npm run lint`, `npm run build` (TS strict), `npm test` (37/37), and live `/api/kpis/global` curl.
+
+#### Small Tweak Phase 4 ✅ [COMPLETED 2026-04-30]
+
+**Situation:** the rival roster only carried B2C OTAs, and `rivals.category` was a single VARCHAR — it couldn't represent OTAs that operate in both segments.
+
+**Resolution:**
+
+- Schema: migration [0002_rival_multi_category.py](../backend/migrations/versions/0002_rival_multi_category.py) drops `category VARCHAR` and adds `categories VARCHAR[]`, backfilling each existing row's prior category as a single-element array.
+- Model: [Rival.categories: ARRAY(String(50))](../backend/app/models/rival.py) replaces the scalar field.
+- API: [routers/rivals.py](../backend/app/routers/rivals.py) filters via Postgres array overlap (`Rival.categories.overlap(...)`), so `?category=B2B` matches both pure-B2B rivals and dual-category ones.
+- Seed: [seed.py](../data/seeds/seed.py) adds 6 new entries (Amadeus, Hotelbeds, TBO Tek, HRS, Riya Connect — pure B2B; Traveloka — both) and re-tags Expedia / Etraveli as `["B2C", "B2B"]` to reflect Expedia Partner Solutions and Etraveli's white-label arm.
+- Frontend: [types.ts](../frontend/src/types.ts), [rivalStore.ts](../frontend/src/stores/rivalStore.ts), [RivalCategoryFilter.tsx](../frontend/src/components/RivalCategoryFilter.tsx), [RivalMarkersLayer.tsx](../frontend/src/components/RivalMarkersLayer.tsx), [RivalSummaryCard.tsx](../frontend/src/components/RivalSummaryCard.tsx), [KpiHeaderBar.tsx](../frontend/src/components/KpiHeaderBar.tsx), and [RivalRankingTable.tsx](../frontend/src/components/RivalRankingTable.tsx) all consume `categories: string[]`. Visibility is "any active category" (overlap semantics, mirroring the backend).
+
+##### Acceptance Criteria
+
+- [x] User can review both B2C and B2B OTAs (some categorized to **both**). Verified: `/api/rivals` returns 15 rivals; Expedia, Etraveli, Traveloka show `["B2C", "B2B"]`.
+- [x] User can filter B2C and B2B OTAs. Verified: `/api/rivals?category=B2B` → 8 results (5 pure-B2B + 3 dual); `?category=B2C` → 10 results (7 pure-B2C + 3 dual).
+
+**Verification:** `alembic upgrade head` (0001 → 0002), `python data/seeds/seed.py` (15 rivals / 30 regions / 175 snapshots), `npm run lint` clean, `npm run build` (TS strict) clean, `npm test` 37/37, live `/api/rivals?category=B2B|B2C` curl confirmed.
+
+#### Small Tweak Phase 4b — Lift comparison cap ✅ [COMPLETED 2026-04-30]
+
+**Situation:** the comparison view originally capped selection at 3 regions via a `COMPARISON_MAX` constant, and the panel had a fixed 520 px width — adding more regions would have crushed columns.
+
+**Resolution:**
+
+- [comparisonStore.ts](../frontend/src/stores/comparisonStore.ts) drops the `COMPARISON_MAX` constant and the cap guard in `addRegion`; duplicate-ISO suppression remains.
+- [ComparisonPicker.tsx](../frontend/src/components/ComparisonPicker.tsx) removes the "max N reached" copy; the `<select>` now disables only once every seeded region is already picked.
+- [index.css](../frontend/src/index.css) makes `.comparison-panel` `width: auto` with `min-width: 520px` and `max-width: calc(100vw - 32px)`; each region column gets `min-width: 130px`. The existing `.comparison-panel__scroll` `overflow: auto` takes over horizontal scroll once the table exceeds the panel's max-width.
+
+##### Acceptance Criteria
+
+- [x] User can compare more than 3 regions on the table — store no longer caps; dropdown stays enabled until every seeded region is selected.
+- [x] The table extends properly as the number of compared countries increases — panel grows up to viewport, then the inner scroll wrapper scrolls horizontally; columns retain a 130 px minimum so values stay legible.
+
+**Verification:** `npm run lint` clean, `npm run build` (TS strict) clean, `npm test` 37/37 (comparison logic is column-count-agnostic, so existing unit tests still validate the row construction).
 
 ---
 
-### Phase 5 — Time-Period Filter + Export
+### Phase 5 — Time-Period Filter + Export ✅ [COMPLETED 2026-04-30]
 
 **Goal:** Satisfy FR-06.
 
-| Task | Output | Acceptance | Verification |
-|---|---|---|---|
-| Time range slider | Filter widget | UI re-fetches on change | Network tab verification |
-| Backend query param | API update | Filtered data returned | API direct query verification |
-| Backend /api/export | Export API | Returns valid CSV | Check CSV in spreadsheet app |
-| PDF export (jsPDF) | PDF button | PDF contains map + tables | Manual PDF audit |
-| "Last updated" badge | Timestamp | Shows ingestion date | UI vs DB timestamp match |
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-5.1 | Time range slider | [TimePeriodFilter.tsx](../frontend/src/components/TimePeriodFilter.tsx) + [timePeriodStore.ts](../frontend/src/stores/timePeriodStore.ts) | Range slider over the years returned by `/api/snapshots`; moving the handle re-fetches regions, region detail, KPI header, and comparison panel | Slider drives `selectedSnapshot`; every consumer effect re-runs against the new value | ✅ |
+| T-5.2 | Ranking among Global OTAs | `global_rank` field added to each row of `rival_ranking` in [regions.py](../backend/app/routers/regions.py); shown alongside local rank in [RivalRankingTable.tsx](../frontend/src/components/RivalRankingTable.tsx) | Each region row shows local position **and** worldwide rank by booking volume; values match between region panel and DB | `curl /api/regions/US` → Expedia local #1 / global #1, Airbnb local #2 / global #6, etc. | ✅ |
+| T-5.3 | Backend query param | `?snapshot_month=YYYY-MM-DD` accepted by [/api/regions](../backend/app/routers/regions.py), [/api/regions/{iso}](../backend/app/routers/regions.py), [/api/kpis/global](../backend/app/routers/kpis.py), and [/api/export](../backend/app/routers/export.py) via shared [snapshot.py](../backend/app/snapshot.py) helper | Bad date → 400 with explanatory message; missing param → falls back to latest snapshot in DB | `?snapshot_month=garbage` → `400 {"detail":"Invalid snapshot_month 'garbage'; expected YYYY-MM-DD."}` | ✅ |
+| T-5.4 | New `/api/snapshots` | [routers/regions.py](../backend/app/routers/regions.py) | Returns `{ months: [...], latest }` so the frontend can populate the slider | `curl /api/snapshots` → 5 months 2022→2026 | ✅ |
+| T-5.5 | Multi-year seed | [data/seeds/seed.py](../data/seeds/seed.py) | Yearly snapshots 2022→2026 with a deterministic recovery curve (`YEAR_MULTIPLIER`); rival assignments stable per region across years so ranks read as a clean trend | `python data/seeds/seed.py` → "5 distinct snapshot months"; US demand 72 → 92 across years | ✅ |
+| T-5.6 | Backend `/api/export` | [routers/export.py](../backend/app/routers/export.py) | Returns `text/csv` with `Content-Disposition: attachment; filename="ota-export-<snap>.csv"`; columns: snapshot_month, iso_code, name, continent, demand_index, avg_booking_value, top_rival, top_rival_share_pct | `curl /api/export` → CSV header + 30 rows; `?snapshot_month=2022-04-01` re-renders with 2022 values | ✅ |
+| T-5.7 | "Last updated" badge + Export CSV button | [KpiHeaderBar.tsx](../frontend/src/components/KpiHeaderBar.tsx) | Right-aligned column in the KPI header showing the active `snapshot_month` and a "Export CSV" link that downloads the same snapshot the dashboard is showing | Manual: badge updates with slider; button downloads `ota-export-2026-04-01.csv` | ✅ |
 
-**Milestone:** Full filter + export flow works end-to-end.
+**Milestone:** Full filter + export flow works end-to-end. Verified via `npm run lint` clean, `npm run build` (TS strict) clean, `npm test` 37/37, multi-year `/api/kpis/global` curls, `/api/export` CSV inspection, and live `/api/regions/US` showing the new `global_rank` field.

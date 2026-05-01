@@ -20,9 +20,10 @@ export const useRivalStore = create<RivalState>((set) => ({
   activeCategories: new Set<string>(),
   selectedRivalId: null,
   setRivals: (rivals) => {
-    const categories = new Set(
-      rivals.map((r) => r.category).filter((c): c is string => Boolean(c)),
-    )
+    const categories = new Set<string>()
+    for (const r of rivals) {
+      for (const c of r.categories) categories.add(c)
+    }
     set({ rivals, activeCategories: categories, loadError: null })
   },
   setLoadError: (message) => set({ loadError: message }),
@@ -37,10 +38,12 @@ export const useRivalStore = create<RivalState>((set) => ({
       return { activeCategories: next }
     }),
   resetCategories: () =>
-    set((state) => ({
-      activeCategories: new Set(
-        state.rivals.map((r) => r.category).filter((c): c is string => Boolean(c)),
-      ),
-    })),
+    set((state) => {
+      const categories = new Set<string>()
+      for (const r of state.rivals) {
+        for (const c of r.categories) categories.add(c)
+      }
+      return { activeCategories: categories }
+    }),
   selectRival: (id) => set({ selectedRivalId: id }),
 }))

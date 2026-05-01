@@ -11,7 +11,7 @@ export function RivalCategoryFilter() {
   const categories = useMemo(() => {
     const set = new Set<string>()
     for (const r of rivals) {
-      if (r.category) set.add(r.category)
+      for (const c of r.categories) set.add(c)
     }
     return Array.from(set).sort()
   }, [rivals])

@@ -38,8 +38,15 @@ export function RivalMarkersLayer() {
   const selectRival = useRivalStore((s) => s.selectRival)
   const clusterGroupRef = useRef<L.MarkerClusterGroup | null>(null)
 
+  // A rival is visible when *any* of its categories is currently active —
+  // overlap semantics mirror the backend's array-overlap filter.
   const visibleRivals = useMemo(
-    () => rivals.filter((r) => r.category === null || activeCategories.has(r.category ?? '')),
+    () =>
+      rivals.filter(
+        (r) =>
+          r.categories.length === 0 ||
+          r.categories.some((c) => activeCategories.has(c)),
+      ),
     [rivals, activeCategories],
   )
 

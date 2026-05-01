@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 
 import { useRegionDetailStore } from '../stores/regionDetailStore'
+import { useTimePeriodStore } from '../stores/timePeriodStore'
 import { DemandChart } from './DemandChart'
 import { DemographicsDonut } from './DemographicsDonut'
 import { RivalRankingTable } from './RivalRankingTable'
@@ -11,6 +12,8 @@ export function RegionPanel() {
   const loading = useRegionDetailStore((s) => s.loading)
   const error = useRegionDetailStore((s) => s.error)
   const closeRegion = useRegionDetailStore((s) => s.closeRegion)
+  const refreshSelected = useRegionDetailStore((s) => s.refreshSelected)
+  const selectedSnapshot = useTimePeriodStore((s) => s.selected)
 
   useEffect(() => {
     if (!selectedIso) return
@@ -20,6 +23,14 @@ export function RegionPanel() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [selectedIso, closeRegion])
+
+  // When the user moves the time-period slider while a region is open, the
+  // panel must re-fetch against the new snapshot. We skip the very first
+  // render after open because openRegion already kicks off the right fetch.
+  useEffect(() => {
+    if (!selectedIso) return
+    void refreshSelected(selectedSnapshot)
+  }, [selectedSnapshot, selectedIso, refreshSelected])
 
   if (!selectedIso) return null
 

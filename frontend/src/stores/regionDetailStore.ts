@@ -8,7 +8,8 @@ interface RegionDetailState {
   detail: RegionDetail | null
   loading: boolean
   error: string | null
-  openRegion: (iso: string) => Promise<void>
+  openRegion: (iso: string, snapshotMonth?: string | null) => Promise<void>
+  refreshSelected: (snapshotMonth: string | null) => Promise<void>
   closeRegion: () => void
 }
 
@@ -17,11 +18,27 @@ export const useRegionDetailStore = create<RegionDetailState>((set, get) => ({
   detail: null,
   loading: false,
   error: null,
-  openRegion: async (iso) => {
-    if (get().selectedIso === iso && get().detail) return
+  openRegion: async (iso, snapshotMonth) => {
+    // Always re-fetch when the user clicks a region: detail is keyed by
+    // (iso, snapshot_month) and we want the freshest data even when the
+    // same iso is reopened with a different time period selected.
     set({ selectedIso: iso, loading: true, error: null, detail: null })
     try {
-      const detail = await fetchRegionDetail(iso)
+      const detail = await fetchRegionDetail(iso, snapshotMonth)
+      if (get().selectedIso !== iso) return
+      set({ detail, loading: false })
+    } catch (err) {
+      if (get().selectedIso !== iso) return
+      const message = err instanceof Error ? err.message : 'Unknown error'
+      set({ error: message, loading: false })
+    }
+  },
+  refreshSelected: async (snapshotMonth) => {
+    const iso = get().selectedIso
+    if (!iso) return
+    set({ loading: true, error: null })
+    try {
+      const detail = await fetchRegionDetail(iso, snapshotMonth)
       if (get().selectedIso !== iso) return
       set({ detail, loading: false })
     } catch (err) {

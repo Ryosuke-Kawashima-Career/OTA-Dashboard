@@ -7,12 +7,13 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import select
+from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy import distinct, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
 from app.models import Region, RegionMetrics, Rival, RivalRegionSnapshot
+from app.snapshot import parse_snapshot_month, resolve_snapshot_month
 
 # Continents whose summer peaks in Jan/Feb (Southern hemisphere). Anything else
 # peaks in Jul/Aug. Used to synthesize a plausible 12-month demand curve from
@@ -34,16 +35,42 @@ def _load_boundaries() -> dict[str, Any]:
         return json.load(f)
 
 
-@router.get("/regions")
-async def list_regions(db: AsyncSession = Depends(get_db)) -> dict[str, Any]:
-    """Return a GeoJSON FeatureCollection of country boundaries enriched with the
-    latest region metrics (demand_index, avg_booking_value) and continent metadata.
+@router.get("/snapshots")
+async def list_snapshots(db: AsyncSession = Depends(get_db)) -> dict[str, Any]:
+    """Return all distinct snapshot months in ``region_metrics``.
 
-    Countries without seeded metrics still appear in the collection with null KPI
-    values, so the frontend can render the full base map and only color-code the
-    subset that has data.
+    Drives the time-period slider — the frontend uses ``months`` to know
+    which years are available and ``latest`` for its default selection.
+    """
+    rows = (
+        await db.execute(
+            select(distinct(RegionMetrics.snapshot_month)).order_by(
+                RegionMetrics.snapshot_month
+            )
+        )
+    ).all()
+    months = [row[0].isoformat() for row in rows if row[0] is not None]
+    return {
+        "months": months,
+        "latest": months[-1] if months else None,
+    }
+
+
+@router.get("/regions")
+async def list_regions(
+    db: AsyncSession = Depends(get_db),
+    snapshot_month: str | None = Query(default=None),
+) -> dict[str, Any]:
+    """Return a GeoJSON FeatureCollection of country boundaries enriched with
+    the requested KPI snapshot (or the latest if ``snapshot_month`` is omitted)
+    and continent metadata.
+
+    Countries without seeded metrics still appear in the collection with null
+    KPI values, so the frontend can render the full base map and only
+    color-code the subset that has data.
     """
     boundaries = _load_boundaries()
+    snap = await resolve_snapshot_month(db, parse_snapshot_month(snapshot_month))
 
     # Region metadata keyed by iso_code
     region_rows = (await db.execute(select(Region.iso_code, Region.name, Region.continent))).all()
@@ -51,32 +78,26 @@ async def list_regions(db: AsyncSession = Depends(get_db)) -> dict[str, Any]:
         iso: {"name": name, "continent": continent} for iso, name, continent in region_rows
     }
 
-    # Latest KPI snapshot per region (we only seed one month, so MAX is safe).
-    latest_month_subq = (
-        select(RegionMetrics.region_iso, RegionMetrics.snapshot_month)
-        .order_by(RegionMetrics.region_iso, RegionMetrics.snapshot_month.desc())
-        .distinct(RegionMetrics.region_iso)
-        .subquery()
-    )
-    metrics_stmt = select(
-        RegionMetrics.region_iso,
-        RegionMetrics.demand_index,
-        RegionMetrics.avg_booking_value,
-        RegionMetrics.snapshot_month,
-    ).join(
-        latest_month_subq,
-        (RegionMetrics.region_iso == latest_month_subq.c.region_iso)
-        & (RegionMetrics.snapshot_month == latest_month_subq.c.snapshot_month),
-    )
-    metrics_rows = (await db.execute(metrics_stmt)).all()
-    kpi_by_iso: dict[str, dict[str, Any]] = {
-        iso: {
-            "demand_index": demand_index,
-            "avg_booking_value": avg_booking_value,
-            "snapshot_month": snapshot_month.isoformat() if snapshot_month else None,
+    kpi_by_iso: dict[str, dict[str, Any]] = {}
+    if snap is not None:
+        metrics_rows = (
+            await db.execute(
+                select(
+                    RegionMetrics.region_iso,
+                    RegionMetrics.demand_index,
+                    RegionMetrics.avg_booking_value,
+                    RegionMetrics.snapshot_month,
+                ).where(RegionMetrics.snapshot_month == snap)
+            )
+        ).all()
+        kpi_by_iso = {
+            iso: {
+                "demand_index": demand_index,
+                "avg_booking_value": avg_booking_value,
+                "snapshot_month": snapshot_month.isoformat() if snapshot_month else None,
+            }
+            for iso, demand_index, avg_booking_value, snapshot_month in metrics_rows
         }
-        for iso, demand_index, avg_booking_value, snapshot_month in metrics_rows
-    }
 
     features: list[dict[str, Any]] = []
     for feat in boundaries["features"]:
@@ -101,7 +122,11 @@ async def list_regions(db: AsyncSession = Depends(get_db)) -> dict[str, Any]:
             }
         )
 
-    return {"type": "FeatureCollection", "features": features}
+    return {
+        "type": "FeatureCollection",
+        "features": features,
+        "snapshot_month": snap.isoformat() if snap else None,
+    }
 
 
 def _synthesize_monthly_demand(demand_index: int | None, continent: str | None) -> list[dict[str, Any]]:
@@ -128,8 +153,14 @@ def _synthesize_monthly_demand(demand_index: int | None, continent: str | None) 
 async def get_region_detail(
     iso_code: str,
     db: AsyncSession = Depends(get_db),
+    snapshot_month: str | None = Query(default=None),
 ) -> dict[str, Any]:
     """Return the detailed regional characteristics for a single country.
+
+    Accepts an optional ``?snapshot_month=YYYY-MM-DD`` query param. When
+    omitted the latest snapshot present in the DB is used. Each rival in
+    the ranking is annotated with its **global rank** for the same month
+    so the panel can show "Local #2 / Global #1" without a second request.
 
     Shape:
         {
@@ -138,10 +169,12 @@ async def get_region_detail(
           monthly_demand: [{month: 1..12, value: float}, ...],
           top_routes:     [{route, share_pct}, ...],
           demographics:   [{segment, share_pct}, ...],
-          rival_ranking:  [{rival_id, name, category, market_share_pct, booking_volume}, ...]
+          rival_ranking:  [{rival_id, name, categories, market_share_pct,
+                            booking_volume, global_rank}, ...]
         }
     """
     iso = iso_code.upper()
+    snap = await resolve_snapshot_month(db, parse_snapshot_month(snapshot_month))
 
     region = (
         await db.execute(select(Region).where(Region.iso_code == iso))
@@ -149,48 +182,74 @@ async def get_region_detail(
     if region is None:
         raise HTTPException(status_code=404, detail=f"Region {iso!r} not found")
 
-    # Latest region_metrics row for this region
-    metrics = (
-        await db.execute(
-            select(RegionMetrics)
-            .where(RegionMetrics.region_iso == iso)
-            .order_by(RegionMetrics.snapshot_month.desc())
-            .limit(1)
-        )
-    ).scalar_one_or_none()
+    # region_metrics row for this region at the requested snapshot
+    metrics = None
+    if snap is not None:
+        metrics = (
+            await db.execute(
+                select(RegionMetrics)
+                .where(RegionMetrics.region_iso == iso)
+                .where(RegionMetrics.snapshot_month == snap)
+                .limit(1)
+            )
+        ).scalar_one_or_none()
 
     demand_index = metrics.demand_index if metrics else None
     avg_booking_value = metrics.avg_booking_value if metrics else None
-    snapshot_month = (
-        metrics.snapshot_month.isoformat() if metrics and metrics.snapshot_month else None
+    snapshot_month_iso = (
+        metrics.snapshot_month.isoformat() if metrics and metrics.snapshot_month
+        else (snap.isoformat() if snap else None)
     )
     top_routes = list(metrics.top_routes) if (metrics and metrics.top_routes) else []
     demographics = list(metrics.demographics) if (metrics and metrics.demographics) else []
 
-    # Rival ranking by market share for this region, latest snapshot
-    ranking_rows = (
-        await db.execute(
-            select(
-                Rival.id,
-                Rival.name,
-                Rival.category,
-                RivalRegionSnapshot.market_share_pct,
-                RivalRegionSnapshot.booking_volume,
+    # Global ranking for the requested snapshot — rank rivals worldwide by
+    # total booking_volume across all regions. Used to annotate each row of
+    # the regional ranking with a `global_rank` field.
+    global_rank_by_id: dict[str, int] = {}
+    if snap is not None:
+        global_rows = (
+            await db.execute(
+                select(
+                    Rival.id,
+                    func.sum(RivalRegionSnapshot.booking_volume).label("total_volume"),
+                )
+                .join(RivalRegionSnapshot, RivalRegionSnapshot.rival_id == Rival.id)
+                .where(RivalRegionSnapshot.snapshot_month == snap)
+                .group_by(Rival.id)
+                .order_by(func.sum(RivalRegionSnapshot.booking_volume).desc())
             )
-            .join(RivalRegionSnapshot, RivalRegionSnapshot.rival_id == Rival.id)
-            .where(RivalRegionSnapshot.region_iso == iso)
-            .order_by(RivalRegionSnapshot.market_share_pct.desc())
-        )
-    ).all()
+        ).all()
+        global_rank_by_id = {str(rid): idx + 1 for idx, (rid, _) in enumerate(global_rows)}
+
+    # Rival ranking by market share for this region at the requested snapshot
+    ranking_rows = []
+    if snap is not None:
+        ranking_rows = (
+            await db.execute(
+                select(
+                    Rival.id,
+                    Rival.name,
+                    Rival.categories,
+                    RivalRegionSnapshot.market_share_pct,
+                    RivalRegionSnapshot.booking_volume,
+                )
+                .join(RivalRegionSnapshot, RivalRegionSnapshot.rival_id == Rival.id)
+                .where(RivalRegionSnapshot.region_iso == iso)
+                .where(RivalRegionSnapshot.snapshot_month == snap)
+                .order_by(RivalRegionSnapshot.market_share_pct.desc())
+            )
+        ).all()
     rival_ranking = [
         {
             "rival_id": str(rid),
             "name": name,
-            "category": category,
+            "categories": list(categories or []),
             "market_share_pct": share,
             "booking_volume": volume,
+            "global_rank": global_rank_by_id.get(str(rid)),
         }
-        for rid, name, category, share, volume in ranking_rows
+        for rid, name, categories, share, volume in ranking_rows
     ]
 
     return {
@@ -199,7 +258,7 @@ async def get_region_detail(
         "continent": region.continent,
         "demand_index": demand_index,
         "avg_booking_value": avg_booking_value,
-        "snapshot_month": snapshot_month,
+        "snapshot_month": snapshot_month_iso,
         "monthly_demand": _synthesize_monthly_demand(demand_index, region.continent),
         "top_routes": top_routes,
         "demographics": demographics,

@@ -12,7 +12,7 @@ from app.models import Rival
 
 router = APIRouter(prefix="/api", tags=["rivals"])
 
-# HQ coordinates for the 9 seed rivals. Hardcoded here (rather than a DB
+# HQ coordinates for the seeded rivals. Hardcoded here (rather than a DB
 # migration) because the roster is small and the values are stable facts
 # about each company's headquarter city.
 HQ_COORDINATES: dict[str, tuple[float, float]] = {
@@ -24,12 +24,18 @@ HQ_COORDINATES: dict[str, tuple[float, float]] = {
     "Czech Republic": (49.1951, 16.6068),   # Brno (Kiwi.com)
     "Sweden": (59.3293, 18.0686),           # Stockholm (Etraveli)
     "Spain": (41.3874, 2.1686),             # Barcelona (eDreams)
+    "Germany": (50.9375, 6.9603),           # Cologne (HRS)
+    "Indonesia": (-6.2088, 106.8456),       # Jakarta (Traveloka)
 }
 
-# Airbnb is also HQ'd in the US — give it a San Francisco pin so Expedia
-# (Seattle) and Airbnb don't stack exactly on top of each other.
+# Per-rival overrides for cases where multiple rivals share an HQ country and
+# would otherwise stack on the same pin (e.g. three Spanish OTAs).
 PER_RIVAL_COORDINATES: dict[str, tuple[float, float]] = {
-    "Airbnb": (37.7749, -122.4194),
+    "Airbnb": (37.7749, -122.4194),       # San Francisco (vs Expedia/Seattle)
+    "Amadeus": (40.4168, -3.7038),        # Madrid (vs eDreams/Barcelona)
+    "Hotelbeds": (39.5696, 2.6502),       # Palma de Mallorca
+    "TBO Tek": (28.5355, 77.3910),        # Noida (vs MakeMyTrip/Gurugram)
+    "Riya Connect": (19.0760, 72.8777),   # Mumbai (vs MakeMyTrip)
 }
 
 
@@ -41,11 +47,13 @@ async def list_rivals(
     """Return the rival roster with HQ coordinates.
 
     Optionally filter by one or more `category` query params (e.g.
-    `?category=B2C&category=B2B`). Unknown categories simply match nothing.
+    `?category=B2C&category=B2B`). The match is an *array overlap*, so a
+    rival categorised as `["B2C", "B2B"]` matches either query value.
+    Unknown categories simply match nothing.
     """
     stmt = select(Rival).order_by(Rival.name)
     if category:
-        stmt = stmt.where(Rival.category.in_(category))
+        stmt = stmt.where(Rival.categories.overlap(category))
 
     rows = (await db.execute(stmt)).scalars().all()
 
@@ -61,7 +69,7 @@ async def list_rivals(
                 "id": str(r.id),
                 "name": r.name,
                 "hq_country": r.hq_country,
-                "category": r.category,
+                "categories": list(r.categories or []),
                 "business_model": r.business_model,
                 "ai_strategy": r.ai_strategy,
                 "website": r.website,

@@ -24,7 +24,7 @@ RIVALS = [
         "id": str(uuid.uuid4()),
         "name": "Booking.com",
         "hq_country": "Netherlands",
-        "category": "B2C",
+        "categories": ["B2C"],
         "business_model": "Online hotel and accommodation marketplace; merchant and agency models.",
         "ai_strategy": "AI-powered pricing, personalised search, and generative travel assistants.",
         "website": "https://www.booking.com",
@@ -33,8 +33,10 @@ RIVALS = [
         "id": str(uuid.uuid4()),
         "name": "Expedia",
         "hq_country": "United States",
-        "category": "B2C",
-        "business_model": "Full-service OTA covering flights, hotels, cars, and packages.",
+        # Expedia Group serves consumers directly *and* runs Expedia Partner
+        # Solutions (EPS) — its B2B affiliate-distribution arm.
+        "categories": ["B2C", "B2B"],
+        "business_model": "Full-service OTA (consumer) plus Expedia Partner Solutions (B2B affiliate distribution).",
         "ai_strategy": "Conversational AI trip-planning (Romie), dynamic packaging via ML.",
         "website": "https://www.expedia.com",
     },
@@ -42,7 +44,7 @@ RIVALS = [
         "id": str(uuid.uuid4()),
         "name": "Trip.com",
         "hq_country": "China",
-        "category": "B2C",
+        "categories": ["B2C"],
         "business_model": "Asia-first full-service OTA; expanding globally through acquisitions.",
         "ai_strategy": "TripGenie AI assistant; demand-forecasting for flash sales.",
         "website": "https://www.trip.com",
@@ -51,7 +53,7 @@ RIVALS = [
         "id": str(uuid.uuid4()),
         "name": "Airbnb",
         "hq_country": "United States",
-        "category": "B2C",
+        "categories": ["B2C"],
         "business_model": "P2P short-term rental marketplace; host + guest fee model.",
         "ai_strategy": "AI-generated listings, smart pricing for hosts, experience recommendations.",
         "website": "https://www.airbnb.com",
@@ -60,7 +62,7 @@ RIVALS = [
         "id": str(uuid.uuid4()),
         "name": "Agoda",
         "hq_country": "Singapore",
-        "category": "B2C",
+        "categories": ["B2C"],
         "business_model": "Asia-Pacific hotel specialist; part of Booking Holdings.",
         "ai_strategy": "ML-driven competitive rate parity; personalised deal engine.",
         "website": "https://www.agoda.com",
@@ -69,7 +71,7 @@ RIVALS = [
         "id": str(uuid.uuid4()),
         "name": "MakeMyTrip",
         "hq_country": "India",
-        "category": "B2C",
+        "categories": ["B2C"],
         "business_model": "Indian full-service OTA dominating domestic flights and hotels.",
         "ai_strategy": "AI chatbot for support; predictive fare alerts.",
         "website": "https://www.makemytrip.com",
@@ -78,7 +80,7 @@ RIVALS = [
         "id": str(uuid.uuid4()),
         "name": "Kiwi.com",
         "hq_country": "Czech Republic",
-        "category": "B2C",
+        "categories": ["B2C"],
         "business_model": "Virtual interlining — combining tickets across carriers into one booking.",
         "ai_strategy": "Graph-based route optimisation; AI disruption management.",
         "website": "https://www.kiwi.com",
@@ -87,8 +89,10 @@ RIVALS = [
         "id": str(uuid.uuid4()),
         "name": "Etraveli",
         "hq_country": "Sweden",
-        "category": "B2C",
-        "business_model": "Flight-first OTA with strong European presence; white-label B2B.",
+        # Consumer-flight brand (Mytrip, GoToGate) plus a substantial
+        # white-label B2B distribution business.
+        "categories": ["B2C", "B2B"],
+        "business_model": "Flight-first OTA with strong European presence; white-label B2B distribution.",
         "ai_strategy": "Dynamic ancillary upsell using ML models.",
         "website": "https://www.etraveli.com",
     },
@@ -96,10 +100,67 @@ RIVALS = [
         "id": str(uuid.uuid4()),
         "name": "eDreams ODIGEO",
         "hq_country": "Spain",
-        "category": "B2C",
+        "categories": ["B2C"],
         "business_model": "Subscription-based OTA (Prime programme); flights & hotels.",
         "ai_strategy": "AI subscription churn prevention; personalised offer engine.",
         "website": "https://www.edreams.com",
+    },
+    # ----- B2B-only additions (Phase 4 small tweak) -----
+    {
+        "id": str(uuid.uuid4()),
+        "name": "Amadeus",
+        "hq_country": "Spain",
+        "categories": ["B2B"],
+        "business_model": "Global Distribution System (GDS) and travel-tech platform for airlines, hotels, and travel agencies.",
+        "ai_strategy": "Travel intelligence APIs; ML-powered shopping/pricing for distribution partners.",
+        "website": "https://amadeus.com",
+    },
+    {
+        "id": str(uuid.uuid4()),
+        "name": "Hotelbeds",
+        "hq_country": "Spain",
+        "categories": ["B2B"],
+        "business_model": "Bedbank — wholesale hotel inventory sold exclusively to travel-trade buyers.",
+        "ai_strategy": "ML-driven dynamic pricing and demand forecasting for B2B hotel distribution.",
+        "website": "https://www.hotelbeds.com",
+    },
+    {
+        "id": str(uuid.uuid4()),
+        "name": "TBO Tek",
+        "hq_country": "India",
+        "categories": ["B2B"],
+        "business_model": "Global B2B travel-distribution platform connecting travel agents with hotel, flight, and ancillary suppliers.",
+        "ai_strategy": "AI-driven content normalisation and booking-funnel personalisation for retail agents.",
+        "website": "https://www.tbo.com",
+    },
+    {
+        "id": str(uuid.uuid4()),
+        "name": "HRS",
+        "hq_country": "Germany",
+        "categories": ["B2B"],
+        "business_model": "Corporate-travel and managed lodging platform for enterprises (TMC partnerships, programme management).",
+        "ai_strategy": "AI rate auditing and continuous-sourcing engine for corporate hotel programmes.",
+        "website": "https://www.hrs.com",
+    },
+    {
+        "id": str(uuid.uuid4()),
+        "name": "Riya Connect",
+        "hq_country": "India",
+        "categories": ["B2B"],
+        "business_model": "B2B travel-agent platform from Riya Travel; flights, hotels, and packages for the retail-agent channel.",
+        "ai_strategy": "Agent-assist tooling and predictive cross-sell for SME agents.",
+        "website": "https://www.riyaconnect.com",
+    },
+    {
+        "id": str(uuid.uuid4()),
+        "name": "Traveloka",
+        "hq_country": "Indonesia",
+        # Consumer super-app *and* "Traveloka for Business" corporate / agent
+        # tooling — fits the "both" category requirement.
+        "categories": ["B2C", "B2B"],
+        "business_model": "Southeast-Asian travel super-app (consumer) with a Traveloka for Business arm for corporate accounts.",
+        "ai_strategy": "Personalised recommendations and dynamic-bundle pricing across SEA markets.",
+        "website": "https://www.traveloka.com",
     },
 ]
 
@@ -268,11 +329,31 @@ RIVAL_HOME_ISO: dict[str, str] = {
     "Kiwi.com": "CZ",
     "Etraveli": "SE",
     "eDreams ODIGEO": "ES",
+    "Amadeus": "ES",
+    "Hotelbeds": "ES",
+    "TBO Tek": "IN",
+    "HRS": "DE",
+    "Riya Connect": "IN",
+    "Traveloka": "ID",
 }
 
-# KPI snapshot for the latest month. Demand index is a 0-100 score
-# (travel intent proxy); avg booking value is USD per reservation.
-SNAPSHOT_MONTH = date(2026, 4, 1)
+# KPI snapshots — one per April between 2022 and 2026. Yearly granularity
+# matches FR-06 ("yearly granularity minimum") and gives the time-period
+# filter five distinct points to walk through. The latest snapshot remains
+# the canonical "current" view for endpoints that don't pass a month.
+SNAPSHOT_MONTHS = [date(year, 4, 1) for year in (2022, 2023, 2024, 2025, 2026)]
+LATEST_SNAPSHOT_MONTH = SNAPSHOT_MONTHS[-1]
+# Recovery-curve multiplier applied to demand_index, avg_booking_value, and
+# rival booking_volume per year. 2022 sits at the post-COVID rebound trough,
+# 2026 is "current". Values are deliberately monotonic so YoY differences
+# are obvious in the slider; in production this would come from real data.
+YEAR_MULTIPLIER: dict[int, float] = {
+    2022: 0.78,
+    2023: 0.86,
+    2024: 0.92,
+    2025: 0.97,
+    2026: 1.00,
+}
 REGION_METRICS = [
     ("US", 92, 412.50),
     ("GB", 78, 298.10),
@@ -318,97 +399,109 @@ def seed():
         COUNTRIES,
     )
 
-    # Rivals
+    # Rivals — idempotent on (name): refresh categories + metadata if the row
+    # already exists (e.g. running this seed after migration 0002 against a
+    # database that already had the original 9 single-category rivals).
     execute_values(
         cur,
         """
-        INSERT INTO rivals (id, name, hq_country, category, business_model, ai_strategy, website)
-        VALUES %s ON CONFLICT DO NOTHING
+        INSERT INTO rivals (id, name, hq_country, categories, business_model, ai_strategy, website)
+        VALUES %s
+        ON CONFLICT (name) DO UPDATE SET
+            hq_country = EXCLUDED.hq_country,
+            categories = EXCLUDED.categories,
+            business_model = EXCLUDED.business_model,
+            ai_strategy = EXCLUDED.ai_strategy,
+            website = EXCLUDED.website
         """,
         [
             (
-                r["id"], r["name"], r["hq_country"], r["category"],
+                r["id"], r["name"], r["hq_country"], r["categories"],
                 r["business_model"], r["ai_strategy"], r["website"],
             )
             for r in RIVALS
         ],
     )
 
-    # Region metrics (idempotent: replace the snapshot for the seeded month)
-    cur.execute(
-        "DELETE FROM region_metrics WHERE snapshot_month = %s",
-        (SNAPSHOT_MONTH,),
-    )
-    execute_values(
-        cur,
-        """
-        INSERT INTO region_metrics
-            (id, region_iso, snapshot_month, avg_booking_value, demand_index, top_routes, demographics)
-        VALUES %s
-        """,
-        [
-            (
-                str(uuid.uuid4()),
-                iso,
-                SNAPSHOT_MONTH,
-                avg_booking_value,
-                demand_index,
-                json.dumps(REGION_TOP_ROUTES.get(iso, [])),
-                json.dumps(REGION_DEMOGRAPHICS.get(iso, [])),
-            )
-            for iso, demand_index, avg_booking_value in REGION_METRICS
-        ],
-    )
-
-    # Rival region snapshots (idempotent: replace the whole snapshot month).
-    # Market-share generation: deterministic PRNG with a home-country bonus so
-    # MakeMyTrip dominates India, Agoda dominates APAC, etc. Shares are
-    # normalized so the top-N rivals cover ~80% of the market (the remainder
-    # represents long-tail/local operators that aren't tracked here).
-    cur.execute(
-        "DELETE FROM rival_region_snapshots WHERE snapshot_month = %s",
-        (SNAPSHOT_MONTH,),
-    )
-    rng = random.Random(42)
-
     cur.execute("SELECT id, name FROM rivals;")
     rival_by_name = {name: rid for rid, name in cur.fetchall()}
 
-    snapshot_rows: list[tuple] = []
-    for iso, _, _ in REGION_METRICS:
-        # Each region picks 5–7 of the 9 rivals to "operate" in it
-        active_rivals = rng.sample(list(RIVAL_HOME_ISO.keys()), k=rng.randint(5, 7))
-        raw_scores = []
-        for name in active_rivals:
-            base = rng.uniform(3, 10)
-            if RIVAL_HOME_ISO[name] == iso:
-                base *= 4.0  # strong home-country bias
-            raw_scores.append(base)
-        total = sum(raw_scores)
-        # Normalize to sum to 80% of market; remaining 20% is unmodeled competition.
-        for name, score in zip(active_rivals, raw_scores):
-            share = round(score / total * 80.0, 2)
-            booking_volume = int(share * 15_000)  # plausible booking volume
-            snapshot_rows.append(
+    # Region metrics + rival snapshots are seeded for every (year, region) pair.
+    # Idempotent within a snapshot month: we DELETE-then-INSERT, so re-running
+    # the seed always converges on the canonical curve.
+    for snap in SNAPSHOT_MONTHS:
+        mult = YEAR_MULTIPLIER[snap.year]
+
+        cur.execute(
+            "DELETE FROM region_metrics WHERE snapshot_month = %s",
+            (snap,),
+        )
+        execute_values(
+            cur,
+            """
+            INSERT INTO region_metrics
+                (id, region_iso, snapshot_month, avg_booking_value, demand_index, top_routes, demographics)
+            VALUES %s
+            """,
+            [
                 (
                     str(uuid.uuid4()),
-                    rival_by_name[name],
                     iso,
-                    share,
-                    booking_volume,
-                    SNAPSHOT_MONTH,
+                    snap,
+                    round(avg_booking_value * mult, 2),
+                    int(round(demand_index * mult)),
+                    json.dumps(REGION_TOP_ROUTES.get(iso, [])),
+                    json.dumps(REGION_DEMOGRAPHICS.get(iso, [])),
                 )
-            )
+                for iso, demand_index, avg_booking_value in REGION_METRICS
+            ],
+        )
 
-    execute_values(
-        cur,
-        """
-        INSERT INTO rival_region_snapshots
-            (id, rival_id, region_iso, market_share_pct, booking_volume, snapshot_month)
-        VALUES %s
-        """,
-        snapshot_rows,
-    )
+        # Rival region snapshots (idempotent per snapshot month). Each year
+        # uses the same PRNG seed so a region keeps its same active rivals
+        # and rank order over time — only volumes scale with `mult`. This
+        # produces a believable historical trend per rival while leaving
+        # the home-country dominance (Expedia/US, MakeMyTrip/IN, etc.) intact.
+        cur.execute(
+            "DELETE FROM rival_region_snapshots WHERE snapshot_month = %s",
+            (snap,),
+        )
+        rng = random.Random(42)
+        snapshot_rows: list[tuple] = []
+        for iso, _, _ in REGION_METRICS:
+            # Each region picks 5–7 rivals to "operate" in it
+            active_rivals = rng.sample(list(RIVAL_HOME_ISO.keys()), k=rng.randint(5, 7))
+            raw_scores = []
+            for name in active_rivals:
+                base = rng.uniform(3, 10)
+                if RIVAL_HOME_ISO[name] == iso:
+                    base *= 4.0  # strong home-country bias
+                raw_scores.append(base)
+            total = sum(raw_scores)
+            # Normalize to sum to 80% of market; remaining 20% is unmodeled competition.
+            for name, score in zip(active_rivals, raw_scores):
+                share = round(score / total * 80.0, 2)
+                booking_volume = int(share * 15_000 * mult)
+                snapshot_rows.append(
+                    (
+                        str(uuid.uuid4()),
+                        rival_by_name[name],
+                        iso,
+                        share,
+                        booking_volume,
+                        snap,
+                    )
+                )
+
+        execute_values(
+            cur,
+            """
+            INSERT INTO rival_region_snapshots
+                (id, rival_id, region_iso, market_share_pct, booking_volume, snapshot_month)
+            VALUES %s
+            """,
+            snapshot_rows,
+        )
 
     conn.commit()
     cur.execute("SELECT COUNT(*) FROM rivals;")
@@ -417,25 +510,32 @@ def seed():
     region_count = cur.fetchone()[0]
     cur.execute(
         "SELECT COUNT(*) FROM region_metrics WHERE snapshot_month = %s",
-        (SNAPSHOT_MONTH,),
+        (LATEST_SNAPSHOT_MONTH,),
     )
     metrics_count = cur.fetchone()[0]
     cur.execute(
         "SELECT COUNT(*) FROM rival_region_snapshots WHERE snapshot_month = %s",
-        (SNAPSHOT_MONTH,),
+        (LATEST_SNAPSHOT_MONTH,),
     )
     snapshot_count = cur.fetchone()[0]
+    cur.execute("SELECT COUNT(DISTINCT snapshot_month) FROM region_metrics;")
+    distinct_months = cur.fetchone()[0]
     cur.close()
     conn.close()
 
     print(
         f"Seeded {rival_count} rivals, {region_count} regions, "
-        f"{metrics_count} region_metrics, {snapshot_count} rival_region_snapshots."
+        f"{metrics_count} region_metrics @ {LATEST_SNAPSHOT_MONTH}, "
+        f"{snapshot_count} rival_region_snapshots @ {LATEST_SNAPSHOT_MONTH}, "
+        f"{distinct_months} distinct snapshot months."
     )
-    assert rival_count == 9, f"Expected 9 rivals, got {rival_count}"
+    assert rival_count == 15, f"Expected 15 rivals, got {rival_count}"
     assert region_count == 30, f"Expected 30 regions, got {region_count}"
-    assert metrics_count == 30, f"Expected 30 region_metrics, got {metrics_count}"
-    assert snapshot_count >= 150, f"Expected ≥150 rival_region_snapshots, got {snapshot_count}"
+    assert metrics_count == 30, f"Expected 30 region_metrics for latest month, got {metrics_count}"
+    assert snapshot_count >= 150, f"Expected ≥150 rival_region_snapshots for latest, got {snapshot_count}"
+    assert distinct_months == len(SNAPSHOT_MONTHS), (
+        f"Expected {len(SNAPSHOT_MONTHS)} distinct snapshot months, got {distinct_months}"
+    )
     print("PASS: seed counts verified.")
 
 

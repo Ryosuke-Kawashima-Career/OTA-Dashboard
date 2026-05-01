@@ -26,7 +26,7 @@ export function RivalSummaryCard() {
           <h2 className="rival-card__title">{rival.name}</h2>
           <p className="rival-card__subtitle">
             {rival.hq_country ?? 'Unknown HQ'}
-            {rival.category ? ` · ${rival.category}` : ''}
+            {rival.categories.length > 0 ? ` · ${rival.categories.join(' / ')}` : ''}
           </p>
         </div>
         <button
