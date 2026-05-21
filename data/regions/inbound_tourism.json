@@ -1,0 +1,902 @@
+[
+  {
+    "id": "d4c6a61e-1bef-5144-807f-15c84daeb10d",
+    "region_iso": "US",
+    "year": 2022,
+    "international_arrivals_thousands": 50820,
+    "tourism_receipts_usd_millions": 165500,
+    "is_estimated": false,
+    "source_url": "https://www.trade.gov/feature-article/ntto-releases-international-travel-statistics-2023",
+    "notes": "NTTO total international arrivals 2022; receipts from NTTO/Commerce Dept."
+  },
+  {
+    "id": "4a65190a-5297-5e9e-98fa-4a023aad824c",
+    "region_iso": "US",
+    "year": 2023,
+    "international_arrivals_thousands": 66500,
+    "tourism_receipts_usd_millions": 213100,
+    "is_estimated": false,
+    "source_url": "https://www.trade.gov/feature-article/ntto-releases-international-travel-statistics-2023",
+    "notes": "NTTO 2023 annual; +31% YoY"
+  },
+  {
+    "id": "aa400d9e-f406-5392-9505-55ec42b57665",
+    "region_iso": "US",
+    "year": 2024,
+    "international_arrivals_thousands": 72390,
+    "tourism_receipts_usd_millions": 253900,
+    "is_estimated": false,
+    "source_url": "https://www.trade.gov/feature-article/december-and-annual-2024-total-international-travel-volume",
+    "notes": "NTTO 2024 annual: 72.39M arrivals, $253.9B exports"
+  },
+  {
+    "id": "308f62e2-ea79-58d0-9c7b-21019d231963",
+    "region_iso": "GB",
+    "year": 2022,
+    "international_arrivals_thousands": 31200,
+    "tourism_receipts_usd_millions": 33000,
+    "is_estimated": false,
+    "source_url": "https://www.visitbritain.org/research-insights/inbound-visits-and-spend-annual-uk",
+    "notes": "ONS IPS / VisitBritain inbound visits 2022"
+  },
+  {
+    "id": "b33b8993-7ae6-543f-a10c-1575ebfc95ba",
+    "region_iso": "GB",
+    "year": 2023,
+    "international_arrivals_thousands": 38010,
+    "tourism_receipts_usd_millions": 38600,
+    "is_estimated": false,
+    "source_url": "https://www.visitbritain.org/research-insights/inbound-visits-and-spend-annual-uk",
+    "notes": "ONS IPS final 2023 - record GBP 31.1bn spend"
+  },
+  {
+    "id": "8cbddcc8-819b-551b-a368-1ec8118bc73e",
+    "region_iso": "GB",
+    "year": 2024,
+    "international_arrivals_thousands": 42600,
+    "tourism_receipts_usd_millions": 102000,
+    "is_estimated": false,
+    "source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/leisureandtourism/articles/traveltrends/2024",
+    "notes": "ONS Travel Trends 2024: 42.6M visits, GBP 32.5B"
+  },
+  {
+    "id": "2d1a9c7f-5379-5330-8168-66fbe3d6cb7b",
+    "region_iso": "DE",
+    "year": 2022,
+    "international_arrivals_thousands": 28500,
+    "tourism_receipts_usd_millions": 46600,
+    "is_estimated": true,
+    "source_url": "https://www.destatis.de/EN/Themes/Economic-Sectors-Enterprises/Accommodation-Food-Services-Activities-Tourism/_node.html",
+    "notes": "Destatis foreign guest arrivals 2022"
+  },
+  {
+    "id": "bec1198d-b5b8-5645-befc-09e389b0f86a",
+    "region_iso": "DE",
+    "year": 2023,
+    "international_arrivals_thousands": 34900,
+    "tourism_receipts_usd_millions": 53900,
+    "is_estimated": false,
+    "source_url": "https://www.destatis.de/EN/Themes/Economic-Sectors-Enterprises/Accommodation-Food-Services-Activities-Tourism/_node.html",
+    "notes": "Destatis 2023"
+  },
+  {
+    "id": "00d72134-9ed0-5855-ad24-71a910174171",
+    "region_iso": "DE",
+    "year": 2024,
+    "international_arrivals_thousands": 37000,
+    "tourism_receipts_usd_millions": 58000,
+    "is_estimated": false,
+    "source_url": "https://www.germany.travel/media/pdf_5/DZT_Zahlenflyer_GTM_2025_EN_barrierefrei.pdf",
+    "notes": "DZT/Destatis 2024"
+  },
+  {
+    "id": "43f85b82-79ec-52be-bdc0-d04b830ca3c8",
+    "region_iso": "FR",
+    "year": 2022,
+    "international_arrivals_thousands": 79400,
+    "tourism_receipts_usd_millions": 59700,
+    "is_estimated": false,
+    "source_url": "https://www.campusfrance.org/en/actu/2024-annee-record-pour-le-tourisme-international-en-france",
+    "notes": "DGE/UNWTO 2022"
+  },
+  {
+    "id": "a414106a-d7ff-581d-b5a5-6b7a3cf88842",
+    "region_iso": "FR",
+    "year": 2023,
+    "international_arrivals_thousands": 100000,
+    "tourism_receipts_usd_millions": 67900,
+    "is_estimated": false,
+    "source_url": "https://www.campusfrance.org/en/actu/2024-annee-record-pour-le-tourisme-international-en-france",
+    "notes": "DGE 2023"
+  },
+  {
+    "id": "a722cb9e-0a48-55ea-9247-2e9e090168d4",
+    "region_iso": "FR",
+    "year": 2024,
+    "international_arrivals_thousands": 102000,
+    "tourism_receipts_usd_millions": 77100,
+    "is_estimated": false,
+    "source_url": "https://en.wikipedia.org/wiki/World_Tourism_rankings",
+    "notes": "France #1 destination 2024"
+  },
+  {
+    "id": "ff624633-19ee-5237-89a4-650fad48ea1d",
+    "region_iso": "JP",
+    "year": 2022,
+    "international_arrivals_thousands": 3832,
+    "tourism_receipts_usd_millions": 5300,
+    "is_estimated": false,
+    "source_url": "https://statistics.jnto.go.jp/en/graph/",
+    "notes": "JNTO 2022"
+  },
+  {
+    "id": "e3cda4d2-048d-5675-ab11-cd9bfc8e4442",
+    "region_iso": "JP",
+    "year": 2023,
+    "international_arrivals_thousands": 25066,
+    "tourism_receipts_usd_millions": 36000,
+    "is_estimated": false,
+    "source_url": "https://statistics.jnto.go.jp/en/graph/",
+    "notes": "JNTO 2023"
+  },
+  {
+    "id": "48c85f29-de6b-57e3-9428-2debb68ec722",
+    "region_iso": "JP",
+    "year": 2024,
+    "international_arrivals_thousands": 36870,
+    "tourism_receipts_usd_millions": 53000,
+    "is_estimated": false,
+    "source_url": "https://statistics.jnto.go.jp/en/graph/",
+    "notes": "JNTO 2024 record"
+  },
+  {
+    "id": "ef5fe02d-afc9-575e-a594-4ab699788bac",
+    "region_iso": "CN",
+    "year": 2022,
+    "international_arrivals_thousands": 27400,
+    "tourism_receipts_usd_millions": 14700,
+    "is_estimated": true,
+    "source_url": "https://www.travelchinaguide.com/tourism/2023-statistics/",
+    "notes": "Includes HK/Macao/Taiwan; COVID restricted"
+  },
+  {
+    "id": "2a3c421d-b8dc-5cc9-84c0-36e16fec96be",
+    "region_iso": "CN",
+    "year": 2023,
+    "international_arrivals_thousands": 82030,
+    "tourism_receipts_usd_millions": 53000,
+    "is_estimated": false,
+    "source_url": "https://www.travelchinaguide.com/tourism/2023-statistics/",
+    "notes": "MCT 2023"
+  },
+  {
+    "id": "74679df2-3ed3-5ea0-8655-d52f50770e0e",
+    "region_iso": "CN",
+    "year": 2024,
+    "international_arrivals_thousands": 131900,
+    "tourism_receipts_usd_millions": 94200,
+    "is_estimated": false,
+    "source_url": "https://english.www.gov.cn/archive/statistics/202411/23/content_WS67413bfdc6d0868f4e8ed590.html",
+    "notes": "Immigration Admin: 131.9M inbound 2024"
+  },
+  {
+    "id": "5d8cb124-3fa4-5fd5-ada5-bf51b26196cf",
+    "region_iso": "IN",
+    "year": 2022,
+    "international_arrivals_thousands": 6430,
+    "tourism_receipts_usd_millions": 16900,
+    "is_estimated": false,
+    "source_url": "https://tourism.gov.in/sites/default/files/2024-02/India%20Tourism%20Statistics%202023-English.pdf",
+    "notes": "MoT India 2023"
+  },
+  {
+    "id": "6c9a8a06-6cba-5f15-a493-6cc97104fc1e",
+    "region_iso": "IN",
+    "year": 2023,
+    "international_arrivals_thousands": 9520,
+    "tourism_receipts_usd_millions": 28100,
+    "is_estimated": false,
+    "source_url": "https://tourism.gov.in/sites/default/files/2025-03/India%20Tourism%20Data%20Compendium%202024_0.pdf",
+    "notes": "MoT India 2024"
+  },
+  {
+    "id": "d6348740-960e-508c-a346-4fc4695026b3",
+    "region_iso": "IN",
+    "year": 2024,
+    "international_arrivals_thousands": 9950,
+    "tourism_receipts_usd_millions": 32100,
+    "is_estimated": false,
+    "source_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2087824&reg=3&lang=2",
+    "notes": "PIB YE Review 2024"
+  },
+  {
+    "id": "164858a3-c194-5ce5-8390-3cb665f0843b",
+    "region_iso": "AU",
+    "year": 2022,
+    "international_arrivals_thousands": 3694,
+    "tourism_receipts_usd_millions": 7000,
+    "is_estimated": false,
+    "source_url": "https://www.abs.gov.au/statistics/industry/tourism-and-transport/overseas-arrivals-and-departures-australia/latest-release",
+    "notes": "ABS 2022"
+  },
+  {
+    "id": "690812ce-7291-5e8d-99b3-1b404f23b584",
+    "region_iso": "AU",
+    "year": 2023,
+    "international_arrivals_thousands": 7187,
+    "tourism_receipts_usd_millions": 22600,
+    "is_estimated": false,
+    "source_url": "https://www.tra.gov.au/en/international/international-tourism-results",
+    "notes": "TRA/ABS 2023"
+  },
+  {
+    "id": "10772831-eba1-53de-8960-09a9c070b8f4",
+    "region_iso": "AU",
+    "year": 2024,
+    "international_arrivals_thousands": 7630,
+    "tourism_receipts_usd_millions": 30900,
+    "is_estimated": false,
+    "source_url": "https://www.tourism.australia.com/en/insights/tourism-statistics/international-visitor-arrivals.html",
+    "notes": "ABS YE Dec 2024"
+  },
+  {
+    "id": "9a9931b9-6004-539a-a8e0-b552c4fbdce1",
+    "region_iso": "BR",
+    "year": 2022,
+    "international_arrivals_thousands": 3630,
+    "tourism_receipts_usd_millions": 5900,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/805683/number-international-tourist-arrivals-brazil/",
+    "notes": "Embratur 2022"
+  },
+  {
+    "id": "89e2543b-9971-510f-9ff4-b1ca07e62e60",
+    "region_iso": "BR",
+    "year": 2023,
+    "international_arrivals_thousands": 5908,
+    "tourism_receipts_usd_millions": 6900,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/805683/number-international-tourist-arrivals-brazil/",
+    "notes": "Embratur 2023"
+  },
+  {
+    "id": "d0c2e2de-1893-59e7-bd6d-20fd631f4c68",
+    "region_iso": "BR",
+    "year": 2024,
+    "international_arrivals_thousands": 6770,
+    "tourism_receipts_usd_millions": 7400,
+    "is_estimated": false,
+    "source_url": "https://tradingeconomics.com/brazil/tourist-arrivals",
+    "notes": "Embratur 2024: 6.77M arrivals"
+  },
+  {
+    "id": "e95aed82-2c38-5991-b000-e4ea8ad6512d",
+    "region_iso": "CA",
+    "year": 2022,
+    "international_arrivals_thousands": 12800,
+    "tourism_receipts_usd_millions": 24200,
+    "is_estimated": false,
+    "source_url": "https://www150.statcan.gc.ca/n1/daily-quotidien/250530/dq250530d-eng.htm",
+    "notes": "StatCan 2022"
+  },
+  {
+    "id": "cace79a7-8430-56e3-9e64-d36d26f16302",
+    "region_iso": "CA",
+    "year": 2023,
+    "international_arrivals_thousands": 18300,
+    "tourism_receipts_usd_millions": 38500,
+    "is_estimated": false,
+    "source_url": "https://www150.statcan.gc.ca/n1/daily-quotidien/250530/dq250530d-eng.htm",
+    "notes": "StatCan 2023"
+  },
+  {
+    "id": "61027475-64cb-5b88-9579-05db978f87e1",
+    "region_iso": "CA",
+    "year": 2024,
+    "international_arrivals_thousands": 19910,
+    "tourism_receipts_usd_millions": 49400,
+    "is_estimated": false,
+    "source_url": "https://www150.statcan.gc.ca/n1/daily-quotidien/250530/dq250530d-eng.htm",
+    "notes": "StatCan Q4 2024"
+  },
+  {
+    "id": "2350776f-c4b0-59ee-b4aa-48e80387f363",
+    "region_iso": "MX",
+    "year": 2022,
+    "international_arrivals_thousands": 38328,
+    "tourism_receipts_usd_millions": 28000,
+    "is_estimated": false,
+    "source_url": "https://www.datatur.sectur.gob.mx/RAT/RAT-2023-12(EN).pdf",
+    "notes": "DataTur/SECTUR 2022"
+  },
+  {
+    "id": "ed42e3ab-09d5-5841-a3af-4badac6b9d5a",
+    "region_iso": "MX",
+    "year": 2023,
+    "international_arrivals_thousands": 42153,
+    "tourism_receipts_usd_millions": 30809,
+    "is_estimated": false,
+    "source_url": "https://www.datatur.sectur.gob.mx/RAT/RAT-2023-12(EN).pdf",
+    "notes": "INEGI/DataTur 2023"
+  },
+  {
+    "id": "ca7ead9f-ab81-59fc-9cd1-866182618176",
+    "region_iso": "MX",
+    "year": 2024,
+    "international_arrivals_thousands": 45040,
+    "tourism_receipts_usd_millions": 32960,
+    "is_estimated": true,
+    "source_url": "https://www.datatur.sectur.gob.mx/RAT/RAT-2024-07(EN).pdf",
+    "notes": "Extrapolated from Jan-Jul 2024 +5.3% YoY"
+  },
+  {
+    "id": "ec5fc6c4-bc26-5a52-a920-f64c705a52ed",
+    "region_iso": "ES",
+    "year": 2022,
+    "international_arrivals_thousands": 71660,
+    "tourism_receipts_usd_millions": 87000,
+    "is_estimated": false,
+    "source_url": "https://ine.es/dyngs/Prensa/en/FRONTUR1223.htm",
+    "notes": "INE FRONTUR 2022"
+  },
+  {
+    "id": "0d491517-ad1e-5266-a669-dd85ef66fae4",
+    "region_iso": "ES",
+    "year": 2023,
+    "international_arrivals_thousands": 85170,
+    "tourism_receipts_usd_millions": 92000,
+    "is_estimated": false,
+    "source_url": "https://www.mintur.gob.es/en-us/gabineteprensa/notasprensa/2024/paginas/datos-llegada-turistas-gasto-2023-record.aspx",
+    "notes": "INE FRONTUR 2023"
+  },
+  {
+    "id": "3b7068cf-0820-52e5-ba6f-3363614e4d2b",
+    "region_iso": "ES",
+    "year": 2024,
+    "international_arrivals_thousands": 93800,
+    "tourism_receipts_usd_millions": 136000,
+    "is_estimated": false,
+    "source_url": "https://www.ine.es/dyngs/Prensa/en/FRONTUR1224.htm",
+    "notes": "INE FRONTUR 2024 record"
+  },
+  {
+    "id": "fed017e8-c82e-56c5-992c-4e8f314e3e84",
+    "region_iso": "IT",
+    "year": 2022,
+    "international_arrivals_thousands": 49800,
+    "tourism_receipts_usd_millions": 44300,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/780963/inbound-tourist-arrivals-in-italy/",
+    "notes": "ISTAT 2022"
+  },
+  {
+    "id": "36f48240-cc25-5572-92a2-edf69c8f1b45",
+    "region_iso": "IT",
+    "year": 2023,
+    "international_arrivals_thousands": 60000,
+    "tourism_receipts_usd_millions": 55900,
+    "is_estimated": false,
+    "source_url": "https://www.istat.it/en/press-release/tourist-flows-fourth-quarter-2024/",
+    "notes": "ISTAT 2023"
+  },
+  {
+    "id": "e8a22991-8b9e-5a71-af89-3ebe5561a1e3",
+    "region_iso": "IT",
+    "year": 2024,
+    "international_arrivals_thousands": 60540,
+    "tourism_receipts_usd_millions": 58700,
+    "is_estimated": false,
+    "source_url": "https://www.istat.it/en/press-release/tourist-flows-fourth-quarter-2024/",
+    "notes": "ISTAT 2024"
+  },
+  {
+    "id": "b01f228b-f001-5818-9ab6-b28b15961f6a",
+    "region_iso": "NL",
+    "year": 2022,
+    "international_arrivals_thousands": 16580,
+    "tourism_receipts_usd_millions": 17800,
+    "is_estimated": false,
+    "source_url": "https://www.nbtc.nl/en/site/knowledge-base/themes/a-focus-on-international-visits",
+    "notes": "NBTC/CBS 2022"
+  },
+  {
+    "id": "37a082a8-155a-5ee4-819e-d56dd68143ab",
+    "region_iso": "NL",
+    "year": 2023,
+    "international_arrivals_thousands": 20300,
+    "tourism_receipts_usd_millions": 22300,
+    "is_estimated": false,
+    "source_url": "https://www.nbtc.nl/en/site/knowledge-base/themes/a-focus-on-international-visits",
+    "notes": "NBTC 2023"
+  },
+  {
+    "id": "f7774b99-fbdf-5c77-9a4c-2ae190738e43",
+    "region_iso": "NL",
+    "year": 2024,
+    "international_arrivals_thousands": 21280,
+    "tourism_receipts_usd_millions": 24500,
+    "is_estimated": false,
+    "source_url": "https://www.nbtc.nl/en/site/knowledge-base",
+    "notes": "NBTC/CBS 2024"
+  },
+  {
+    "id": "d3b7d771-e9c7-52a0-9b9e-73e1a5e83f17",
+    "region_iso": "SE",
+    "year": 2022,
+    "international_arrivals_thousands": 6800,
+    "tourism_receipts_usd_millions": 9200,
+    "is_estimated": true,
+    "source_url": "https://www.statista.com/statistics/422548/number-of-overnight-stays-in-sweden-by-country/",
+    "notes": "Tillvaxtverket/SCB 2022"
+  },
+  {
+    "id": "81be6149-4bd3-597e-abbf-67047af7e92b",
+    "region_iso": "SE",
+    "year": 2023,
+    "international_arrivals_thousands": 7240,
+    "tourism_receipts_usd_millions": 11400,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/413261/number-of-arrivals-spent-in-short-stay-accommodation-in-sweden/",
+    "notes": "SCB 2023"
+  },
+  {
+    "id": "9c4b23c3-7fd6-5935-a8c0-505091fa9084",
+    "region_iso": "SE",
+    "year": 2024,
+    "international_arrivals_thousands": 8400,
+    "tourism_receipts_usd_millions": 12000,
+    "is_estimated": false,
+    "source_url": "https://www.insights.visitory.io/post/nordic-tourism-in-2024-international-growth-continues",
+    "notes": "Tillvaxtverket 2024"
+  },
+  {
+    "id": "6df374a3-893e-5aae-bfe8-4686b32c107a",
+    "region_iso": "CZ",
+    "year": 2022,
+    "international_arrivals_thousands": 5500,
+    "tourism_receipts_usd_millions": 6300,
+    "is_estimated": true,
+    "source_url": "https://csu.gov.cz/rychle-informace/tourism-1-quarter-of-2024",
+    "notes": "CZSO 2022"
+  },
+  {
+    "id": "bee0fabc-bd3c-5cb3-9374-ee33388fd3d8",
+    "region_iso": "CZ",
+    "year": 2023,
+    "international_arrivals_thousands": 8290,
+    "tourism_receipts_usd_millions": 8800,
+    "is_estimated": false,
+    "source_url": "https://www.czechtourism.cz/en-US/654488aa-7cfb-4d6a-9f80-9beca1b584ef/article/cesko-laka-vice-turistu-roste-pocet-navstevniku-ze",
+    "notes": "CzechTourism/CZSO 2023"
+  },
+  {
+    "id": "1e470db0-47fd-57ca-b0d9-2c8b76da1696",
+    "region_iso": "CZ",
+    "year": 2024,
+    "international_arrivals_thousands": 10500,
+    "tourism_receipts_usd_millions": 10100,
+    "is_estimated": true,
+    "source_url": "https://csu.gov.cz/rychle-informace/tourism-1-quarter-of-2024",
+    "notes": "CZSO 2024"
+  },
+  {
+    "id": "c860b89a-f393-502e-af45-3aee8da4a8e2",
+    "region_iso": "SG",
+    "year": 2022,
+    "international_arrivals_thousands": 6300,
+    "tourism_receipts_usd_millions": 13800,
+    "is_estimated": false,
+    "source_url": "https://www.stb.gov.sg/about-stb/media-publications/media-centre/singapore-s-tourism-sector-recovers-strongly-in-2022--visitor-numbers-expected-to-double-in-2023/",
+    "notes": "STB 2022"
+  },
+  {
+    "id": "0ee5259a-543d-58b8-b3c3-cdda8bb15348",
+    "region_iso": "SG",
+    "year": 2023,
+    "international_arrivals_thousands": 13610,
+    "tourism_receipts_usd_millions": 19100,
+    "is_estimated": false,
+    "source_url": "https://stan.stb.gov.sg/content/stan/en/tourism-statistics.html",
+    "notes": "STB STAN 2023"
+  },
+  {
+    "id": "c2a5b85c-f5d1-5594-a659-ebf76ab880aa",
+    "region_iso": "SG",
+    "year": 2024,
+    "international_arrivals_thousands": 16520,
+    "tourism_receipts_usd_millions": 22800,
+    "is_estimated": false,
+    "source_url": "https://www.stb.gov.sg/about-stb/media-publications/media-centre/singapore-achieves-historical-high-in-tourism-receipts-in-2024/",
+    "notes": "STB 2024"
+  },
+  {
+    "id": "5d4ad07f-0b1d-5157-b7b0-e12164e1a6a1",
+    "region_iso": "TH",
+    "year": 2022,
+    "international_arrivals_thousands": 11150,
+    "tourism_receipts_usd_millions": 14100,
+    "is_estimated": false,
+    "source_url": "https://www.tatnews.org/2024/12/thailand-welcomes-over-35-million-visitors-in-2024-a-milestone-paving-the-way-for-2025/",
+    "notes": "TAT/MOTS 2022"
+  },
+  {
+    "id": "b038282e-3e21-5062-9a5f-4370f98fc157",
+    "region_iso": "TH",
+    "year": 2023,
+    "international_arrivals_thousands": 28150,
+    "tourism_receipts_usd_millions": 33400,
+    "is_estimated": false,
+    "source_url": "https://www.tatnews.org/2024/12/thailand-welcomes-over-35-million-visitors-in-2024-a-milestone-paving-the-way-for-2025/",
+    "notes": "TAT 2023"
+  },
+  {
+    "id": "dfc87a53-b688-5032-b09e-857756eb6ffe",
+    "region_iso": "TH",
+    "year": 2024,
+    "international_arrivals_thousands": 35550,
+    "tourism_receipts_usd_millions": 48500,
+    "is_estimated": false,
+    "source_url": "https://www.tatnews.org/2024/12/thailand-welcomes-over-35-million-visitors-in-2024-a-milestone-paving-the-way-for-2025/",
+    "notes": "TAT 2024"
+  },
+  {
+    "id": "132e2b58-4c5a-59a0-95f0-3bf5f4d138d9",
+    "region_iso": "ID",
+    "year": 2022,
+    "international_arrivals_thousands": 5890,
+    "tourism_receipts_usd_millions": 4300,
+    "is_estimated": false,
+    "source_url": "https://www.bps.go.id/en/publication/2023/05/12/4dcc6b622ae0c4e7ea6a61e8/international-visitor-arrival-statistics-2022.html",
+    "notes": "BPS 2022"
+  },
+  {
+    "id": "0bcb4541-05f5-51ce-8e09-dbaf36d389a8",
+    "region_iso": "ID",
+    "year": 2023,
+    "international_arrivals_thousands": 11680,
+    "tourism_receipts_usd_millions": 10500,
+    "is_estimated": false,
+    "source_url": "https://www.bps.go.id/en/publication/2024/04/05/0ba2b8f3f4f15dd18799f0c0/international-visitor-arrival-statistics-2023.html",
+    "notes": "BPS 2023"
+  },
+  {
+    "id": "b100e8a2-9a07-5dbb-8b58-c804c8f5025f",
+    "region_iso": "ID",
+    "year": 2024,
+    "international_arrivals_thousands": 13900,
+    "tourism_receipts_usd_millions": 14600,
+    "is_estimated": false,
+    "source_url": "https://www.bps.go.id/en/publication/2025/03/20/a85d584df19ea65a5e2b3d0b/international-visitor-arrival-statistics-2024.html",
+    "notes": "BPS 2024"
+  },
+  {
+    "id": "697eacae-f2f6-5e10-b16d-983022b2e1ec",
+    "region_iso": "KR",
+    "year": 2022,
+    "international_arrivals_thousands": 3200,
+    "tourism_receipts_usd_millions": 10200,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/709116/south-korea-inbound-visitors/",
+    "notes": "KTO 2022"
+  },
+  {
+    "id": "2050d9f3-aa0a-5982-ae00-66f4572c6632",
+    "region_iso": "KR",
+    "year": 2023,
+    "international_arrivals_thousands": 11030,
+    "tourism_receipts_usd_millions": 15100,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/709116/south-korea-inbound-visitors/",
+    "notes": "KTO 2023"
+  },
+  {
+    "id": "f8852860-d77d-52a3-985b-ad1ffee05150",
+    "region_iso": "KR",
+    "year": 2024,
+    "international_arrivals_thousands": 16360,
+    "tourism_receipts_usd_millions": 16700,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/968265/south-korea-number-visitor-arrivals-by-origin/",
+    "notes": "KTO 2024"
+  },
+  {
+    "id": "9382b01c-7523-5b75-84a8-4c7868f67c44",
+    "region_iso": "AE",
+    "year": 2022,
+    "international_arrivals_thousands": 22700,
+    "tourism_receipts_usd_millions": 38400,
+    "is_estimated": true,
+    "source_url": "https://www.moet.gov.ae/en/tourism-indicators",
+    "notes": "UAE total est. Dubai+Abu Dhabi+Sharjah+RAK"
+  },
+  {
+    "id": "7b8f8316-6d05-51bc-85a6-23d9a4cd6761",
+    "region_iso": "AE",
+    "year": 2023,
+    "international_arrivals_thousands": 28100,
+    "tourism_receipts_usd_millions": 52400,
+    "is_estimated": false,
+    "source_url": "https://economymiddleeast.com/news/dubai-international-tourists/",
+    "notes": "UAE total 2023; Dubai 17.15M"
+  },
+  {
+    "id": "a880f133-bb67-5b88-9f5b-b56cf9efadcb",
+    "region_iso": "AE",
+    "year": 2024,
+    "international_arrivals_thousands": 30000,
+    "tourism_receipts_usd_millions": 58000,
+    "is_estimated": true,
+    "source_url": "https://www.wam.ae/en/article/b4e0sbe-dubai-welcomes-record-931-million-visitors-2024",
+    "notes": "UAE total est. Dubai 18.72M + emirates"
+  },
+  {
+    "id": "5b0a18c9-1813-51c8-9b5c-6d5b9ec7423a",
+    "region_iso": "SA",
+    "year": 2022,
+    "international_arrivals_thousands": 16600,
+    "tourism_receipts_usd_millions": 23000,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/377290/number-of-international-tourist-arrivals-in-saudi-arabia/",
+    "notes": "Saudi MoT 2022"
+  },
+  {
+    "id": "8ace5ecb-3c8f-555a-97f0-9920c19d1ce6",
+    "region_iso": "SA",
+    "year": 2023,
+    "international_arrivals_thousands": 27400,
+    "tourism_receipts_usd_millions": 36000,
+    "is_estimated": false,
+    "source_url": "https://skift.com/2025/01/24/saudi-hits-record-tourist-arrivals-needs-faster-pace-to-reach-70-million-target/",
+    "notes": "Saudi MoT 2023"
+  },
+  {
+    "id": "ffe5c78f-5423-59b1-bf2f-997900edde1a",
+    "region_iso": "SA",
+    "year": 2024,
+    "international_arrivals_thousands": 30000,
+    "tourism_receipts_usd_millions": 41200,
+    "is_estimated": false,
+    "source_url": "https://skift.com/2025/01/24/saudi-hits-record-tourist-arrivals-needs-faster-pace-to-reach-70-million-target/",
+    "notes": "Saudi MoT 2024 record"
+  },
+  {
+    "id": "5c7a30cb-2c8e-5481-b8da-d65573b052fa",
+    "region_iso": "ZA",
+    "year": 2022,
+    "international_arrivals_thousands": 5700,
+    "tourism_receipts_usd_millions": 6700,
+    "is_estimated": false,
+    "source_url": "https://www.statssa.gov.za/publications/P0351/P0351August2023.pdf",
+    "notes": "Stats SA 2022"
+  },
+  {
+    "id": "1912a3ef-c274-5bed-8b4a-3cb4c163509f",
+    "region_iso": "ZA",
+    "year": 2023,
+    "international_arrivals_thousands": 8500,
+    "tourism_receipts_usd_millions": 9100,
+    "is_estimated": false,
+    "source_url": "https://www.sanews.gov.za/south-africa/increase-international-arrivals-2023",
+    "notes": "Stats SA 2023"
+  },
+  {
+    "id": "90a6316b-0baf-574c-97af-42ae6ecd17a1",
+    "region_iso": "ZA",
+    "year": 2024,
+    "international_arrivals_thousands": 8900,
+    "tourism_receipts_usd_millions": 9700,
+    "is_estimated": false,
+    "source_url": "https://www.statssa.gov.za/?p=19362",
+    "notes": "Stats SA 2024"
+  },
+  {
+    "id": "6fdc4ad6-85e7-5088-85b4-414e75a57d71",
+    "region_iso": "NG",
+    "year": 2022,
+    "international_arrivals_thousands": 480,
+    "tourism_receipts_usd_millions": 240,
+    "is_estimated": true,
+    "source_url": "https://data.worldbank.org/indicator/ST.INT.ARVL?locations=NG",
+    "notes": "World Bank Nigeria sparse"
+  },
+  {
+    "id": "8592be72-2777-505d-96dd-13c56ae9e15c",
+    "region_iso": "NG",
+    "year": 2023,
+    "international_arrivals_thousands": 520,
+    "tourism_receipts_usd_millions": 290,
+    "is_estimated": true,
+    "source_url": "https://data.worldbank.org/indicator/ST.INT.ARVL?locations=NG",
+    "notes": "World Bank/UNWTO Africa annex"
+  },
+  {
+    "id": "0db44d3b-2769-594f-a0b5-c4c43c6b9356",
+    "region_iso": "NG",
+    "year": 2024,
+    "international_arrivals_thousands": 539,
+    "tourism_receipts_usd_millions": 336,
+    "is_estimated": false,
+    "source_url": "https://statbase.org/data/nga-inbound-tourism-arrivals/",
+    "notes": "Statbase/UNWTO 2024"
+  },
+  {
+    "id": "f3353e0e-9c54-5fdf-b3e4-fba114bed260",
+    "region_iso": "EG",
+    "year": 2022,
+    "international_arrivals_thousands": 11720,
+    "tourism_receipts_usd_millions": 10700,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/970638/egypt-tourist-arrivals/",
+    "notes": "CAPMAS/Egypt MoT 2022"
+  },
+  {
+    "id": "0c40631d-7793-5cb6-86fb-bdc58dc664ed",
+    "region_iso": "EG",
+    "year": 2023,
+    "international_arrivals_thousands": 14906,
+    "tourism_receipts_usd_millions": 13600,
+    "is_estimated": false,
+    "source_url": "https://sis.gov.eg/en/media-center/news/fitch-egypt-to-welcome-1776m-tourists-by-end-of-2025-1856m-in-2026/",
+    "notes": "Egypt MoT 2023 record"
+  },
+  {
+    "id": "c804014c-5194-506e-b9cb-cf86055daef9",
+    "region_iso": "EG",
+    "year": 2024,
+    "international_arrivals_thousands": 15780,
+    "tourism_receipts_usd_millions": 14400,
+    "is_estimated": false,
+    "source_url": "https://sis.gov.eg/en/media-center/news/fitch-egypt-to-welcome-1776m-tourists-by-end-of-2025-1856m-in-2026/",
+    "notes": "Egypt MoT 2024"
+  },
+  {
+    "id": "355ff124-1567-5f9a-8b0c-2f908081fd29",
+    "region_iso": "AR",
+    "year": 2022,
+    "international_arrivals_thousands": 3900,
+    "tourism_receipts_usd_millions": 3000,
+    "is_estimated": true,
+    "source_url": "https://data.worldbank.org/indicator/ST.INT.ARVL?locations=AR",
+    "notes": "INDEC/WB 2022"
+  },
+  {
+    "id": "ffe7e2fd-bebf-5dd9-af36-8c1c833d2439",
+    "region_iso": "AR",
+    "year": 2023,
+    "international_arrivals_thousands": 6200,
+    "tourism_receipts_usd_millions": 4400,
+    "is_estimated": false,
+    "source_url": "https://www.latinnews.com/component/k2/item/104457-in-brief-tourism-to-argentina-down-in-2024.html",
+    "notes": "INDEC 2023"
+  },
+  {
+    "id": "11f7759b-8b74-5135-a431-387c62b2dd80",
+    "region_iso": "AR",
+    "year": 2024,
+    "international_arrivals_thousands": 5680,
+    "tourism_receipts_usd_millions": 4000,
+    "is_estimated": false,
+    "source_url": "https://www.latinnews.com/component/k2/item/104457-in-brief-tourism-to-argentina-down-in-2024.html",
+    "notes": "INDEC 2024 -8.4%"
+  },
+  {
+    "id": "1b091327-9ed0-5294-9bb1-ad9fa3cba835",
+    "region_iso": "TR",
+    "year": 2022,
+    "international_arrivals_thousands": 44560,
+    "tourism_receipts_usd_millions": 46300,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/707699/foreign-tourist-arrivals-in-turkey/",
+    "notes": "TUIK 2022"
+  },
+  {
+    "id": "d886b440-a9f6-5d82-b571-393d124c2db6",
+    "region_iso": "TR",
+    "year": 2023,
+    "international_arrivals_thousands": 49210,
+    "tourism_receipts_usd_millions": 55870,
+    "is_estimated": false,
+    "source_url": "https://www.statista.com/statistics/707699/foreign-tourist-arrivals-in-turkey/",
+    "notes": "TUIK 2023"
+  },
+  {
+    "id": "7508c36f-d78a-58bd-b81f-39b46c01e706",
+    "region_iso": "TR",
+    "year": 2024,
+    "international_arrivals_thousands": 52630,
+    "tourism_receipts_usd_millions": 61100,
+    "is_estimated": false,
+    "source_url": "https://www.theistanbulchronicle.com/post/tourism-in-t%C3%BCrkiye-statistics-skyrocket-in-2024",
+    "notes": "TUIK 2024"
+  },
+  {
+    "id": "b7197cb5-11e6-543f-8066-be8861fcea0f",
+    "region_iso": "PL",
+    "year": 2022,
+    "international_arrivals_thousands": 15200,
+    "tourism_receipts_usd_millions": 11300,
+    "is_estimated": true,
+    "source_url": "https://stat.gov.pl/en/topics/culture-tourism-sport/",
+    "notes": "GUS 2022"
+  },
+  {
+    "id": "8175e69c-6231-5fee-8ca6-7ba6c29e4cd5",
+    "region_iso": "PL",
+    "year": 2023,
+    "international_arrivals_thousands": 17500,
+    "tourism_receipts_usd_millions": 13000,
+    "is_estimated": false,
+    "source_url": "https://stat.gov.pl/en/topics/culture-tourism-sport/tourism/tourism-in-2023,1,21.html",
+    "notes": "GUS 2023"
+  },
+  {
+    "id": "320f9876-cdba-5f3b-8f96-616e60f85ccd",
+    "region_iso": "PL",
+    "year": 2024,
+    "international_arrivals_thousands": 19720,
+    "tourism_receipts_usd_millions": 14270,
+    "is_estimated": false,
+    "source_url": "https://stat.gov.pl/en/topics/culture-tourism-sport/tourism/tourism-in-2024,1,22.html",
+    "notes": "GUS 2024"
+  },
+  {
+    "id": "c9fd5919-2d53-53e6-8d3d-3ca549b1b83e",
+    "region_iso": "PT",
+    "year": 2022,
+    "international_arrivals_thousands": 22200,
+    "tourism_receipts_usd_millions": 22600,
+    "is_estimated": false,
+    "source_url": "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=675602667&att_display=n&att_download=y",
+    "notes": "INE Portugal 2022"
+  },
+  {
+    "id": "6047ea94-9f53-5f7d-bbba-1419b1a8802a",
+    "region_iso": "PT",
+    "year": 2023,
+    "international_arrivals_thousands": 26500,
+    "tourism_receipts_usd_millions": 27800,
+    "is_estimated": false,
+    "source_url": "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_destaques&DESTAQUESdest_boui=646074543&DESTAQUEStema=55581&DESTAQUESmodo=2",
+    "notes": "INE 2023"
+  },
+  {
+    "id": "525aa963-befa-5c12-8de3-90fcea6edc0e",
+    "region_iso": "PT",
+    "year": 2024,
+    "international_arrivals_thousands": 29000,
+    "tourism_receipts_usd_millions": 31200,
+    "is_estimated": false,
+    "source_url": "https://www.turismodeportugal.pt/en/Turismo_Portugal/visao_geral/Pages/default.aspx",
+    "notes": "INE/Turismo Portugal 2024"
+  },
+  {
+    "id": "14812b7c-be5f-5ea7-a923-e018db4b9b57",
+    "region_iso": "GR",
+    "year": 2022,
+    "international_arrivals_thousands": 27800,
+    "tourism_receipts_usd_millions": 18300,
+    "is_estimated": false,
+    "source_url": "https://insete.gr/wp-content/uploads/2024/04/Bulletin_EN_2023.pdf",
+    "notes": "ELSTAT/BoG 2022"
+  },
+  {
+    "id": "1d4913dc-368b-5c7a-9e34-63dddf0b34cf",
+    "region_iso": "GR",
+    "year": 2023,
+    "international_arrivals_thousands": 32735,
+    "tourism_receipts_usd_millions": 21700,
+    "is_estimated": false,
+    "source_url": "https://insete.gr/wp-content/uploads/2024/04/Bulletin_EN_2023.pdf",
+    "notes": "INSETE 2023"
+  },
+  {
+    "id": "2260052c-ccfa-5f26-a4c5-33135131ffd4",
+    "region_iso": "GR",
+    "year": 2024,
+    "international_arrivals_thousands": 36000,
+    "tourism_receipts_usd_millions": 23400,
+    "is_estimated": false,
+    "source_url": "https://insete.gr/wp-content/uploads/2025/04/Bulletin_EN_2024.pdf",
+    "notes": "INSETE 2024"
+  }
+]
