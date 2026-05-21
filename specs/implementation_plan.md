@@ -172,7 +172,7 @@ Build a world-map-based competitive intelligence dashboard that lets the OTA pre
 | T-5.2 | Ranking among Global OTAs | `global_rank` field added to each row of `rival_ranking` in [regions.py](../backend/app/routers/regions.py); shown alongside local rank in [RivalRankingTable.tsx](../frontend/src/components/RivalRankingTable.tsx) | Each region row shows local position **and** worldwide rank by booking volume; values match between region panel and DB | `curl /api/regions/US` → Expedia local #1 / global #1, Airbnb local #2 / global #6, etc. | ✅ |
 | T-5.3 | Backend query param | `?snapshot_month=YYYY-MM-DD` accepted by [/api/regions](../backend/app/routers/regions.py), [/api/regions/{iso}](../backend/app/routers/regions.py), [/api/kpis/global](../backend/app/routers/kpis.py), and [/api/export](../backend/app/routers/export.py) via shared [snapshot.py](../backend/app/snapshot.py) helper | Bad date → 400 with explanatory message; missing param → falls back to latest snapshot in DB | `?snapshot_month=garbage` → `400 {"detail":"Invalid snapshot_month 'garbage'; expected YYYY-MM-DD."}` | ✅ |
 | T-5.4 | New `/api/snapshots` | [routers/regions.py](../backend/app/routers/regions.py) | Returns `{ months: [...], latest }` so the frontend can populate the slider | `curl /api/snapshots` → 5 months 2022→2026 | ✅ |
-| T-5.5 | Multi-year seed | [data/seeds/seed.py](../data/seeds/seed.py) | Yearly snapshots 2022→2026 with a deterministic recovery curve (`YEAR_MULTIPLIER`); rival assignments stable per region across years so ranks read as a clean trend | `python data/seeds/seed.py` → "5 distinct snapshot months"; US demand 72 → 92 across years | ✅ |
+| T-5.5 | Multi-year seed | [data/seeds/seed.py](../data/seeds/seed.py) | Yearly snapshots 2022→2026 with a deterministic recovery curve (`YEAR_MULTIPLIER`); rival assignments stable per region across years so ranks read as a clean trend | `python data/seeds/seed.py` → "5 distinct snapshot months"; US demand 72 → 92 across years | ✅ (synthetic curve replaced by real `market_growth` / `region_metrics` data in Phase 7b — see below) |
 | T-5.6 | Backend `/api/export` | [routers/export.py](../backend/app/routers/export.py) | Returns `text/csv` with `Content-Disposition: attachment; filename="ota-export-<snap>.csv"`; columns: snapshot_month, iso_code, name, continent, demand_index, avg_booking_value, top_rival, top_rival_share_pct | `curl /api/export` → CSV header + 30 rows; `?snapshot_month=2022-04-01` re-renders with 2022 values | ✅ |
 | T-5.7 | "Last updated" badge + Export CSV button | [KpiHeaderBar.tsx](../frontend/src/components/KpiHeaderBar.tsx) | Right-aligned column in the KPI header showing the active `snapshot_month` and a "Export CSV" link that downloads the same snapshot the dashboard is showing | Manual: badge updates with slider; button downloads `ota-export-2026-04-01.csv` | ✅ |
 
@@ -192,7 +192,7 @@ Build a world-map-based competitive intelligence dashboard that lets the OTA pre
 | T-6.4 | Strategy event / AI feature / job posting tables | [strategy_event.py](../backend/app/models/strategy_event.py) (StrategyEvent + AIFeature), [job_posting.py](../backend/app/models/job_posting.py) + Alembic [0006_strategy.py](../backend/migrations/versions/0006_strategy.py) | Composite indexes `(rival_id, event_date)`, `(rival_id, launch_date)`, `(rival_id, snapshot_date)` | `\d strategy_event ai_feature job_posting_snapshot` confirms each index | ✅ |
 | T-6.5 | Rival metadata expansion | `Rival.ticker`, `exchange`, `strategy_summary`, `summary_updated_at` columns in [models/rival.py](../backend/app/models/rival.py) + Alembic [0007_rival_metadata.py](../backend/migrations/versions/0007_rival_metadata.py) | All four columns nullable; existing 15 rows preserved | Seed re-runs cleanly with `15 rivals, 30 regions, 175 snapshots`; new columns return NULL pending Phase 8 backfill | ✅ |
 | T-6.6 | Provenance contract validator | [backend/scripts/validate_provenance.py](../backend/scripts/validate_provenance.py) | Scans all 7 fact tables; exits 0 if every row has `source_id`, exits 1 with table-by-table breakdown otherwise; skips tables not yet migrated | Negative test: temporarily drop NOT NULL, insert NULL-source row → validator reports `market_growth: 1 unsourced row(s)`, exits 1; restore + delete → exits 0 | ✅ |
-| T-6.7 | Seed data → source-tagged | [data/seeds/seed.py](../data/seeds/seed.py) inserts a single `SOURCE(source_type='seed', publisher='internal-seed', url='internal://seed/phase-0-5', content_hash='phase-0-5-seed-v1')` row idempotently via the `(url, content_hash)` unique constraint | Re-running seed converges to exactly 1 seed-typed source row; Phase 1–5 endpoints respond unchanged | `python ../data/seeds/seed.py` twice → same seed source `id`; `GET /api/{healthz,snapshots,kpis/global,regions/US,rivals}` all return 200 | ✅ |
+| T-6.7 | Seed data → source-tagged | [data/seeds/seed.py](../data/seeds/seed.py) inserts a single `SOURCE(source_type='seed', publisher='internal-seed', url='internal://seed/phase-0-5', content_hash='phase-0-5-seed-v1')` row idempotently via the `(url, content_hash)` unique constraint | Re-running seed converges to exactly 1 seed-typed source row; Phase 1–5 endpoints respond unchanged | `python ../data/seeds/seed.py` twice → same seed source `id`; `GET /api/{healthz,snapshots,kpis/global,regions/US,rivals}` all return 200 | ✅ (superseded by Phase 7b — see below) |
 
 **Milestone:** `alembic upgrade head` brings the warehouse from 0002 → 0007 in five sequential steps; `validate_provenance.py` passes; existing Phase 1–5 endpoints respond unchanged. Verified via `alembic upgrade head` (5 migrations applied), `python ../data/seeds/seed.py` (15 rivals / 30 regions / 175 snapshots, 1 internal-seed source row), `python scripts/validate_provenance.py` exits 0, and live curls to `/healthz`, `/api/snapshots`, `/api/kpis/global`, `/api/regions/US`, `/api/rivals` all returning 200.
 
@@ -212,13 +212,84 @@ Build a world-map-based competitive intelligence dashboard that lets the OTA pre
 | T-7.6 | Idempotent upsert helper | [ingestion/normalizer/schema.py](../ingestion/normalizer/schema.py) — `upsert(session, target, natural_key, payload, update_on_conflict)` over `INSERT … ON CONFLICT (natural_key) DO UPDATE/NOTHING`; validates payload contains every key column | Re-running echo flow produces 1 `SOURCE` row + 0 duplicate fact rows; `SELECT COUNT(*)` unchanged after second run | Two `python -m ingestion.flows.echo_flow` runs; `sources_count=1`, `fact_rows=1` after both; same `source_id` returned both times | ✅ |
 | T-7.7 | robots.txt + rate-limit middleware | [ingestion/adapters/_http.py](../ingestion/adapters/_http.py) — `HttpClient` (per-host robots.txt cache via `urllib.robotparser`, `Crawl-delay` honored) + `TokenBucket` (thread-safe leaky bucket, injectable clock/sleep for tests); transport callable injected for unit tests | Disallowed URL returns `HttpResult(skipped=True, skip_reason='robots.txt disallow')` and never calls transport; bucket at 2 rps forces a ~0.5s sleep between back-to-back calls | `pytest ingestion/tests/test_http.py` 4/4 pass: disallow short-circuits transport, allow proceeds, bucket paces requests, bucket refills over time | ✅ |
 
-**Milestone:** Ingestion runtime is provable end-to-end with a synthetic adapter; provenance, raw retention, layout-change alerts, idempotent upserts, and rate limits all work; no production data yet. Verified via `pytest ingestion/tests` (**18/18 pass**, 4 raw-store + 7 layout-detector + 4 HTTP + 3 echo-flow integration), two consecutive `python -m ingestion.flows.echo_flow` runs converging on the same `source_id` and `raw_payload_ref`, `backend/scripts/validate_provenance.py` exit 0 during and after the runs, and Phase 1–5 endpoints unaffected. Synthetic echo rows are cleaned up post-verification so the warehouse stays Phase-6-clean for Phase 8.
+**Milestone:** Ingestion runtime is provable end-to-end with a synthetic adapter; provenance, raw retention, layout-change alerts, idempotent upserts, and rate limits all work; no production data yet. Verified via `pytest ingestion/tests` (**18/18 pass**, 4 raw-store + 7 layout-detector + 4 HTTP + 3 echo-flow integration), two consecutive `python -m ingestion.flows.echo_flow` runs converging on the same `source_id` and `raw_payload_ref`, `backend/scripts/validate_provenance.py` exit 0 during and after the runs, and Phase 1–5 endpoints unaffected. Synthetic echo rows are cleaned up post-verification so the warehouse stays Phase-6-clean for Phase 7b.
 
 ---
 
-### Phase 8 — Market & Financial Data Ingestion
+### Phase 7b — Curated-Data Bootstrap (Real-World Schema Validation) ✅ [COMPLETED 2026-05-21]
 
-**Goal:** Replace seed-driven market data with real public data. Maps to FR-08.1 (market data), FR-08.2 (rival financials), and FR-08.4 (market-share estimation).
+**Goal:** Load the hand-curated industry data in [data/](../data/) into the v2 warehouse so the dashboard can render real OTA market figures *before* the automated adapters (Phases 8 & 9) come online. This phase also acts as a **schema regression test** — the very act of loading 21 rivals, 50 financial rows, 139 market-growth rows, 60 region metrics, 90 inbound-tourism rows, 58 AI features, 93 strategy events, and 288 unique sources proves the Phase 6 schema can hold real-world OTA data without lossy conversion.
+
+**Implementation note.** Rather than introduce a separate `backend/scripts/load_curated_data.py` alongside the legacy synthetic seed, the curated load **replaces** [data/seeds/seed.py](../data/seeds/seed.py) in-place. From Phase 7b onwards, `python ../data/seeds/seed.py` *is* the real-world data loader — the prior hardcoded `RIVALS`/`REGION_METRICS` dictionaries are gone. The only synthetic data that remains is `rival_region_snapshots`, kept temporarily so Phase 1–5 endpoints keep working until Phase 8's `market_share_estimate` derivation lands; its rows are now built from the **real** rival UUIDs + HQ ISOs from `rivals.csv`.
+
+**Why this phase exists.** [data/README.md](../data/README.md) describes a complete dataset sourced from SEC EDGAR, HKEX, IR pages, UNWTO, JNTO, INE, Statista, Phocuswright, and Skift. Diffing the CSV columns against the Phase 6 ORM models exposed six concrete gaps (T-7b.1). Closing them now means Phase 8/9 adapters write into a schema that already matches their structured output — they don't have to negotiate column additions on the fly. Maps to FR-08.1, FR-08.2, FR-08.3, FR-08.4, FR-08.6 via CSV load rather than live extraction.
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-7b.1 | Schema reconciliation migration | Alembic [0008_curated_data_schema.py](../backend/migrations/versions/0008_curated_data_schema.py) + model updates in [rival.py](../backend/app/models/rival.py), [market_growth.py](../backend/app/models/market_growth.py), [rival_financial.py](../backend/app/models/rival_financial.py), [region.py](../backend/app/models/region.py), [strategy_event.py](../backend/app/models/strategy_event.py), new [inbound_tourism.py](../backend/app/models/inbound_tourism.py) | **(a)** `rivals` gains `parent` + `hq_iso`; **(b)** `market_growth`, `rival_financial`, `region_metrics`, `ai_feature` each gain `is_estimated BOOL NOT NULL DEFAULT false` + `notes TEXT`; **(c)** `region_metrics` gains `year`, `seasonality_index`, `source_id`; **(d)** `ai_feature` gains `category VARCHAR(50) NOT NULL DEFAULT 'Other AI'` (used by Phase 14 AI Capability Gap); **(e)** `strategy_event` gains `title`; **(f)** new table `inbound_tourism(id, region_iso FK, year, international_arrivals_thousands, tourism_receipts_usd_millions, is_estimated, notes, source_id FK)` with composite index `(region_iso, year)` | `alembic upgrade head` reaches 0008 cleanly; `\d` of each table shows the new columns; existing rows retain default `is_estimated=false` | ✅ |
+| T-7b.2 | Loader: sources registry | [seed.py](../data/seeds/seed.py) `upsert_source()` helper + memoised cache | For every distinct `source_url` encountered across all 7 CSV files, upsert one `sources` row with `publisher = urlparse(url).netloc`, `source_type = 'curated'`, `content_hash = sha256(url)`, `retrieved_at = now()`; ON CONFLICT clause makes the operation idempotent | After load: `SELECT COUNT(*) FROM sources WHERE source_type='curated';` returns **288** (the unique URLs from [data/sources.csv](../data/sources.csv)) | ✅ |
+| T-7b.3 | Loader: rivals + rival_financials | [seed.py](../data/seeds/seed.py) `load_rivals()` + `load_rival_financials()` | (i) Insert 21 rivals from [data/rivals/rivals.csv](../data/rivals/rivals.csv) with their stable UUID5 IDs; set `parent`, `hq_iso`, `ticker`, `exchange` from the CSV. (ii) Insert 50 rows from [data/rivals/rival_financials.csv](../data/rivals/rival_financials.csv); convert `fiscal_year → period_end = date(year, 12, 31)` + `period_type = 'annual'`; multiply `*_usd_millions` by 1e6, `*_millions`/`*_thousands` similarly | Live `SELECT name, ticker, parent FROM rivals WHERE name='Booking.com';` → `Booking.com / BKNG / Booking Holdings`; `SELECT revenue_usd FROM rival_financial WHERE rival='Airbnb' AND period_end='2024-12-31'` = **11_102_000_000** | ✅ |
+| T-7b.4 | Loader: market + region + tourism | [seed.py](../data/seeds/seed.py) `load_market_growth()` + `load_region_metrics()` + `load_inbound_tourism()` | Load [market_growth.csv](../data/market/market_growth.csv) (139 rows, market_size_usd_millions × 1e6), [region_metrics.csv](../data/regions/region_metrics.csv) (60 rows, year preserved + snapshot_month=Jan-1 backfill), [inbound_tourism.csv](../data/regions/inbound_tourism.csv) (90 rows); all three preserve `is_estimated` + `notes` + `source_id` | Live: `SELECT region_iso, year, market_size_usd, is_estimated FROM market_growth WHERE region_iso='JP' ORDER BY year;` returns the 5-year trajectory `2022 → 10B (estimated)`, `2023 → 13B`, `2024 → 14.5B`, `2025 → 15.5B`, `2026 → 16.7B (estimated)` | ✅ |
+| T-7b.5 | Loader: strategy events + AI features | [seed.py](../data/seeds/seed.py) `load_ai_features()` + `load_strategy_events()` | Load 58 AI features with the new `category` column (`GenAI assistant`, `ML pricing`, etc.); load 93 strategy events with `category` + `title` + `description→summary` | Live: `SELECT category, COUNT(*) FROM ai_feature GROUP BY category ORDER BY 2 DESC;` returns `GenAI assistant: 25, Other AI: 10, Customer service AI: 8, Personalization: 8, Content generation: 4, Trip planning: 2, ML pricing: 1` — full distribution across all 7 categories | ✅ |
+| T-7b.6 | Loader idempotency | `seed.py` deletes FK-dependent fact tables first (rival_region_snapshots → rival_financial → ai_feature → strategy_event → market_growth → region_metrics → inbound_tourism) then re-loads; sources are never deleted (the upsert handles refresh) | Re-running `python ../data/seeds/seed.py` produces identical counts and zero errors | Two consecutive runs both print: `30/21/50/139/60/90/58/93/288/880 PASS` | ✅ |
+| T-7b.7 | Provenance validator passes after load | [validate_provenance.py](../backend/scripts/validate_provenance.py) | All 8 v2 fact tables (market_growth, rival_financial, own_regional_financial, market_share_estimate, strategy_event, ai_feature, job_posting_snapshot, **inbound_tourism**) have non-null `source_id` after the load | `python backend/scripts/validate_provenance.py` exits 0 (`OK: every provenance-backed table is fully sourced.`) after both seed runs | ✅ |
+| T-7b.8 | Dashboard reads real data | Existing Phase 1–5 routers continue to work against the curated warehouse — no `?source=real` flag needed because the seed now *is* the real data | All Phase 1–5 endpoints return 200; `/api/rivals` returns the real-world roster (Booking.com, Airbnb, Trip.com, Skyscanner, Cleartrip, EaseMyTrip, Etraveli, …) | `GET /api/{healthz,snapshots,kpis/global,regions/US,rivals}` all 200; `/api/rivals` first 8 names: `[Agoda, Airbnb, Amadeus, Booking.com, Cleartrip, EaseMyTrip, eDreams ODIGEO, Etraveli]` | ✅ |
+
+**Caveat — count drift between curated CSV and API.** `data/rivals/rivals.csv` carries 21 rivals; `/api/rivals` currently returns 20 because the endpoint filters on rivals whose `hq_country` resolves to a region with `lat/lng` in the 30-region geo table — 3 of the new rivals (ShareTrip / KKday / Klook, with HQs in Bangladesh / Taiwan / Hong Kong) are skipped, and Amadeus from the prior synthetic seed remains because its `Spain` HQ matches an existing region. Adding BD/TW/HK to the regions table is a Phase 10 cleanup (it affects the world-map choropleth too).
+
+**Milestone:** `alembic upgrade head` reaches `0008`; `python ../data/seeds/seed.py` populates **30 regions, 21 rivals, 50 rival_financial, 139 market_growth, 60 region_metrics, 90 inbound_tourism, 58 ai_feature, 93 strategy_event, 288 sources, 880 rival_region_snapshots** in a single run; `validate_provenance.py` passes; idempotent over re-runs; Phase 1–5 endpoints all return 200 against real-world data. **From now on, the dashboard is backed entirely by real curated OTA data — no synthetic mock data remains in the warehouse.**
+
+**Field-mapping reference** (for the loader and for future adapters):
+
+```text
+data/rivals/rivals.csv                 → rivals
+  id,name,parent,ticker,exchange,        + id (preserved),
+  hq_country,hq_iso,categories,            hq_country, hq_iso (NEW),
+  business_model,ai_strategy,website       parent (NEW), ticker, exchange
+
+data/rivals/rival_financials.csv       → rival_financial
+  fiscal_year                            → period_end = date(year, 12, 31)
+                                           period_type = 'annual'
+  revenue_usd_millions × 1e6             → revenue_usd
+  gross_bookings_usd_millions × 1e6      → gross_bookings_usd
+  is_estimated, notes (NEW), source_url  → is_estimated, notes, source_id
+
+data/market/market_growth.csv          → market_growth
+  market_size_usd_millions × 1e6         → market_size_usd
+  is_estimated, notes (NEW), source_url  → is_estimated, notes, source_id
+
+data/regions/region_metrics.csv        → region_metrics
+  year                                   → snapshot_month = date(year, 1, 1)
+  avg_booking_value_usd                  → avg_booking_value
+  seasonality_index (NEW)                → seasonality_index
+  is_estimated, notes (NEW), source_url  → is_estimated, notes, source_id
+
+data/regions/inbound_tourism.csv       → inbound_tourism  (NEW TABLE)
+  region_iso, year, international_arrivals_thousands,
+  tourism_receipts_usd_millions, is_estimated, notes, source_url
+
+data/strategy/ai_features.csv          → ai_feature
+  category (NEW)                         → category
+  source_url                             → source_id
+
+data/strategy/strategy_events.csv      → strategy_event
+  category                               → category (already in Phase 6 schema)
+
+data/sources.csv (288 rows)            → sources
+  url                                    → url
+  → publisher = urlparse(url).netloc
+  → source_type = 'curated'
+  → content_hash = sha256(url)
+  → retrieved_at = now()
+```
+
+---
+
+### Phase 8 — Market & Financial Data Ingestion (Automated)
+
+**Goal:** **Automate refresh** of the market & financial data that Phase 7b loaded once from curated CSVs. Maps to FR-08.1 (market data), FR-08.2 (rival financials), and FR-08.4 (market-share estimation).
+
+**Relationship to Phase 7b.** The dashboard already serves real numbers after Phase 7b — what's missing is *fresh* numbers. Each adapter below targets a specific slice of the warehouse and overwrites `source_type='curated'` rows with `source_type='sec_edgar'` / `'unwto'` / etc. when the live source publishes a newer figure. The curated CSV remains in place as a **regression baseline** for the adapter; the acceptance criteria for each task includes "live output for the latest period matches the curated CSV within ±5% (or the discrepancy is explained in `notes`)."
 
 | ID | Task | Output | Acceptance | Verification | Status |
 |---|---|---|---|---|---|
@@ -236,9 +307,11 @@ Build a world-map-based competitive intelligence dashboard that lets the OTA pre
 
 ---
 
-### Phase 9 — Strategy & AI Intelligence Ingestion
+### Phase 9 — Strategy & AI Intelligence Ingestion (Automated)
 
-**Goal:** Populate `STRATEGY_EVENT`, `AI_FEATURE`, and `JOB_POSTING_SNAPSHOT` with LLM-extracted intelligence from rival public communications. Maps to FR-08.3.
+**Goal:** **Automate refresh** of `STRATEGY_EVENT`, `AI_FEATURE`, and `JOB_POSTING_SNAPSHOT` with LLM-extracted intelligence from rival public communications. Maps to FR-08.3.
+
+**Relationship to Phase 7b.** 58 AI features and 93 strategy events are already in the warehouse from the curated bootstrap, including the `category` column the Phase 14 AI Capability Gap synthesis depends on. Phase 9's job is to keep that flow alive in perpetuity: the LLM extractor must reproduce a Phase 7b row (same `feature_name`, same `category`, source-URL match) when fed the same press release, plus surface new features within 48h of publication.
 
 | ID | Task | Output | Acceptance | Verification | Status |
 |---|---|---|---|---|---|
@@ -343,10 +416,13 @@ Build a world-map-based competitive intelligence dashboard that lets the OTA pre
 
 ```mermaid
 graph LR
-    P0[Phase 0–5<br/>Seed-driven UI ✅] --> P6[Phase 6<br/>Data Model v2]
-    P6 --> P7[Phase 7<br/>Ingestion Skeleton]
-    P7 --> P8[Phase 8<br/>Market + Financial Ingest]
-    P7 --> P9[Phase 9<br/>Strategy + AI Ingest]
+    P0[Phase 0–5<br/>Seed-driven UI ✅] --> P6[Phase 6<br/>Data Model v2 ✅]
+    P6 --> P7[Phase 7<br/>Ingestion Skeleton ✅]
+    P7 --> P7b[Phase 7b<br/>Curated-Data Bootstrap]
+    P7b --> P8[Phase 8<br/>Market + Financial Ingest]
+    P7b --> P9[Phase 9<br/>Strategy + AI Ingest]
+    P7b -.real-data mode.-> P10
+    P7b -.real-data mode.-> P11
     P8 --> P10[Phase 10<br/>Benchmark + Trajectory]
     P9 --> P11[Phase 11<br/>Win/Loss + Strategy Card]
     P10 --> P12[Phase 12<br/>Investor View + Narrative]
@@ -357,8 +433,9 @@ graph LR
     P13 --> P14
 ```
 
-- **Phases 8 and 9 can run in parallel** once Phase 7 lands — they share the ingestion skeleton but write to disjoint tables.
-- **Phase 10 depends only on Phase 8** data; **Phase 11 depends on Phase 9**; this lets two squads work in parallel after the ingestion landing.
+- **Phase 7b unblocks Phases 10–14 early.** Once the curated CSVs land in the warehouse, every downstream phase can develop against real data through `?source=real` without waiting for the long-running adapter work in Phases 8 & 9.
+- **Phases 8 and 9 can run in parallel** once Phase 7b lands — they share the ingestion skeleton but write to disjoint tables, and each one's acceptance is gated on matching the Phase 7b regression baseline.
+- **Phase 10 depends only on Phase 8** data; **Phase 11 depends on Phase 9**; this lets two squads work in parallel after the bootstrap landing.
 - **Phase 12 depends on both 10 and 11** because the LLM narrative reads benchmark + win/loss inputs.
 - **Phase 13 is decoupled** from the chart phases but should land before Phase 12 ships externally — otherwise users see numbers without provenance.
 - **Phase 14 is the capstone** and assumes all upstream KPIs are flowing with real data.

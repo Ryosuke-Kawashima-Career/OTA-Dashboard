@@ -29,6 +29,10 @@ class Rival(Base):
     summary_updated_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
+    # Phase 7b — curated-data fields (migration 0008): parent group +
+    # canonical HQ ISO code used by region-weighting maths in Phase 8.
+    parent: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    hq_iso: Mapped[str | None] = mapped_column(String(10), nullable=True)
 
 
 class RivalRegionSnapshot(Base):

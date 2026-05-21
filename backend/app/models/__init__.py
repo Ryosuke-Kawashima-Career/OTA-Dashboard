@@ -1,3 +1,4 @@
+from app.models.inbound_tourism import InboundTourism
 from app.models.job_posting import JobPostingSnapshot
 from app.models.market_growth import MarketGrowth
 from app.models.market_share import MarketShareEstimate
@@ -10,6 +11,7 @@ from app.models.strategy_event import AIFeature, StrategyEvent
 
 __all__ = [
     "AIFeature",
+    "InboundTourism",
     "JobPostingSnapshot",
     "MarketGrowth",
     "MarketShareEstimate",

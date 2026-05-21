@@ -1,7 +1,7 @@
 import uuid
 from datetime import date
 
-from sqlalchemy import Date, ForeignKey, String, Text
+from sqlalchemy import Boolean, Date, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -26,6 +26,10 @@ class StrategyEvent(Base):
     )
     event_date: Mapped[date] = mapped_column(Date, nullable=False)
     category: Mapped[str] = mapped_column(String(50), nullable=False)
+    # `title` is the curated CSV's short headline; `summary` carries the
+    # longer description. Either field can be displayed depending on
+    # the surface (Rival Strategy Card vs. timeline tooltip).
+    title: Mapped[str | None] = mapped_column(String(255), nullable=True)
     summary: Mapped[str] = mapped_column(Text, nullable=False)
     source_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("sources.id"), nullable=False
@@ -50,6 +54,12 @@ class AIFeature(Base):
     launch_date: Mapped[date] = mapped_column(Date, nullable=False)
     feature_name: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Phase 7b — feature category (migration 0008). Used by the Phase 14
+    # AI Capability Gap synthesis to compare our coverage against rivals'.
+    category: Mapped[str] = mapped_column(String(50), nullable=False, default="Other AI")
+    # Phase 7b — curated-data audit pair (migration 0008).
+    is_estimated: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
     source_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("sources.id"), nullable=False
     )
