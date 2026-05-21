@@ -7,7 +7,7 @@ import os
 import random
 import sys
 import uuid
-from datetime import date
+from datetime import date, datetime, timezone
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "backend"))
 
@@ -388,9 +388,52 @@ REGION_METRICS = [
 ]
 
 
+# Phase 6 (T-6.7): every fact row in the v2 warehouse must carry a
+# source_id. The seed predates the ingestion layer, so we insert one
+# canonical "internal-seed" Source row that future migrations (and
+# Phase 8 backfills) can point fact rows at. The fixed URL + content
+# hash makes the row idempotent under the (url, content_hash) unique
+# constraint, so re-running the seed never produces duplicates.
+SEED_SOURCE = {
+    "url": "internal://seed/phase-0-5",
+    "publisher": "internal-seed",
+    "source_type": "seed",
+    "content_hash": "phase-0-5-seed-v1",
+}
+
+
 def seed():
     conn = psycopg2.connect(DB_URL)
     cur = conn.cursor()
+
+    # Source registry — single internal-seed row (Phase 6, T-6.7).
+    # The `sources` table only exists after migration 0003 has been
+    # applied; skip silently if running against a Phase-1–5 schema so
+    # the seed remains backward-compatible during the rollout window.
+    cur.execute("SELECT to_regclass('public.sources') IS NOT NULL")
+    (sources_table_exists,) = cur.fetchone()
+    if sources_table_exists:
+        cur.execute(
+            """
+            INSERT INTO sources (url, publisher, source_type, retrieved_at, content_hash)
+            VALUES (%s, %s, %s, %s, %s)
+            ON CONFLICT ON CONSTRAINT uq_sources_url_content_hash DO NOTHING
+            """,
+            (
+                SEED_SOURCE["url"],
+                SEED_SOURCE["publisher"],
+                SEED_SOURCE["source_type"],
+                datetime.now(timezone.utc),
+                SEED_SOURCE["content_hash"],
+            ),
+        )
+        cur.execute(
+            "SELECT id FROM sources WHERE url = %s AND content_hash = %s",
+            (SEED_SOURCE["url"], SEED_SOURCE["content_hash"]),
+        )
+        seed_source_id = cur.fetchone()[0]
+    else:
+        seed_source_id = None
 
     # Regions
     execute_values(
@@ -504,6 +547,13 @@ def seed():
         )
 
     conn.commit()
+    if sources_table_exists:
+        cur.execute("SELECT COUNT(*) FROM sources WHERE source_type = 'seed'")
+        seed_source_count = cur.fetchone()[0]
+        assert seed_source_count == 1, (
+            f"Expected exactly 1 'seed' source row, got {seed_source_count}"
+        )
+        print(f"  · internal-seed source row id: {seed_source_id}")
     cur.execute("SELECT COUNT(*) FROM rivals;")
     rival_count = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM regions;")
