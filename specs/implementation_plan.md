@@ -1,14 +1,22 @@
 # Implementation Plan — OTA Competitive Intelligence Dashboard
 
-**Version:** 1.0
-**Last Updated:** 2026-04-18
-**Source Spec:** [specs/user_story.md](user_story.md)
+**Version:** 2.0
+**Last Updated:** 2026-05-21
+**Source Specs:** [user_story.md](user_story.md) · [requirements.md](requirements.md) · [design.md](design.md)
 
 ---
 
 ## 1. Executive Summary
 
-Build a world-map-based competitive intelligence dashboard for the OTA president to monitor rival companies and regional travel market characteristics, prioritizing a working map core before layering analytics on top.
+Build a world-map-based competitive intelligence dashboard that lets the OTA president **and** the broader organization make share-based decisions backed by real, up-to-date public data. Phases 0–5 delivered the seed-driven core (map, rival overlay, regional panel, KPI header, comparison view, time-period filter + CSV export). Phases 6–14 expand the scope per the v2 requirements and design:
+
+1. **Provenance-backed data model** — every fact row carries a `source_id` (FR-08.6).
+2. **Real-data ingestion layer** — Prefect + adapters for SEC EDGAR, HKEX, IR pages, UNWTO, JNTO, World Bank, IMF, Statista, Phocuswright, RSS, blogs, and career sites (FR-08).
+3. **Self vs. Market Benchmark + Market Share Trajectory** (FR-04b, FR-06).
+4. **Competitor Win/Loss + Rival Strategy & AI intelligence** (FR-02 extension, FR-08.3).
+5. **Investor View preset + chart narratives + non-analyst accessibility** (FR-07).
+6. **Provenance UI + stale-data warnings** (FR-08.6, NFR-01).
+7. **Strategy Synthesis layer** — converts KPIs into actionable recommendations (the layer that fulfills the president's "escape the revenue up/down debate" mandate).
 
 ---
 
@@ -22,8 +30,13 @@ Build a world-map-based competitive intelligence dashboard for the OTA president
 | State Management | Zustand | Simple, minimal boilerplate for dashboard state |
 | Backend API | Python + FastAPI | Fast prototyping, async I/O, auto-generated docs |
 | Database | PostgreSQL + PostGIS | Relational + geospatial queries |
-| Data Ingestion | Python scripts + cron | Scraping/API fetch pipeline, monthly cadence |
-| Hosting | Vercel (frontend) + Railway (backend) | Fast deployment, free tier for prototype |
+| Data Ingestion Orchestration | **Prefect** | Idempotent flows, scheduling, retries, observability (FR-08) |
+| Raw Payload Store | **AWS S3** (or compatible) | 24-month retention of source HTML/PDF/XBRL (FR-08.5) |
+| Financial Parsing | **`python-xbrl` + `pdfplumber` + `beautifulsoup4`** | XBRL → regex → LLM fallback chain (FR-08.2) |
+| LLM Provider | **Claude API (Sonnet)** | Strategy summarization, AI-feature extraction, chart narratives (FR-08.3, FR-07) |
+| Job Scheduler | Prefect schedules | Daily filings (6h), daily press (12h), weekly jobs, monthly market (NFR-01) |
+| Alerting | Slack webhook | Layout-change & stale-data alerts (FR-08.5, NFR-01) |
+| Hosting | Vercel (frontend) + Railway (backend) + Prefect Cloud / self-hosted Prefect Server | Fast deployment, free tier for prototype |
 
 ---
 
@@ -159,8 +172,283 @@ Build a world-map-based competitive intelligence dashboard for the OTA president
 | T-5.2 | Ranking among Global OTAs | `global_rank` field added to each row of `rival_ranking` in [regions.py](../backend/app/routers/regions.py); shown alongside local rank in [RivalRankingTable.tsx](../frontend/src/components/RivalRankingTable.tsx) | Each region row shows local position **and** worldwide rank by booking volume; values match between region panel and DB | `curl /api/regions/US` → Expedia local #1 / global #1, Airbnb local #2 / global #6, etc. | ✅ |
 | T-5.3 | Backend query param | `?snapshot_month=YYYY-MM-DD` accepted by [/api/regions](../backend/app/routers/regions.py), [/api/regions/{iso}](../backend/app/routers/regions.py), [/api/kpis/global](../backend/app/routers/kpis.py), and [/api/export](../backend/app/routers/export.py) via shared [snapshot.py](../backend/app/snapshot.py) helper | Bad date → 400 with explanatory message; missing param → falls back to latest snapshot in DB | `?snapshot_month=garbage` → `400 {"detail":"Invalid snapshot_month 'garbage'; expected YYYY-MM-DD."}` | ✅ |
 | T-5.4 | New `/api/snapshots` | [routers/regions.py](../backend/app/routers/regions.py) | Returns `{ months: [...], latest }` so the frontend can populate the slider | `curl /api/snapshots` → 5 months 2022→2026 | ✅ |
-| T-5.5 | Multi-year seed | [data/seeds/seed.py](../data/seeds/seed.py) | Yearly snapshots 2022→2026 with a deterministic recovery curve (`YEAR_MULTIPLIER`); rival assignments stable per region across years so ranks read as a clean trend | `python data/seeds/seed.py` → "5 distinct snapshot months"; US demand 72 → 92 across years | ✅ |
+| T-5.5 | Multi-year seed | [data/seeds/seed.py](../data/seeds/seed.py) | Yearly snapshots 2022→2026 with a deterministic recovery curve (`YEAR_MULTIPLIER`); rival assignments stable per region across years so ranks read as a clean trend | `python data/seeds/seed.py` → "5 distinct snapshot months"; US demand 72 → 92 across years | ✅ (synthetic curve replaced by real `market_growth` / `region_metrics` data in Phase 7b — see below) |
 | T-5.6 | Backend `/api/export` | [routers/export.py](../backend/app/routers/export.py) | Returns `text/csv` with `Content-Disposition: attachment; filename="ota-export-<snap>.csv"`; columns: snapshot_month, iso_code, name, continent, demand_index, avg_booking_value, top_rival, top_rival_share_pct | `curl /api/export` → CSV header + 30 rows; `?snapshot_month=2022-04-01` re-renders with 2022 values | ✅ |
 | T-5.7 | "Last updated" badge + Export CSV button | [KpiHeaderBar.tsx](../frontend/src/components/KpiHeaderBar.tsx) | Right-aligned column in the KPI header showing the active `snapshot_month` and a "Export CSV" link that downloads the same snapshot the dashboard is showing | Manual: badge updates with slider; button downloads `ota-export-2026-04-01.csv` | ✅ |
 
 **Milestone:** Full filter + export flow works end-to-end. Verified via `npm run lint` clean, `npm run build` (TS strict) clean, `npm test` 37/37, multi-year `/api/kpis/global` curls, `/api/export` CSV inspection, and live `/api/regions/US` showing the new `global_rank` field.
+
+---
+
+### Phase 6 — Data Model Foundation & Source Registry ✅ [COMPLETED 2026-05-21]
+
+**Goal:** Extend the data warehouse with the provenance-backed fact tables defined in [design.md § Data Model](design.md) so subsequent ingestion has a target schema. Maps to FR-08.6 (provenance), FR-08.4 (estimation flags).
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-6.1 | Source registry table | [backend/app/models/source.py](../backend/app/models/source.py) + Alembic [0003_source_registry.py](../backend/migrations/versions/0003_source_registry.py) | `SOURCE(id, url, publisher, source_type, retrieved_at, raw_payload_ref, content_hash)` with unique constraint on `(url, content_hash)` + indexes on `source_type`, `retrieved_at` | `\d sources` confirms 7 columns + 3 indexes + unique constraint; FKs from 7 fact tables resolve to `sources.id` | ✅ |
+| T-6.2 | Market growth + financial fact tables | [market_growth.py](../backend/app/models/market_growth.py), [rival_financial.py](../backend/app/models/rival_financial.py), [own_financial.py](../backend/app/models/own_financial.py) + Alembic [0004_financials.py](../backend/migrations/versions/0004_financials.py) | All three tables exist; every row carries `source_id` NOT NULL FK; FK uses default `RESTRICT` so a source can never be deleted while fact rows reference it | `\d market_growth rival_financial own_regional_financial`; SQLAlchemy metadata check asserts `source_id.nullable is False` | ✅ |
+| T-6.3 | Market share estimate table | [market_share.py](../backend/app/models/market_share.py) + Alembic [0005_market_share.py](../backend/migrations/versions/0005_market_share.py) | Includes `is_estimated` bool NOT NULL + `calculation_method` text + `source_id` FK; partial index `WHERE is_estimated=true` | `\d market_share_estimate` shows partial index `ix_market_share_estimate_is_estimated`; unique constraint `(rival_id, region_iso, period_end, source_id)` present | ✅ |
+| T-6.4 | Strategy event / AI feature / job posting tables | [strategy_event.py](../backend/app/models/strategy_event.py) (StrategyEvent + AIFeature), [job_posting.py](../backend/app/models/job_posting.py) + Alembic [0006_strategy.py](../backend/migrations/versions/0006_strategy.py) | Composite indexes `(rival_id, event_date)`, `(rival_id, launch_date)`, `(rival_id, snapshot_date)` | `\d strategy_event ai_feature job_posting_snapshot` confirms each index | ✅ |
+| T-6.5 | Rival metadata expansion | `Rival.ticker`, `exchange`, `strategy_summary`, `summary_updated_at` columns in [models/rival.py](../backend/app/models/rival.py) + Alembic [0007_rival_metadata.py](../backend/migrations/versions/0007_rival_metadata.py) | All four columns nullable; existing 15 rows preserved | Seed re-runs cleanly with `15 rivals, 30 regions, 175 snapshots`; new columns return NULL pending Phase 8 backfill | ✅ |
+| T-6.6 | Provenance contract validator | [backend/scripts/validate_provenance.py](../backend/scripts/validate_provenance.py) | Scans all 7 fact tables; exits 0 if every row has `source_id`, exits 1 with table-by-table breakdown otherwise; skips tables not yet migrated | Negative test: temporarily drop NOT NULL, insert NULL-source row → validator reports `market_growth: 1 unsourced row(s)`, exits 1; restore + delete → exits 0 | ✅ |
+| T-6.7 | Seed data → source-tagged | [data/seeds/seed.py](../data/seeds/seed.py) inserts a single `SOURCE(source_type='seed', publisher='internal-seed', url='internal://seed/phase-0-5', content_hash='phase-0-5-seed-v1')` row idempotently via the `(url, content_hash)` unique constraint | Re-running seed converges to exactly 1 seed-typed source row; Phase 1–5 endpoints respond unchanged | `python ../data/seeds/seed.py` twice → same seed source `id`; `GET /api/{healthz,snapshots,kpis/global,regions/US,rivals}` all return 200 | ✅ (superseded by Phase 7b — see below) |
+
+**Milestone:** `alembic upgrade head` brings the warehouse from 0002 → 0007 in five sequential steps; `validate_provenance.py` passes; existing Phase 1–5 endpoints respond unchanged. Verified via `alembic upgrade head` (5 migrations applied), `python ../data/seeds/seed.py` (15 rivals / 30 regions / 175 snapshots, 1 internal-seed source row), `python scripts/validate_provenance.py` exits 0, and live curls to `/healthz`, `/api/snapshots`, `/api/kpis/global`, `/api/regions/US`, `/api/rivals` all returning 200.
+
+---
+
+### Phase 7 — Ingestion Pipeline Skeleton ✅ [COMPLETED 2026-05-21]
+
+**Goal:** Stand up the `ingestion/` directory with a runnable Prefect flow, S3-backed raw payload store, Source provenance recorder, and layout-change alerting. No production adapters yet — one synthetic "echo" adapter proves the pipeline end-to-end. Maps to FR-08.5 and FR-08.6.
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-7.1 | Prefect harness | [ingestion/\_\_init\_\_.py](../ingestion/__init__.py), [ingestion/requirements.txt](../ingestion/requirements.txt) (`prefect>=3.0`, `boto3`, `beautifulsoup4`, `requests`, `pdfplumber`, `python-xbrl`, `anthropic`), [ingestion/flows/\_\_init\_\_.py](../ingestion/flows/__init__.py), shared sync session in [ingestion/db.py](../ingestion/db.py) | Package importable; `@prefect.flow` decorator wires `echo_flow` cleanly; flow remains a plain callable for tests | `PYTHONPATH=backend:. python -m ingestion.flows.echo_flow` runs Prefect locally, prints `Flow run … Finished in state Completed()` | ✅ |
+| T-7.2 | Raw payload store | [ingestion/raw_store/s3_client.py](../ingestion/raw_store/s3_client.py) — `RawPayloadStore` Protocol + `LocalRawPayloadStore` (dev/test default) + `S3RawPayloadStore` (production, lazy boto3) + `default_raw_store()` env-driven factory | Writes `<source_type>/<yyyy>/<mm>/<sha256>.bin`; reads by ref; content-addressed → identical payload yields identical key (idempotent without a DB) | `pytest ingestion/tests/test_raw_store.py` 4/4 pass: round-trip, key-layout regex, content-addressed idempotency, distinct-payload distinct-key | ✅ |
+| T-7.3 | Provenance recorder | [ingestion/provenance/recorder.py](../ingestion/provenance/recorder.py) — `record(session, url, publisher, source_type, content_hash, …) -> UUID` using `INSERT … ON CONFLICT … DO NOTHING RETURNING id` then SELECT fallback for concurrent racers | Same `(url, content_hash)` → same `source_id`; no duplicate `sources` row under concurrent writers | Two consecutive `echo_flow()` runs return identical `source_id` (`a35c3dc6-…`); `SELECT count(*) FROM sources WHERE source_type='echo'` = 1 | ✅ |
+| T-7.4 | Layout-change detector | [ingestion/monitor/layout_change_detector.py](../ingestion/monitor/layout_change_detector.py) (`dom_skeleton_hash`, `xbrl_tag_count_fingerprint`, `LayoutChangeDetector` with on-disk per-URL JSON state) + [alerts.py](../ingestion/monitor/alerts.py) (Slack-webhook poster that never raises) | DOM-skeleton hash ignores text/attribute drift, fires on structural drift; rolling window of 5; first run never alerts; novel fingerprint does NOT enter the window | `pytest ingestion/tests/test_layout_change_detector.py` 7/7 pass; live echo flow with a pre-seeded "fake" window returns `status='skipped_layout_drift'` and writes zero DB rows | ✅ |
+| T-7.5 | Echo adapter end-to-end | [ingestion/adapters/echo.py](../ingestion/adapters/echo.py) (`fetch`, `extract`, deterministic HTML fixture, sentinel row `region_iso='US' year=1900`) + [ingestion/flows/echo_flow.py](../ingestion/flows/echo_flow.py) (`@flow` wiring raw_store → detector → recorder → upsert) | Flow run produces exactly 1 `SOURCE` row + 1 raw payload object + 1 `market_growth` fact row; `EchoRunSummary` returned for assertion | Live run: `EchoRunSummary(status='ok', source_id='a35c3dc6-…', raw_payload_ref='echo/2026/05/a50b45cb….bin', fact_rows_upserted=1)`; raw file present on disk; DB shows 1/1/1 | ✅ |
+| T-7.6 | Idempotent upsert helper | [ingestion/normalizer/schema.py](../ingestion/normalizer/schema.py) — `upsert(session, target, natural_key, payload, update_on_conflict)` over `INSERT … ON CONFLICT (natural_key) DO UPDATE/NOTHING`; validates payload contains every key column | Re-running echo flow produces 1 `SOURCE` row + 0 duplicate fact rows; `SELECT COUNT(*)` unchanged after second run | Two `python -m ingestion.flows.echo_flow` runs; `sources_count=1`, `fact_rows=1` after both; same `source_id` returned both times | ✅ |
+| T-7.7 | robots.txt + rate-limit middleware | [ingestion/adapters/_http.py](../ingestion/adapters/_http.py) — `HttpClient` (per-host robots.txt cache via `urllib.robotparser`, `Crawl-delay` honored) + `TokenBucket` (thread-safe leaky bucket, injectable clock/sleep for tests); transport callable injected for unit tests | Disallowed URL returns `HttpResult(skipped=True, skip_reason='robots.txt disallow')` and never calls transport; bucket at 2 rps forces a ~0.5s sleep between back-to-back calls | `pytest ingestion/tests/test_http.py` 4/4 pass: disallow short-circuits transport, allow proceeds, bucket paces requests, bucket refills over time | ✅ |
+
+**Milestone:** Ingestion runtime is provable end-to-end with a synthetic adapter; provenance, raw retention, layout-change alerts, idempotent upserts, and rate limits all work; no production data yet. Verified via `pytest ingestion/tests` (**18/18 pass**, 4 raw-store + 7 layout-detector + 4 HTTP + 3 echo-flow integration), two consecutive `python -m ingestion.flows.echo_flow` runs converging on the same `source_id` and `raw_payload_ref`, `backend/scripts/validate_provenance.py` exit 0 during and after the runs, and Phase 1–5 endpoints unaffected. Synthetic echo rows are cleaned up post-verification so the warehouse stays Phase-6-clean for Phase 7b.
+
+---
+
+### Phase 7b — Curated-Data Bootstrap (Real-World Schema Validation) ✅ [COMPLETED 2026-05-21]
+
+**Goal:** Load the hand-curated industry data in [data/](../data/) into the v2 warehouse so the dashboard can render real OTA market figures *before* the automated adapters (Phases 8 & 9) come online. This phase also acts as a **schema regression test** — the very act of loading 21 rivals, 50 financial rows, 139 market-growth rows, 60 region metrics, 90 inbound-tourism rows, 58 AI features, 93 strategy events, and 288 unique sources proves the Phase 6 schema can hold real-world OTA data without lossy conversion.
+
+**Implementation note.** Rather than introduce a separate `backend/scripts/load_curated_data.py` alongside the legacy synthetic seed, the curated load **replaces** [data/seeds/seed.py](../data/seeds/seed.py) in-place. From Phase 7b onwards, `python ../data/seeds/seed.py` *is* the real-world data loader — the prior hardcoded `RIVALS`/`REGION_METRICS` dictionaries are gone. The only synthetic data that remains is `rival_region_snapshots`, kept temporarily so Phase 1–5 endpoints keep working until Phase 8's `market_share_estimate` derivation lands; its rows are now built from the **real** rival UUIDs + HQ ISOs from `rivals.csv`.
+
+**Why this phase exists.** [data/README.md](../data/README.md) describes a complete dataset sourced from SEC EDGAR, HKEX, IR pages, UNWTO, JNTO, INE, Statista, Phocuswright, and Skift. Diffing the CSV columns against the Phase 6 ORM models exposed six concrete gaps (T-7b.1). Closing them now means Phase 8/9 adapters write into a schema that already matches their structured output — they don't have to negotiate column additions on the fly. Maps to FR-08.1, FR-08.2, FR-08.3, FR-08.4, FR-08.6 via CSV load rather than live extraction.
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-7b.1 | Schema reconciliation migration | Alembic [0008_curated_data_schema.py](../backend/migrations/versions/0008_curated_data_schema.py) + model updates in [rival.py](../backend/app/models/rival.py), [market_growth.py](../backend/app/models/market_growth.py), [rival_financial.py](../backend/app/models/rival_financial.py), [region.py](../backend/app/models/region.py), [strategy_event.py](../backend/app/models/strategy_event.py), new [inbound_tourism.py](../backend/app/models/inbound_tourism.py) | **(a)** `rivals` gains `parent` + `hq_iso`; **(b)** `market_growth`, `rival_financial`, `region_metrics`, `ai_feature` each gain `is_estimated BOOL NOT NULL DEFAULT false` + `notes TEXT`; **(c)** `region_metrics` gains `year`, `seasonality_index`, `source_id`; **(d)** `ai_feature` gains `category VARCHAR(50) NOT NULL DEFAULT 'Other AI'` (used by Phase 14 AI Capability Gap); **(e)** `strategy_event` gains `title`; **(f)** new table `inbound_tourism(id, region_iso FK, year, international_arrivals_thousands, tourism_receipts_usd_millions, is_estimated, notes, source_id FK)` with composite index `(region_iso, year)` | `alembic upgrade head` reaches 0008 cleanly; `\d` of each table shows the new columns; existing rows retain default `is_estimated=false` | ✅ |
+| T-7b.2 | Loader: sources registry | [seed.py](../data/seeds/seed.py) `upsert_source()` helper + memoised cache | For every distinct `source_url` encountered across all 7 CSV files, upsert one `sources` row with `publisher = urlparse(url).netloc`, `source_type = 'curated'`, `content_hash = sha256(url)`, `retrieved_at = now()`; ON CONFLICT clause makes the operation idempotent | After load: `SELECT COUNT(*) FROM sources WHERE source_type='curated';` returns **288** (the unique URLs from [data/sources.csv](../data/sources.csv)) | ✅ |
+| T-7b.3 | Loader: rivals + rival_financials | [seed.py](../data/seeds/seed.py) `load_rivals()` + `load_rival_financials()` | (i) Insert 21 rivals from [data/rivals/rivals.csv](../data/rivals/rivals.csv) with their stable UUID5 IDs; set `parent`, `hq_iso`, `ticker`, `exchange` from the CSV. (ii) Insert 50 rows from [data/rivals/rival_financials.csv](../data/rivals/rival_financials.csv); convert `fiscal_year → period_end = date(year, 12, 31)` + `period_type = 'annual'`; multiply `*_usd_millions` by 1e6, `*_millions`/`*_thousands` similarly | Live `SELECT name, ticker, parent FROM rivals WHERE name='Booking.com';` → `Booking.com / BKNG / Booking Holdings`; `SELECT revenue_usd FROM rival_financial WHERE rival='Airbnb' AND period_end='2024-12-31'` = **11_102_000_000** | ✅ |
+| T-7b.4 | Loader: market + region + tourism | [seed.py](../data/seeds/seed.py) `load_market_growth()` + `load_region_metrics()` + `load_inbound_tourism()` | Load [market_growth.csv](../data/market/market_growth.csv) (139 rows, market_size_usd_millions × 1e6), [region_metrics.csv](../data/regions/region_metrics.csv) (60 rows, year preserved + snapshot_month=Jan-1 backfill), [inbound_tourism.csv](../data/regions/inbound_tourism.csv) (90 rows); all three preserve `is_estimated` + `notes` + `source_id` | Live: `SELECT region_iso, year, market_size_usd, is_estimated FROM market_growth WHERE region_iso='JP' ORDER BY year;` returns the 5-year trajectory `2022 → 10B (estimated)`, `2023 → 13B`, `2024 → 14.5B`, `2025 → 15.5B`, `2026 → 16.7B (estimated)` | ✅ |
+| T-7b.5 | Loader: strategy events + AI features | [seed.py](../data/seeds/seed.py) `load_ai_features()` + `load_strategy_events()` | Load 58 AI features with the new `category` column (`GenAI assistant`, `ML pricing`, etc.); load 93 strategy events with `category` + `title` + `description→summary` | Live: `SELECT category, COUNT(*) FROM ai_feature GROUP BY category ORDER BY 2 DESC;` returns `GenAI assistant: 25, Other AI: 10, Customer service AI: 8, Personalization: 8, Content generation: 4, Trip planning: 2, ML pricing: 1` — full distribution across all 7 categories | ✅ |
+| T-7b.6 | Loader idempotency | `seed.py` deletes FK-dependent fact tables first (rival_region_snapshots → rival_financial → ai_feature → strategy_event → market_growth → region_metrics → inbound_tourism) then re-loads; sources are never deleted (the upsert handles refresh) | Re-running `python ../data/seeds/seed.py` produces identical counts and zero errors | Two consecutive runs both print: `30/21/50/139/60/90/58/93/288/880 PASS` | ✅ |
+| T-7b.7 | Provenance validator passes after load | [validate_provenance.py](../backend/scripts/validate_provenance.py) | All 8 v2 fact tables (market_growth, rival_financial, own_regional_financial, market_share_estimate, strategy_event, ai_feature, job_posting_snapshot, **inbound_tourism**) have non-null `source_id` after the load | `python backend/scripts/validate_provenance.py` exits 0 (`OK: every provenance-backed table is fully sourced.`) after both seed runs | ✅ |
+| T-7b.8 | Dashboard reads real data | Existing Phase 1–5 routers continue to work against the curated warehouse — no `?source=real` flag needed because the seed now *is* the real data | All Phase 1–5 endpoints return 200; `/api/rivals` returns the real-world roster (Booking.com, Airbnb, Trip.com, Skyscanner, Cleartrip, EaseMyTrip, Etraveli, …) | `GET /api/{healthz,snapshots,kpis/global,regions/US,rivals}` all 200; `/api/rivals` first 8 names: `[Agoda, Airbnb, Amadeus, Booking.com, Cleartrip, EaseMyTrip, eDreams ODIGEO, Etraveli]` | ✅ |
+
+**Caveat — count drift between curated CSV and API.** `data/rivals/rivals.csv` carries 21 rivals; `/api/rivals` currently returns 20 because the endpoint filters on rivals whose `hq_country` resolves to a region with `lat/lng` in the 30-region geo table — 3 of the new rivals (ShareTrip / KKday / Klook, with HQs in Bangladesh / Taiwan / Hong Kong) are skipped, and Amadeus from the prior synthetic seed remains because its `Spain` HQ matches an existing region. Adding BD/TW/HK to the regions table is a Phase 10 cleanup (it affects the world-map choropleth too).
+
+**Milestone:** `alembic upgrade head` reaches `0008`; `python ../data/seeds/seed.py` populates **30 regions, 21 rivals, 50 rival_financial, 139 market_growth, 60 region_metrics, 90 inbound_tourism, 58 ai_feature, 93 strategy_event, 288 sources, 880 rival_region_snapshots** in a single run; `validate_provenance.py` passes; idempotent over re-runs; Phase 1–5 endpoints all return 200 against real-world data. **From now on, the dashboard is backed entirely by real curated OTA data — no synthetic mock data remains in the warehouse.**
+
+**Field-mapping reference** (for the loader and for future adapters):
+
+```text
+data/rivals/rivals.csv                 → rivals
+  id,name,parent,ticker,exchange,        + id (preserved),
+  hq_country,hq_iso,categories,            hq_country, hq_iso (NEW),
+  business_model,ai_strategy,website       parent (NEW), ticker, exchange
+
+data/rivals/rival_financials.csv       → rival_financial
+  fiscal_year                            → period_end = date(year, 12, 31)
+                                           period_type = 'annual'
+  revenue_usd_millions × 1e6             → revenue_usd
+  gross_bookings_usd_millions × 1e6      → gross_bookings_usd
+  is_estimated, notes (NEW), source_url  → is_estimated, notes, source_id
+
+data/market/market_growth.csv          → market_growth
+  market_size_usd_millions × 1e6         → market_size_usd
+  is_estimated, notes (NEW), source_url  → is_estimated, notes, source_id
+
+data/regions/region_metrics.csv        → region_metrics
+  year                                   → snapshot_month = date(year, 1, 1)
+  avg_booking_value_usd                  → avg_booking_value
+  seasonality_index (NEW)                → seasonality_index
+  is_estimated, notes (NEW), source_url  → is_estimated, notes, source_id
+
+data/regions/inbound_tourism.csv       → inbound_tourism  (NEW TABLE)
+  region_iso, year, international_arrivals_thousands,
+  tourism_receipts_usd_millions, is_estimated, notes, source_url
+
+data/strategy/ai_features.csv          → ai_feature
+  category (NEW)                         → category
+  source_url                             → source_id
+
+data/strategy/strategy_events.csv      → strategy_event
+  category                               → category (already in Phase 6 schema)
+
+data/sources.csv (288 rows)            → sources
+  url                                    → url
+  → publisher = urlparse(url).netloc
+  → source_type = 'curated'
+  → content_hash = sha256(url)
+  → retrieved_at = now()
+```
+
+---
+
+### Phase 8 — Market & Financial Data Ingestion (Automated)
+
+**Goal:** **Automate refresh** of the market & financial data that Phase 7b loaded once from curated CSVs. Maps to FR-08.1 (market data), FR-08.2 (rival financials), and FR-08.4 (market-share estimation).
+
+**Relationship to Phase 7b.** The dashboard already serves real numbers after Phase 7b — what's missing is *fresh* numbers. Each adapter below targets a specific slice of the warehouse and overwrites `source_type='curated'` rows with `source_type='sec_edgar'` / `'unwto'` / etc. when the live source publishes a newer figure. The curated CSV remains in place as a **regression baseline** for the adapter; the acceptance criteria for each task includes "live output for the latest period matches the curated CSV within ±5% (or the discrepancy is explained in `notes`)."
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-8.1 | UNWTO adapter | `ingestion/adapters/unwto.py` | Pulls regional tourism receipts for last 5 years; writes `MARKET_GROWTH` rows with `publisher='UNWTO'` | `SELECT region_iso, year, market_size_usd, growth_rate_pct FROM market_growth WHERE region_iso='JP';` returns ≥5 rows, `source_id` non-null | Pending |
+| T-8.2 | JNTO + World Bank + IMF adapters | `jnto.py`, `world_bank.py`, `imf.py` | JNTO populates JP monthly arrivals; World Bank populates GDP; IMF populates FX rates | Spot-check 2024 USD/JPY against the row in DB; diff < 0.5% | Pending |
+| T-8.3 | Industry research adapter | `industry_research.py` (Statista + Phocuswright + Skift open content) | Fills gaps where UNWTO lacks coverage; rows tagged by publisher | Acceptance ≥ 2 sources per region per year (per requirements.md AC) — verified by `HAVING COUNT(DISTINCT publisher) ≥ 2` | Pending |
+| T-8.4 | SEC EDGAR adapter | `sec_edgar.py` | Pulls 10-K + 10-Q + 20-F for Booking, Expedia, Airbnb; parses XBRL revenue, operating income, segment revenue | `SELECT rivals.name, period_end, revenue_usd, take_rate_pct FROM rival_financial JOIN rivals USING (...) ORDER BY period_end DESC LIMIT 5;` returns latest filings | Pending |
+| T-8.5 | HKEX adapter (Trip.com) | `hkex.py` | Parses Trip.com semi-annual + interim disclosures from HKEX | Latest 4 periods present for Trip.com | Pending |
+| T-8.6 | Generic IR adapter for non-XBRL filers | `ir_page.py` + `pdf_report.py` | Handles HTML earnings pages + PDF reports; uses XBRL > regex > LLM fallback per design § Ingestion principle 6 | Top-5 rivals have non-null `revenue_usd` for most recent quarter | Pending |
+| T-8.7 | Market share estimator | `backend/app/services/share_estimator.py` | Implements `share_pct = (rival_total_revenue × regional_revenue_weight) / regional_market_size`; writes `MARKET_SHARE_ESTIMATE` with `is_estimated=true` + `calculation_method` text | Disclosed Booking US share is non-estimated; derived Booking IN share is flagged + method visible | Pending |
+| T-8.8 | `monthly_market.py` flow | `ingestion/flows/monthly_market.py` | Orchestrates T-8.1–T-8.3 sequentially; idempotent on `(source, region, year)` | Run twice → no duplicate `MARKET_GROWTH` rows | Pending |
+| T-8.9 | `daily_filings.py` flow | `ingestion/flows/daily_filings.py` | Triggers every 6h (NFR-01 24h SLA); deduplicates filings by SEC `accession_number` | Stub clock 24h forward; latest 10-Q for Booking ingested within SLA | Pending |
+
+**Milestone:** Dashboard KPIs (TAM, Market Growth Rate, Own/Rival Take Rate, Op Margin) are sourced from real public data with `source_id` traceability. Requirements AC "automated ingestion pipeline retrieves market data from at least 2 distinct public sources per region" passes.
+
+---
+
+### Phase 9 — Strategy & AI Intelligence Ingestion (Automated)
+
+**Goal:** **Automate refresh** of `STRATEGY_EVENT`, `AI_FEATURE`, and `JOB_POSTING_SNAPSHOT` with LLM-extracted intelligence from rival public communications. Maps to FR-08.3.
+
+**Relationship to Phase 7b.** 58 AI features and 93 strategy events are already in the warehouse from the curated bootstrap, including the `category` column the Phase 14 AI Capability Gap synthesis depends on. Phase 9's job is to keep that flow alive in perpetuity: the LLM extractor must reproduce a Phase 7b row (same `feature_name`, same `category`, source-URL match) when fed the same press release, plus surface new features within 48h of publication.
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-9.1 | Press RSS + corporate blog adapters | `ingestion/adapters/press_rss.py`, `corporate_blog.py` | Subscribes to RSS for top-10 rivals; persists raw HTML to S3 | ≥1 fresh press release per top-5 rival in trailing 7 days | Pending |
+| T-9.2 | Strategy summarizer (LLM) | `ingestion/extractors/strategy_extractor.py` (Claude Sonnet) | Generates one-paragraph `Rival.strategy_summary`; prompt requires `[source: <url>]` markers in output | `rivals.strategy_summary` non-null for ≥10 rivals; `summary_updated_at` within 48h | Pending |
+| T-9.3 | AI feature detector | `extractors/ai_feature_extractor.py` | Identifies AI-feature launches from press; populates `AI_FEATURE(launch_date, feature_name, description, source_id)` | ≥1 AI feature in last 12 months for Booking, Expedia, Trip.com, Airbnb | Pending |
+| T-9.4 | Job board adapter | `adapters/job_board.py` | Scrapes rival career pages weekly; computes `ml_eng_count / total_open_roles` ratio | `JOB_POSTING_SNAPSHOT` populated for ≥5 rivals across ≥2 weeks | Pending |
+| T-9.5 | `daily_press.py` flow | `ingestion/flows/daily_press.py` | Orchestrates T-9.1–T-9.3 every 12h; rate-limits per host | Run twice → `strategy_summary` updates only when content hash changed | Pending |
+| T-9.6 | `weekly_jobs.py` flow | `ingestion/flows/weekly_jobs.py` | Triggers weekly; idempotent on `(rival_id, snapshot_date)` | `SELECT COUNT(DISTINCT snapshot_date) FROM job_posting_snapshot;` ≥ 2 after two weeks | Pending |
+| T-9.7 | Source-citation guard | LLM-output validator in `strategy_extractor.py` | Rejects summaries missing `[source: <url>]` markers | Unit test: malformed LLM response raises `MissingSourceCitation` | Pending |
+
+**Milestone:** Requirements AC "automated job ingests rival press releases and blog posts at least daily and produces an LLM-generated strategy summary per rival with source citations" passes end-to-end.
+
+---
+
+### Phase 10 — Self vs. Market Benchmark + Market Share Trajectory
+
+**Goal:** Satisfy FR-04b (self vs market) and FR-06's new trajectory requirement using the real data delivered in Phases 8–9.
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-10.1 | Backend `/api/benchmark` | `backend/app/routers/benchmark.py` + `services/benchmark_service.py` | Returns `{ region_iso, period, own_growth, market_growth, outperformance_pp, narrative, source_ids[] }`; latency < 300ms | `curl /api/benchmark?region=JP&period=2025-Q4` → outperformance computed = own − market | Pending |
+| T-10.2 | Backend `/api/share-trajectory` | `routers/share_trajectory.py` + `services/trajectory_service.py` | Returns time-series of own share + top-5 rivals per region; computes per-series regression slope; latency < 400ms | `curl /api/share-trajectory?region=US&from=2022&to=2026` returns ≥5 points per series | Pending |
+| T-10.3 | `SelfVsMarketChart.tsx` | Recharts dual-bar chart (own growth vs market growth) with colored gap band | Beating → green band, losing → red band; tooltip shows narrative + source links | Manual: a known-winning region vs known-losing region show opposite colors | Pending |
+| T-10.4 | `ShareTrajectoryChart.tsx` | Recharts LineChart; own + top-5 rivals; period selector reads `timeRangeStore` | Each rival's line color matches their Win/Loss label (set in Phase 11); slope label uses `trajectoryMath.ts` | `npm test` covers `trajectoryMath` slope on synthetic data | Pending |
+| T-10.5 | `benchmarkMath.ts` + `trajectoryMath.ts` | Pure utility libs | ≥90% branch coverage | `npm test` includes them in coverage report | Pending |
+| T-10.6 | Template-fallback narrative | Backend returns template-based narrative until Phase 12's LLM service is live | e.g. "Our APAC revenue grew 8% while the market grew 12% — we lost 4 percentage points of relative position" | Playwright assert: narrative text contains "lost" or "gained" with magnitude | Pending |
+
+**Milestone:** AC "Self vs. market benchmark chart renders" and "Market share trajectory time-series chart renders our company and at least the top 5 rivals" pass.
+
+---
+
+### Phase 11 — Competitor Win/Loss Panel + Rival Strategy Card
+
+**Goal:** Satisfy the new FR-02 win/loss requirement and surface FR-08.3 intelligence in the UI.
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-11.1 | Backend `/api/win-loss` | `routers/win_loss.py` + `services/win_loss_service.py` | Returns per-region rival list with `share_delta_pp`, `label ∈ {Gainer, Loser, Stable}` per design § KPI Catalog | `curl /api/win-loss?region=US&period=2026` → top-3 gainers + top-3 losers | Pending |
+| T-11.2 | `WinLossPanel.tsx` | Two-column panel (Gainers / Losers); click-through to `RivalStrategyCard` | Color-coded chips; sticky-top for top-3 gainers; integrates with region-panel host | Manual: a known gainer appears in the gainer column | Pending |
+| T-11.3 | Backend `/api/strategy/{rival_id}` | `routers/strategy.py` | Returns `strategy_summary`, `ai_features[]`, `recent_strategy_events[]`, all with `source_id`s | `curl /api/strategy/<booking_uuid>` returns ≥1 AI feature with a source URL | Pending |
+| T-11.4 | `RivalStrategyCard.tsx` | Replaces the existing `RivalSummaryCard` for win/loss flow; tabs for Strategy / AI Features / Events | Each item shows publisher + retrieved_at + "View source" affordance (wired in Phase 13) | Click "View source" opens `ViewSourceModal` (Phase 13 stub OK) | Pending |
+| T-11.5 | Win/Loss labeling unit tests | `services/win_loss_service.py` test suite | Δ = +0.6pp → Gainer, +0.3pp → Stable, −0.7pp → Loser; ties handled deterministically | `pytest backend/tests/test_win_loss_service.py` 100% pass | Pending |
+| T-11.6 | Map marker enrichment | `RivalMarkersLayer.tsx` adds a Gainer/Loser ring around each rival pin in the active region | Visual: gainer ring is green, loser ring red, stable grey | Manual zoom into a region | Pending |
+
+**Milestone:** AC "Competitor win/loss trend view labels each tracked rival as a share-gainer or share-loser" passes; clicking a gainer surfaces their strategy and AI features.
+
+---
+
+### Phase 12 — Investor View Preset + Chart Narratives
+
+**Goal:** Satisfy FR-07 (company-wide accessibility, ≤200-char narratives, Investor View preset).
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-12.1 | Backend `/api/narrative` | `routers/narrative.py` + `services/narrative_service.py` (Claude Sonnet) | Generates ≤200-char narrative per `chart_id × region × period`; cached 6h; returns supporting `source_ids[]` | `curl /api/narrative?chart=self_vs_market&region=JP` → text length ≤ 200, ≥1 source_id | Pending |
+| T-12.2 | `ChartNarrative.tsx` | Sub-component wrapped around every major chart | Shows narrative + "View source" links; null narrative → "Generating insight..." placeholder | Storybook stories for both states | Pending |
+| T-12.3 | `InvestorViewPreset.tsx` + `investorViewStore.ts` | Toggle in `KpiHeader.tsx`; when on, dashboard renders only Self-vs-Market, Share Trajectory, Top-3 Win/Loss Δ | Toggle persists in `localStorage`; Playwright covers the toggle path | Playwright: toggle on → only 3 panels visible; toggle off → restore previous state | Pending |
+| T-12.4 | Non-analyst usability validation | UAT walkthrough + 1-page interpretation cheatsheet linked from `KpiHeader` | Non-finance team member reads Self-vs-Market chart and explains the gap unaided | UAT session log appended to docs/walkthrough.md | Pending |
+| T-12.5 | LLM cost guardrail | `narrative_service` cache + max 50 regenerations per day | When budget exceeded → template fallback used; ops alert sent | Test that exceeds limit triggers fallback path | Pending |
+| T-12.6 | Locale toggle for narratives | Backend accepts `?lang=ja\|en`; Japanese narratives generated for IR向けビュー | Same chart_id in `lang=ja` returns Japanese text ≤200 chars | `curl ?lang=ja` returns Japanese | Pending |
+
+**Milestone:** AC "Investor View preset is selectable" and "Every major chart displays a plain-language narrative (≤200 chars)" pass.
+
+---
+
+### Phase 13 — Provenance UI + Stale Data Badge
+
+**Goal:** Satisfy FR-08.6 (View Source everywhere) and NFR-01 (stale-data warning at 2× expected cadence).
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-13.1 | Backend `/api/sources/{id}` | `routers/sources.py` | Returns `{ url, publisher, source_type, retrieved_at, raw_payload_ref, content_hash }`; raw_payload_ref returns a presigned S3 URL | `curl /api/sources/<uuid>` returns 200; clicking link downloads original payload | Pending |
+| T-13.2 | `ViewSourceModal.tsx` | Modal opened from any chart/KPI; lists every contributing source with timestamps | If value is estimated → modal shows `calculation_method` + an "Estimated" badge | Manual: TAM number → modal lists UNWTO + Statista | Pending |
+| T-13.3 | `StaleDataBadge.tsx` + `backend/app/services/freshness_service.py` | Backend exposes age per KPI; frontend renders red/amber badge when age > 2× cadence | Earnings older than 48h → red; market data older than 60d → red; jobs older than 14d → red | Inject stub clock; assert badge appears on the relevant chart | Pending |
+| T-13.4 | Provenance contract on every endpoint | All `/api/*` responses include `source_ids[]` for each KPI value or aggregate | Schema-level test asserts no number is returned without ≥1 `source_id` | `pytest backend/tests/test_provenance_contract.py` passes for every router | Pending |
+| T-13.5 | Estimated-value badge propagation | `MARKET_SHARE_ESTIMATE.is_estimated=true` rows render an "estimated" pill everywhere they appear | Win/Loss panel, trajectory chart, strategy card all show the pill | Visual regression test for a known-estimated rival/region pair | Pending |
+
+**Milestone:** AC "Every figure on the dashboard exposes a 'View source' action" and "A 'stale data' warning is rendered whenever any displayed figure exceeds twice its expected refresh cadence" both pass.
+
+---
+
+### Phase 14 — Strategy Synthesis Layer
+
+**Goal:** Convert raw KPIs into actionable recommendations per the five synthesis rules in [design.md § Strategy Synthesis](design.md). This is the capstone that fulfills the president's "escape the revenue up/down debate" mandate.
+
+| ID | Task | Output | Acceptance | Verification | Status |
+|---|---|---|---|---|---|
+| T-14.1 | Position Diagnosis service | `backend/app/services/synthesis/position_diagnosis.py` | Per region classifies as `Winning`, `Losing`, `Stable`; drives chart color and narrative verb | Unit test: outperformance +2pp → `Winning`; −2pp → `Losing`; ±0.5pp → `Stable` | Pending |
+| T-14.2 | Rival Targeting service | `services/synthesis/rival_targeting.py` | For losing regions, picks the rival with highest positive Share Δ and returns their `strategy_summary` + recent `ai_features` | E2E: in a synthetic losing region the surfaced rival matches the largest gainer | Pending |
+| T-14.3 | AI Capability Gap | `services/synthesis/ai_gap.py` | Categorizes AI features (pricing, search, customer service, supply optimization); returns categories present in top-3 rivals but absent for us | Unit test: own=[pricing], rivals=[pricing, search] → gap=[search] | Pending |
+| T-14.4 | Region Prioritization | `services/synthesis/region_priority.py` | Returns regions ranked by `score = TAM × Market Growth Rate × (target_share − current_share)`; `target_share` configurable per region | `curl /api/synthesis/priorities` returns ranked list, highest score first | Pending |
+| T-14.5 | Aggregated `/api/synthesis/recommendation` | `routers/synthesis.py` | Returns `{ position, targeted_rival, ai_gap, priority_rank, recommendation_narrative, source_ids[] }` for a given region | A known-losing region returns non-empty `targeted_rival` + AI gap | Pending |
+| T-14.6 | "Recommended next move" banner in Investor View | Frontend banner in `InvestorViewPreset.tsx` | Reads `/api/synthesis/recommendation`; renders a one-sentence recommendation + source links | Manual: banner reads e.g. "Invest in dynamic-pricing AI to close Booking's 4pp APAC lead." | Pending |
+| T-14.7 | Synthesis explainability log | `services/synthesis/_explain.py` | Every recommendation persists its inputs (KPI deltas, rival picked, gap list) to an `audit_log` table for review | `SELECT * FROM synthesis_audit_log ORDER BY created_at DESC LIMIT 1;` shows the inputs | Pending |
+
+**Milestone:** Any employee opening the dashboard can navigate from a KPI to a concrete recommendation, with every claim backed by source links. The dashboard transitions from a passive data display to an active strategy tool — satisfying the president's vision that the system should help employees discuss positioning, not just revenue trends.
+
+---
+
+## 4. Cross-Phase Dependencies
+
+```mermaid
+graph LR
+    P0[Phase 0–5<br/>Seed-driven UI ✅] --> P6[Phase 6<br/>Data Model v2 ✅]
+    P6 --> P7[Phase 7<br/>Ingestion Skeleton ✅]
+    P7 --> P7b[Phase 7b<br/>Curated-Data Bootstrap]
+    P7b --> P8[Phase 8<br/>Market + Financial Ingest]
+    P7b --> P9[Phase 9<br/>Strategy + AI Ingest]
+    P7b -.real-data mode.-> P10
+    P7b -.real-data mode.-> P11
+    P8 --> P10[Phase 10<br/>Benchmark + Trajectory]
+    P9 --> P11[Phase 11<br/>Win/Loss + Strategy Card]
+    P10 --> P12[Phase 12<br/>Investor View + Narrative]
+    P11 --> P12
+    P8 --> P13[Phase 13<br/>Provenance UI + Stale Badge]
+    P9 --> P13
+    P12 --> P14[Phase 14<br/>Strategy Synthesis]
+    P13 --> P14
+```
+
+- **Phase 7b unblocks Phases 10–14 early.** Once the curated CSVs land in the warehouse, every downstream phase can develop against real data through `?source=real` without waiting for the long-running adapter work in Phases 8 & 9.
+- **Phases 8 and 9 can run in parallel** once Phase 7b lands — they share the ingestion skeleton but write to disjoint tables, and each one's acceptance is gated on matching the Phase 7b regression baseline.
+- **Phase 10 depends only on Phase 8** data; **Phase 11 depends on Phase 9**; this lets two squads work in parallel after the bootstrap landing.
+- **Phase 12 depends on both 10 and 11** because the LLM narrative reads benchmark + win/loss inputs.
+- **Phase 13 is decoupled** from the chart phases but should land before Phase 12 ships externally — otherwise users see numbers without provenance.
+- **Phase 14 is the capstone** and assumes all upstream KPIs are flowing with real data.
+
+---
+
+## 5. Risk Register (v2 scope additions)
+
+| Risk | Mitigation | Owner |
+|---|---|---|
+| Rival IR pages change layout silently → wrong financials in DB | Layout-change detector (T-7.4) + raw-payload retention (T-7.2) for reprocessing | Ingestion |
+| LLM hallucinates strategy summaries | Source-citation guard (T-9.7) + human review queue for first 30 days; LLM-as-fallback policy keeps financials deterministic | Data |
+| Market data sources disagree (UNWTO vs Statista) | Store all sources; show range in `ViewSourceModal`; HHI / share denominators picked from highest-trust source per region | Data |
+| LLM cost explosion on narrative endpoint | Cache + daily budget cap (T-12.5) with template fallback | Backend |
+| Estimated market shares (FR-08.4) misunderstood as disclosed | "Estimated" pill propagated to every surface (T-13.5); calculation method shown on hover | Frontend |
+| Time-to-data on a fresh rival is too long | Phase 7's echo adapter is the integration template — new rivals add an adapter in < 1 day | Ingestion |

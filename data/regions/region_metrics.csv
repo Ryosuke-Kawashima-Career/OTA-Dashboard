@@ -1,0 +1,61 @@
+id,region_iso,year,avg_booking_value_usd,demand_index,seasonality_index,is_estimated,source_url,notes
+51ecaeca-d883-57ce-be5f-f53969b4a010,US,2024,475.0,88,1.45,True,https://www.costar.com/products/benchmark/resources/press-releases/us-hotel-performance-september-2024,STR ADR + airfare 2024
+324e2d1f-ffaf-5697-b163-4225fe4540ef,US,2023,455.0,85,1.45,True,https://www.statista.com/statistics/195704/average-hotel-room-rate-in-the-us-since-2005/,STR ADR 2023
+946a216f-4096-56cd-8773-ec6d129aa644,GB,2024,520.0,84,1.6,True,https://www.visitbritain.org/research-insights/inbound-visits-and-spend-annual-uk,VisitBritain spend/visit 2024
+813efd03-0310-5098-8720-5378081c7f59,GB,2023,495.0,80,1.6,True,https://www.visitbritain.org/research-insights/inbound-visits-and-spend-annual-uk,VisitBritain 2023
+df0ab34b-5073-5b82-acb2-8811fb371377,DE,2024,410.0,70,1.7,True,https://www.germany.travel/media/pdf_5/DZT_Zahlenflyer_GTM_2025_EN_barrierefrei.pdf,DZT 2024
+30a826bf-b475-519d-b925-d580f32390af,DE,2023,395.0,68,1.7,True,https://www.statista.com/statistics/1090016/guest-arrivals-travel-accommodation-germany/,Statista DE 2023
+c35efc1d-acb3-5eaa-b878-01268841f6f3,FR,2024,525.0,95,2.1,True,https://www.campusfrance.org/en/actu/2024-annee-record-pour-le-tourisme-international-en-france,Olympics premium 2024
+04582e5a-d565-53b3-8441-49a4f0f3b931,FR,2023,470.0,90,2.2,True,https://www.statista.com/statistics/436543/number-of-inbound-overnight-visits-france/,Pre-Olympics 2023
+0a471dc8-07a3-5081-abb5-a69ccb5a7733,JP,2024,550.0,96,1.4,True,https://www.mlit.go.jp/kankocho/en/siryou/toukei/syouhityousa.html,JTA IVS 2024
+08ac32cd-6aaf-5df9-897e-5cc52eebed9f,JP,2023,520.0,90,1.4,True,https://www.mlit.go.jp/kankocho/en/siryou/toukei/syouhityousa.html,JTA IVS 2023
+bc33171a-2f25-5e2d-9a14-394d25c86bce,CN,2024,380.0,78,1.8,True,https://www.travelchinaguide.com/tourism/2024-statistics/,Visa-free policy boost
+62fdb6e7-1473-518d-a0de-1cfaaf53fb2d,CN,2023,330.0,60,1.8,True,https://www.travelchinaguide.com/tourism/2023-statistics/,Recovery year
+5b6c067f-8e12-55b9-a1d1-b60aa231ae4c,IN,2024,310.0,62,1.9,True,https://tourism.gov.in/sites/default/files/2025-03/India%20Tourism%20Data%20Compendium%202024_0.pdf,MoT 2024
+7dcce747-914e-5d5c-93d3-dae113ee0e08,IN,2023,295.0,58,2.0,True,https://tourism.gov.in/sites/default/files/2024-02/India%20Tourism%20Statistics%202023-English.pdf,MoT 2023
+4a288d6f-6cd5-5c98-ab4d-67469a195712,AU,2024,620.0,75,1.5,True,https://www.tra.gov.au/en/international/international-tourism-results,TRA IVS 2024 long-haul
+2da07482-a224-5726-ac7e-5058402cf96f,AU,2023,580.0,72,1.5,True,https://www.tra.gov.au/en/international/international-tourism-results,TRA IVS 2023
+14617d24-54a2-5820-8c6a-29ffa69fcf9d,BR,2024,360.0,58,1.6,True,https://tradingeconomics.com/brazil/tourist-arrivals,Embratur 2024
+6a16d914-dba7-5767-a4bb-fe8efa5bf95e,BR,2023,340.0,55,1.6,True,https://www.statista.com/statistics/805683/number-international-tourist-arrivals-brazil/,Embratur 2023
+2441fd23-62e7-5ac0-9200-e335f572d72b,CA,2024,510.0,76,1.7,True,https://www150.statcan.gc.ca/n1/daily-quotidien/250530/dq250530d-eng.htm,StatCan VTS 2024
+3cdb2f56-82a4-5fa5-b218-2958648888b4,CA,2023,485.0,72,1.7,True,https://www150.statcan.gc.ca/n1/daily-quotidien/250530/dq250530d-eng.htm,StatCan VTS 2023
+4e5c15ff-46eb-5834-973b-8c687e303f1d,MX,2024,425.0,80,1.4,True,https://www.datatur.sectur.gob.mx/RAT/RAT-2024-07(EN).pdf,DataTur 2024
+d41ab553-174e-5190-bcf9-a86dffbe9a76,MX,2023,410.0,78,1.4,True,https://www.datatur.sectur.gob.mx/RAT/RAT-2023-12(EN).pdf,DataTur 2023
+4a0ca533-d445-533f-a0a5-1ea2aebfb9e0,ES,2024,480.0,93,2.0,True,https://www.ine.es/dyngs/Prensa/en/FRONTUR1224.htm,INE EGATUR 2024
+b34f269a-3468-5a6b-84b2-dcbfd5aaac74,ES,2023,445.0,88,2.0,True,https://www.mintur.gob.es/en-us/gabineteprensa/notasprensa/2024/paginas/datos-llegada-turistas-gasto-2023-record.aspx,INE EGATUR 2023
+ab20cc5f-fd38-5e03-a372-2260aefc45e1,IT,2024,495.0,87,2.3,True,https://www.bancaditalia.it/media/notizia/survey-on-international-tourism-2024/,Bank of Italy 2024
+99f96d74-52c7-55d8-ace5-944e3a889055,IT,2023,460.0,82,2.3,True,https://www.bancaditalia.it/statistiche/tematiche/rapporti-estero/turismo-internazionale/index.html,Bank of Italy 2023
+a9235192-288e-51c2-9b51-9aea9ece622f,NL,2024,440.0,73,1.7,True,https://www.nbtc.nl/en/site/knowledge-base,NBTC 2024 Amsterdam ADR 230 EUR
+130de172-ad38-528c-a47f-161cdd01c655,NL,2023,415.0,70,1.7,True,https://www.nbtc.nl/en/site/knowledge-base/themes/a-focus-on-international-visits,NBTC 2023
+cd04d7e8-5bec-54ca-89ad-c586410eb86c,SE,2024,430.0,60,1.9,True,https://www.insights.visitory.io/post/nordic-tourism-in-2024-international-growth-continues,Tillvaxtverket 2024
+eb63af11-db9e-5552-b89e-2d3ce4e1dfcd,SE,2023,410.0,56,1.9,True,https://www.statista.com/statistics/413261/number-of-arrivals-spent-in-short-stay-accommodation-in-sweden/,Tillvaxtverket/SCB 2023
+82443fef-3579-5b4e-8fd1-d2d293f8128f,CZ,2024,360.0,64,1.7,True,https://csu.gov.cz/rychle-informace/tourism-1-quarter-of-2024,CZSO 2024
+aff8f18f-4215-5e43-9a5c-d1be2c4d7b8e,CZ,2023,340.0,60,1.7,True,https://www.czechtourism.cz/en-US/654488aa-7cfb-4d6a-9f80-9beca1b584ef/article/cesko-laka-vice-turistu-roste-pocet-navstevniku-ze,CzechTourism 2023
+54fbecc5-f4bc-5e9a-a4f1-c591ee06974e,SG,2024,580.0,86,1.2,True,https://www.stb.gov.sg/about-stb/media-publications/media-centre/singapore-achieves-historical-high-in-tourism-receipts-in-2024/,STB record 2024
+dcd1f5f3-87ed-50a2-b878-22e01aad796c,SG,2023,535.0,78,1.2,True,https://stan.stb.gov.sg/content/stan/en/tourism-statistics.html,STB STAN 2023
+936542b0-9244-5175-951c-48e9ba06e571,TH,2024,390.0,90,1.5,True,https://www.tatnews.org/2024/12/thailand-welcomes-over-35-million-visitors-in-2024-a-milestone-paving-the-way-for-2025/,TAT 2024
+5c4b1b8d-75cb-527e-b7ec-abbbe547f3ba,TH,2023,370.0,82,1.5,True,https://www.tatnews.org/2024/12/thailand-welcomes-over-35-million-visitors-in-2024-a-milestone-paving-the-way-for-2025/,TAT 2023
+dbbb47a6-1536-567f-87e5-30fbcc6a865b,ID,2024,345.0,68,1.3,True,https://www.bps.go.id/en/publication/2025/03/20/a85d584df19ea65a5e2b3d0b/international-visitor-arrival-statistics-2024.html,BPS 2024 Bali ADR
+5d5474df-3136-5e0f-a323-21a4d289d161,ID,2023,325.0,60,1.3,True,https://www.bps.go.id/en/publication/2024/04/05/0ba2b8f3f4f15dd18799f0c0/international-visitor-arrival-statistics-2023.html,BPS 2023
+31b84d01-ba6b-5e1e-9939-1be61580afa7,KR,2024,440.0,78,1.5,True,https://www.statista.com/statistics/968265/south-korea-number-visitor-arrivals-by-origin/,KTO 2024 K-content boom
+ed640c4d-17ad-58e4-b80f-3ed192cef245,KR,2023,420.0,70,1.5,True,https://www.statista.com/statistics/709116/south-korea-inbound-visitors/,KTO 2023
+b9bfbdeb-789c-5699-b8e8-2fbb7b4d6782,AE,2024,720.0,92,2.2,True,https://www.wam.ae/en/article/b4e0sbe-dubai-welcomes-record-931-million-visitors-2024,Dubai DET 2024
+dedb0255-0ddf-5810-aa67-1752df1ed64d,AE,2023,680.0,88,2.2,True,https://economymiddleeast.com/news/dubai-international-tourists/,Dubai DET 2023
+6e925b5c-a5e1-55b5-8c26-87eddb2ec46f,SA,2024,540.0,85,2.0,True,https://skift.com/2025/01/24/saudi-hits-record-tourist-arrivals-needs-faster-pace-to-reach-70-million-target/,Saudi MoT 2024 Hajj
+ae1a81fc-00f6-5fbb-b1c7-62c903e78a98,SA,2023,510.0,80,2.0,True,https://www.statista.com/statistics/377290/number-of-international-tourist-arrivals-in-saudi-arabia/,Saudi MoT 2023
+72e08f80-8c3b-5f8d-91b0-5c846ca19016,ZA,2024,380.0,55,1.6,True,https://www.statssa.gov.za/?p=19362,Stats SA + SAT 2024
+510ca029-d715-58ad-b09e-510f5996fa26,ZA,2023,360.0,52,1.6,True,https://www.sanews.gov.za/south-africa/increase-international-arrivals-2023,Stats SA 2023
+d22ac422-92af-5bff-8d15-e371aed6fc41,NG,2024,290.0,32,1.4,True,https://statbase.org/data/nga-inbound-tourism-arrivals/,Statbase/UNWTO 2024
+7aee8969-30ed-58b8-ad51-ee380635be62,NG,2023,275.0,30,1.4,True,https://data.worldbank.org/indicator/ST.INT.ARVL?locations=NG,World Bank fallback
+09fe800b-b6ec-5a07-82be-f300fc331b2a,EG,2024,420.0,72,1.8,True,https://sis.gov.eg/en/media-center/news/fitch-egypt-to-welcome-1776m-tourists-by-end-of-2025-1856m-in-2026/,Egypt MoT 2024 Red Sea
+0df98953-a89d-5dab-a737-fd0ea5c93445,EG,2023,395.0,68,1.8,True,https://www.statista.com/statistics/970638/egypt-tourist-arrivals/,Egypt MoT 2023
+7fb011fd-b97c-567a-ae6e-af3927b399f8,AR,2024,350.0,50,1.7,True,https://www.latinnews.com/component/k2/item/104457-in-brief-tourism-to-argentina-down-in-2024.html,INDEC 2024 strong peso
+863ebbca-4c38-5111-9f4f-87f5b51bea50,AR,2023,320.0,54,1.7,True,https://www.statista.com/topics/6802/travel-and-tourism-in-argentina/,INDEC 2023
+a49da6d3-1f15-50e4-b9ef-3525175e0eb4,TR,2024,470.0,89,2.4,True,https://www.theistanbulchronicle.com/post/tourism-in-t%C3%BCrkiye-statistics-skyrocket-in-2024,TUIK 2024 Antalya summer
+4a3704ca-4693-5749-9b57-bf0a2ad01667,TR,2023,445.0,85,2.4,True,https://www.statista.com/statistics/707699/foreign-tourist-arrivals-in-turkey/,TUIK 2023
+333892fc-d327-5a55-a2c5-d25e6be96e63,PL,2024,350.0,62,1.8,True,"https://stat.gov.pl/en/topics/culture-tourism-sport/tourism/tourism-in-2024,1,22.html",GUS 2024 Krakow ADR
+683eee48-a48c-58d8-8c89-5f1bf31123ca,PL,2023,330.0,58,1.8,True,"https://stat.gov.pl/en/topics/culture-tourism-sport/tourism/tourism-in-2023,1,21.html",GUS 2023
+eedaa1ce-9a9b-59d2-afe4-574e9406246c,PT,2024,430.0,82,1.9,True,https://www.turismodeportugal.pt/en/Turismo_Portugal/visao_geral/Pages/default.aspx,Turismo Portugal 2024
+0a752066-6873-5af4-bf5a-da1af9b59aa1,PT,2023,410.0,78,1.9,True,https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_destaques&DESTAQUESdest_boui=646074543&DESTAQUEStema=55581&DESTAQUESmodo=2,INE Portugal 2023
+d2b86852-d282-56f1-924f-b58e570c24fb,GR,2024,460.0,84,2.5,True,https://insete.gr/wp-content/uploads/2025/04/Bulletin_EN_2024.pdf,INSETE/BoG 2024 islands
+f8f8d105-213c-5ca7-bc71-203f1d13cc7d,GR,2023,430.0,80,2.5,True,https://insete.gr/wp-content/uploads/2024/04/Bulletin_EN_2023.pdf,INSETE 2023

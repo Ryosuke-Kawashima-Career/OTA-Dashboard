@@ -359,33 +359,33 @@ erDiagram
 
 ## KPI Catalog — What We Measure and Why
 
-The dashboard's purpose is to answer two strategic questions simultaneously per the **"知彼知己"** principle: *Are we winning vs. the market?* (Know Yourself) and *Which rivals are winning, and how?* (Know the Enemy). The KPIs below are organized to serve those questions directly, and every one is computable from the data model above.
+The dashboard's purpose is to answer two strategic questions simultaneously per the **"Know youself, Know the enemy"** principle: *Are we winning vs. the market?* (Know Yourself) and *Which rivals are winning, and how?* (Know the Enemy). The KPIs below are organized to serve those questions directly, and every one is computable from the data model above.
 
-### 1. Strategic Position KPIs (Know Yourself — 知己)
+### 1. Strategic Position KPIs (Know Yourself)
 
 These KPIs answer "where do we stand?" and feed the **Self vs. Market Benchmark** (FR-04b) and **Investor View** (FR-07).
 
 | KPI | Formula | Backing Tables | Refresh |
 | --- | --- | --- | --- |
-| **Market Outperformance** (市場超過成長率) | `own_growth_rate − market_growth_rate` | `OWN_REGIONAL_FINANCIAL` + `MARKET_GROWTH` | Quarterly |
+| **Market Outperformance** | `own_growth_rate − market_growth_rate` | `OWN_REGIONAL_FINANCIAL` + `MARKET_GROWTH` | Quarterly |
 | Own Revenue Growth (YoY) | `(rev_t − rev_{t-4Q}) / rev_{t-4Q}` | `OWN_REGIONAL_FINANCIAL` | Quarterly |
-| **Own Market Share** (自社シェア) | `own_revenue / regional_market_size` | `OWN_REGIONAL_FINANCIAL` + `MARKET_GROWTH` | Quarterly |
-| **Share Trajectory Slope** (シェア推移傾き) | Linear-regression slope of `share` over selected period | `MARKET_SHARE_ESTIMATE` (own rows) | Per-query |
+| **Own Market Share** | `own_revenue / regional_market_size` | `OWN_REGIONAL_FINANCIAL` + `MARKET_GROWTH` | Quarterly |
+| **Share Trajectory Slope** | Linear-regression slope of `share` over selected period | `MARKET_SHARE_ESTIMATE` (own rows) | Per-query |
 | Share-of-Voice — AI Features | `count(own AI features in 12m) / sum(rivals + own)` | `AI_FEATURE` | Monthly |
 | Own Take Rate | `own_revenue / own_gross_bookings` | `OWN_REGIONAL_FINANCIAL` | Quarterly |
 
-### 2. Competitive Intelligence KPIs (Know the Enemy — 知彼)
+### 2. Competitive Intelligence KPIs (Know the Enemy)
 
 These feed the **Competitor Win/Loss Panel** (FR-02) and **Rival Strategy Card** (FR-02 + FR-08.3).
 
 | KPI | Formula | Backing Tables | Refresh |
 | --- | --- | --- | --- |
 | Rival Market Share per region | `rival_segment_revenue / regional_market_size` (or estimate, FR-08.4) | `RIVAL_FINANCIAL` + `MARKET_GROWTH` → `MARKET_SHARE_ESTIMATE` | Quarterly |
-| **Rival Share Δ** (シェア増減) | `share_t − share_{t-1}` per rival per region | `MARKET_SHARE_ESTIMATE` | Quarterly |
+| **Rival Share Δ** | `share_t − share_{t-1}` per rival per region | `MARKET_SHARE_ESTIMATE` | Quarterly |
 | **Win/Loss Label** | `Gainer` if Δ > +0.5pp, `Loser` if Δ < −0.5pp, else `Stable` | Derived from Share Δ | Quarterly |
 | Rival Take Rate | `revenue / gross_bookings` | `RIVAL_FINANCIAL` | Quarterly |
 | Rival Operating Margin | `operating_income / revenue` | `RIVAL_FINANCIAL` | Quarterly |
-| **AI Velocity** (AI機能投入速度) | `count(AI_FEATURE)` where `launch_date >= now-365d` per rival | `AI_FEATURE` | Daily |
+| **AI Velocity** | `count(AI_FEATURE)` where `launch_date >= now-365d` per rival | `AI_FEATURE` | Daily |
 | AI Investment Index (leading) | `ml_eng_count / total_open_roles` per rival | `JOB_POSTING_SNAPSHOT` | Weekly |
 | Strategy Recency | `now − max(STRATEGY_EVENT.event_date)` per rival | `STRATEGY_EVENT` | Daily |
 
@@ -403,7 +403,7 @@ These set the **denominator** for share calculations and color the choropleth on
 | Seasonality Index | (peak month demand) / (trough month demand) | `REGION_METRICS.demand_index` |
 | Top Routes | Most-booked origin-destination pairs | `REGION_METRICS.top_routes` |
 
-The HHI (ハーフィンダール・ハーシュマン指数) tells employees whether a region is a contested battleground (low HHI) or a near-monopoly (high HHI), which dictates strategy shape.
+The HHI tells employees whether a region is a contested battleground (low HHI) or a near-monopoly (high HHI), which dictates strategy shape.
 
 ### 4. Operational KPIs (Apples-to-Apples Comparison)
 
@@ -421,13 +421,13 @@ These let users compare us against rivals on the same yardsticks (FR-04b, FR-05)
 
 ### 5. Investor-View Subset (FR-07 preset)
 
-When a user toggles **Investor View (IR向けビュー)**, only these three top-line KPIs are surfaced:
+When a user toggles **Investor View**, only these three top-line KPIs are surfaced:
 
 1. **Market Outperformance** — did we beat the regional market growth rate this period?
 2. **Own Market Share Trajectory** — 12-month rolling chart of our share.
 3. **Top-3 Win/Loss Rival Deltas** — who gained or lost the most share against us.
 
-This subset is the smallest projection of the dataset that still answers the institutional-investor's (機関投資家) core question: *Are we taking share, or losing it?*
+This subset is the smallest projection of the dataset that still answers the institutional-investor's core question: *Are we taking share, or losing it?*
 
 ---
 
@@ -530,4 +530,3 @@ flowchart LR
 5. **Narrative Generation** — `narrative_service` calls an LLM with the structured KPI deltas plus the top supporting source URLs; output is ≤200 chars and always carries a "View source" link (FR-07 + FR-08.6).
 
 This synthesis layer is what converts raw warehouse facts into the question-answering tool the president and the broader organization actually need.
-

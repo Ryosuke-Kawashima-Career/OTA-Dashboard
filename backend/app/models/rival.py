@@ -1,7 +1,7 @@
 import uuid
-from datetime import date
+from datetime import date, datetime
 
-from sqlalchemy import Date, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import Date, DateTime, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -20,6 +20,19 @@ class Rival(Base):
     business_model: Mapped[str] = mapped_column(Text, nullable=True)
     ai_strategy: Mapped[str] = mapped_column(Text, nullable=True)
     website: Mapped[str] = mapped_column(String(255), nullable=True)
+    # v2 metadata — populated by Phase 8 (filings adapters) and Phase 9
+    # (LLM strategy summarizer). All nullable so existing Phase 1–5 rows
+    # remain valid until the ingestion layer backfills them.
+    ticker: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    exchange: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    strategy_summary: Mapped[str | None] = mapped_column(Text, nullable=True)
+    summary_updated_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    # Phase 7b — curated-data fields (migration 0008): parent group +
+    # canonical HQ ISO code used by region-weighting maths in Phase 8.
+    parent: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    hq_iso: Mapped[str | None] = mapped_column(String(10), nullable=True)
 
 
 class RivalRegionSnapshot(Base):

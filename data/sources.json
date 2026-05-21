@@ -1,0 +1,2379 @@
+[
+  {
+    "id": "7b0e98ed-d9e3-538a-99a3-5da9852da484",
+    "url": "https://arival.travel/article/klook-attracts-100m-investment/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "4be9d4c8-91b5-54e1-a5df-f7ae7a30e600",
+    "url": "https://covergenius.com/make-my-trip-partners-with-cover-genius-to-offer-cancel-for-any-reason-protection/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "875184a3-7ce4-5f8e-9732-989a502e1b7e",
+    "url": "https://craft.co/kiwi-com/executives",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "31e468db-17e2-518b-a579-a43677e78cd8",
+    "url": "https://csu.gov.cz/rychle-informace/tourism-1-quarter-of-2024",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "b020d620-185c-56da-b19a-2d511954933f",
+    "url": "https://data.worldbank.org/indicator/ST.INT.ARVL?locations=AR",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "8824b440-71a7-51cd-b70a-a94fa26e7efc",
+    "url": "https://data.worldbank.org/indicator/ST.INT.ARVL?locations=NG",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "3244b6a7-5d85-548c-8383-1ca17fced890",
+    "url": "https://deepmarketinsights.com/vista/insights/online-travel-booking-market/germany",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "d19d31a3-4b7a-5d72-882a-22d60fa43ba3",
+    "url": "https://deepmarketinsights.com/vista/insights/online-travel-booking-market/japan",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "5cf87a00-ee58-5ed1-8236-b5a2839d473d",
+    "url": "https://e27.co/kkday-lands-us70m-funding-to-bolster-mas-in-asia-pacific-ai-projects-20241205/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "58bd33ee-41af-5dfe-922f-4b83673a6331",
+    "url": "https://ec.europa.eu/commission/presscorner/detail/en/ip_23_4573",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "f9405ae5-4df0-58de-90a0-407664588255",
+    "url": "https://economymiddleeast.com/news/dubai-international-tourists/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "49f6ff93-398f-54b4-9a7d-06c8a8447091",
+    "url": "https://en.wikipedia.org/wiki/EaseMyTrip",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "98ed05fd-8fee-5ef0-8804-a8c3995c9d1e",
+    "url": "https://en.wikipedia.org/wiki/Etraveli_Group",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "e9a81130-0db3-584a-8df9-ec6755793cf7",
+    "url": "https://en.wikipedia.org/wiki/Traveloka",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "faf7d0a1-dc1b-556e-960f-3099710a0fea",
+    "url": "https://en.wikipedia.org/wiki/World_Tourism_rankings",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "612d077e-b890-5ea4-96e2-b352a4e6d000",
+    "url": "https://english.www.gov.cn/archive/statistics/202411/23/content_WS67413bfdc6d0868f4e8ed590.html",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "06b86142-5056-5a04-833c-b5f7b4433683",
+    "url": "https://entrackr.com/fintrackr/flipkart-owned-cleartrip-spent-rs-988-cr-to-earn-rs-97-cr-in-fy24-7658587",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "b0873fd5-e293-5e0e-94a9-089ccbf4a144",
+    "url": "https://entrackr.com/news/easemytrip-ceo-nishant-pitti-resigns-rikant-pittie-to-take-over-8582339",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "daca3439-a195-51fc-92ca-08d747650a53",
+    "url": "https://fortune.com/2025/11/11/asian-travel-platform-klook-is-filing-for-a-new-york-ipo/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "f3c46408-fbc8-5a68-b682-1ec038f012de",
+    "url": "https://inc42.com/buzz/easemytrip-acquires-spree-hospitality-for-inr-18-25-cr/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "0700a766-f5ee-5235-8a24-cff2c0f805d4",
+    "url": "https://inc42.com/buzz/flipkart-owned-cleartrip-spent-inr-15-to-earn-every-inr-1-from-ops-in-fy23/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "129134aa-6e71-53e2-abbf-081a14f3e2b7",
+    "url": "https://ine.es/dyngs/Prensa/en/FRONTUR1223.htm",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "d37f4f42-476a-542d-a8b3-a028f65660dd",
+    "url": "https://insete.gr/wp-content/uploads/2024/04/Bulletin_EN_2023.pdf",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "ca6b907e-9d83-5ab3-a9c1-3b62ce4332ee",
+    "url": "https://insete.gr/wp-content/uploads/2025/04/Bulletin_EN_2024.pdf",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "c29ed714-1746-50c0-b9fa-554d1c3e7d01",
+    "url": "https://insurance-edge.net/2025/10/14/etraveli-group-reflects-on-25-years-of-innovation/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "354f5d58-b3c7-54ef-87e5-0f4bff031dbf",
+    "url": "https://investors.trip.com/news-releases/news-release-details/ctrip-announces-completion-acquisition-skyscanner",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "b9d3bfbd-1946-5e1d-b303-2d0195ae100f",
+    "url": "https://investors.yatra.com/financial-information/financial-summary/default.aspx",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "68a657d7-a613-5c8f-819b-a52f0c09aebb",
+    "url": "https://investors.yatra.com/press-releases/press-release-details/2024/Yatra-Doubles-Down-on-Corporate-Travel-with-the-Acquisition-of-Globe-Travels-Solidifying-its-Leadership-Position/default.aspx",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "c43cd64a-a6dd-510e-af19-0d60b4ff6d55",
+    "url": "https://ir.bookingholdings.com/news/news-details/2017/The-Priceline-Group-Completes-the-Acquisition-of-Momondo-Group-07-24-2017/default.aspx",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "7dd9a203-1ac3-5b4d-9e3f-a9838e2980a2",
+    "url": "https://m.alphabiz.co.kr/news/amp.html?ncode=1065618008620459",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "70b43aef-9aa2-5e3f-964c-5a17e35f076a",
+    "url": "https://media.kiwi.com/company-news/kiwi-com-2022-business-results/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "a3a313ac-4455-50c4-9795-e38397dc3912",
+    "url": "https://medium.com/agoda-engineering/a-retrospective-agodas-genai-journey-thus-far-b0739683d53e",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "4f258ef0-70e5-5269-82f3-0bbc1e4740e4",
+    "url": "https://news.airbnb.com/airbnb-2024-summer-release/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "92575798-683f-571f-8e6e-5898270695a8",
+    "url": "https://news.airbnb.com/airbnb-2025-summer-release/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "3018ce8c-880d-5753-8fbc-1655e79065bb",
+    "url": "https://news.airbnb.com/airbnb-has-acquired-gameplanner-ai/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "083a7564-3fd0-5b09-87f6-8bfe48b53ac6",
+    "url": "https://news.airbnb.com/airbnb-q3-2025-financial-results/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "98b4ecd6-e748-587e-b35a-0f8cf6a6c963",
+    "url": "https://news.booking.com/bookingcom-debuts-agentic-ai-innovations-adding-to-its-robust-suite-of-genai-tools-for-customers/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "c0a025af-ee34-574f-b34f-3c6c3604dd3f",
+    "url": "https://news.booking.com/bookingcom-enhances-travel-planning-with-new-ai-powered-features--for-easier-smarter-decisions/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "2038f2b0-d024-5240-8660-e96ed3852afd",
+    "url": "https://news.booking.com/bookingcom-launches-new-ai-trip-planner-to-enhance-travel-planning-experience/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "954397b9-b4d4-568b-b5db-7dbf50c09906",
+    "url": "https://openai.com/index/booking-com/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "88fad957-5d28-53cb-bcde-69ea67fb56bd",
+    "url": "https://openai.com/index/chatgpt-plugins/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "953cfdd6-388f-5470-b9b4-588267f5e45a",
+    "url": "https://partnerships.booking.com/news-and-insights/building-connected-trip",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "4bc96f65-d2fc-5310-813d-f22ffc59747e",
+    "url": "https://pitchbook.com/profiles/company/168877-09",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "a3cf5733-d827-57b7-b763-46c7e9385231",
+    "url": "https://s201.q4cdn.com/865305287/files/doc_financials/2022/q4/BKNG-Earnings-Release-Q4-2022.pdf",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "91668cbf-8dc0-5a26-aa17-e88f48a5fbe7",
+    "url": "https://s202.q4cdn.com/757635260/files/doc_financials/2025/q3/Earnings-Release-Q3-2025_FINAL.pdf",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "21c1986f-0981-5859-8131-6fc0a16abf2f",
+    "url": "https://s22.q4cdn.com/850749348/files/doc_financials/2022/q4/4Q22-Earnings-PR.pdf",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "9c7d2a8d-ee85-5090-be1e-fd85727e32eb",
+    "url": "https://shorttermrentalz.com/news/expedia-announces-restructuring/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "86570f0b-515d-526c-9544-141d8ad9e629",
+    "url": "https://sis.gov.eg/en/media-center/news/fitch-egypt-to-welcome-1776m-tourists-by-end-of-2025-1856m-in-2026/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "1e6e96aa-9f91-58c6-8e86-d89d6b40a498",
+    "url": "https://skift.com/2023/03/03/why-trip-com-thought-it-needed-a-generative-ai-chatbot/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "1d320863-dc84-5b6e-a002-8ecfcb7ec63f",
+    "url": "https://skift.com/2023/06/27/booking-com-chooses-openai-not-google-bard-for-generative-ai-rollout/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "391ff44a-0336-517f-9223-158df3c5199e",
+    "url": "https://skift.com/2024/02/14/airbnb-and-ai-brian-chesky-sees-new-verticals-like-amazon-and-apple/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "616d0bef-11ca-566f-abf4-2b66fc29bd98",
+    "url": "https://skift.com/2024/02/26/expedia-to-layoff-nearly-9-of-workforce-in-latest-downsizing/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "2f41409f-4cc2-5cdd-b230-6ad598fded80",
+    "url": "https://skift.com/2024/10/30/booking-coms-ai-trip-planner-got-a-big-update-heres-how-it-works/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "74607b26-985c-5229-8583-a67ed30d03f1",
+    "url": "https://skift.com/2024/12/05/taiwans-kkday-raises-70-million-whats-next-for-this-travel-experiences-platform/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "bbd88404-386e-519c-9734-ef9b9efe6d70",
+    "url": "https://skift.com/2025/01/24/saudi-hits-record-tourist-arrivals-needs-faster-pace-to-reach-70-million-target/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "6bd82d9b-4933-5223-881c-cbf10a65376d",
+    "url": "https://skift.com/2025/11/10/klook-ipo-global-travel-experiences-future/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "83fa678d-de37-5003-99a0-3d6217d0876d",
+    "url": "https://skift.com/2026/05/19/makemytrip-takes-steps-toward-india-ipo/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "40addcdf-7d46-5e3b-87e3-d80f3de0fabe",
+    "url": "https://stan.stb.gov.sg/content/stan/en/tourism-statistics.html",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "51352f76-c242-5614-98f1-f028553d07d4",
+    "url": "https://stat.gov.pl/en/topics/culture-tourism-sport/",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "89c614bc-a344-5d88-8565-9427f978c3f2",
+    "url": "https://stat.gov.pl/en/topics/culture-tourism-sport/tourism/tourism-in-2023,1,21.html",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "37710dd9-5388-55b8-9585-2b3721c67929",
+    "url": "https://stat.gov.pl/en/topics/culture-tourism-sport/tourism/tourism-in-2024,1,22.html",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "6ee9f5cd-6f00-5844-98bf-1676f3d51b5f",
+    "url": "https://statbase.org/data/nga-inbound-tourism-arrivals/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "427dc93a-04b9-5a89-8e0a-79ff32724654",
+    "url": "https://statistics.jnto.go.jp/en/graph/",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "0c544a86-9cdf-557b-b85e-01f0ddd722ec",
+    "url": "https://techcrunch.com/2021/04/15/flipkart-to-acquire-online-travel-firm-cleartrip/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "fe12b69b-7d5c-5f0e-9a14-c3d64a332bf7",
+    "url": "https://techcrunch.com/2021/10/14/softbank-backed-travel-tech-startup-yanolja-acquires-korean-e-commerce-company-interpark/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "3e18fbbf-8780-5bec-a1a6-5a0876fa25de",
+    "url": "https://techcrunch.com/2025/05/02/airbnb-is-quietly-rolling-out-an-ai-customer-service-bot-in-the-us/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "b96bc570-d82e-5eac-ae03-c381f994cf49",
+    "url": "https://techcrunch.com/2026/05/20/airbnb-gets-into-hotels-expands-ai-for-host-onboarding-and-customer-support/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "a93f3177-3796-5c30-b864-d8e77e0ec9ed",
+    "url": "https://techwireasia.com/2023/04/the-new-face-of-travel-generative-ai-transformative-impact-on-tourists-and-talent/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "7271c8eb-123f-5623-bc45-078fd7c6be96",
+    "url": "https://tourism.gov.in/sites/default/files/2024-02/India%20Tourism%20Statistics%202023-English.pdf",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "618bea5a-9c00-536f-9eb1-505b6f1497f2",
+    "url": "https://tourism.gov.in/sites/default/files/2025-03/India%20Tourism%20Data%20Compendium%202024_0.pdf",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "d61bb936-d454-56ef-8c0b-f7d5191504e1",
+    "url": "https://tradingeconomics.com/brazil/tourist-arrivals",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "d2742fcc-fe2a-54a1-9761-21902fde7b28",
+    "url": "https://tradingeconomics.com/egypt/tourism-revenues",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "b8c57a09-527a-5474-9dfa-fb5de53dcda1",
+    "url": "https://travelweekly.com.au/klook-files-for-ipo-gives-insight-into-global-experience-market/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "94cf2ce1-7f7a-5416-8e05-da2ef3e1b823",
+    "url": "https://vocal.media/trader/australia-online-travel-bookings-market-steadies-toward-usd-15-9-billion-by-2034",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "2e086b92-51a4-586b-a659-9b9c16f11de1",
+    "url": "https://www.abs.gov.au/statistics/industry/tourism-and-transport/overseas-arrivals-and-departures-australia/latest-release",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "b27daf4a-1f2c-5146-827b-1af852b833ce",
+    "url": "https://www.bancaditalia.it/media/notizia/survey-on-international-tourism-2024/",
+    "datasets": [
+      "region_metrics"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "026de737-9e7f-59bc-bfc3-76cf4ef37abb",
+    "url": "https://www.bancaditalia.it/statistiche/tematiche/rapporti-estero/turismo-internazionale/index.html",
+    "datasets": [
+      "region_metrics"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "a9afebec-f7dd-5928-b376-4db87d9b48de",
+    "url": "https://www.bloomberg.com/news/videos/2024-10-11/priceline-ceo-on-ai-agent-penny-s-new-voice-feature-video",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "5c61e3e7-06b5-58e5-a38c-f439e206c90c",
+    "url": "https://www.bookingholdings.com/about/history/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "3b07c0b5-7d01-518c-aa93-68dd30a9c548",
+    "url": "https://www.bookingholdings.com/press-releases/booking-holdings-intends-to-appeal-european-commission-decision-to-prohibit-the-companys-acquisition-of-etraveli-group/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "e67d704e-9dfa-542e-b9e1-afd965cc1bcd",
+    "url": "https://www.bookingholdings.com/wp-content/uploads/2024/02/BKNG-Earnings-Release-Final.pdf",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "c3637c2c-9ff0-5d90-8111-021bdbaa63a9",
+    "url": "https://www.bps.go.id/en/publication/2023/05/12/4dcc6b622ae0c4e7ea6a61e8/international-visitor-arrival-statistics-2022.html",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "1a7e6557-58ad-535d-bfbc-43438cc0ad7c",
+    "url": "https://www.bps.go.id/en/publication/2024/04/05/0ba2b8f3f4f15dd18799f0c0/international-visitor-arrival-statistics-2023.html",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "c0a4c236-a448-5c09-b338-439fd0659070",
+    "url": "https://www.bps.go.id/en/publication/2025/03/20/a85d584df19ea65a5e2b3d0b/international-visitor-arrival-statistics-2024.html",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "e697a02a-c3fd-5980-b54d-7fa9c82199c7",
+    "url": "https://www.businesswire.com/news/home/20240208695141/en/Expedia-Group-Announces-CEO-Transition-Plan",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "4a98406d-5526-5cf2-bd85-20bc4195022a",
+    "url": "https://www.businesswire.com/news/home/20240530646233/en/Yatra-Online-Inc.-Announces-Results-for-the-Three-Months-and-Year-Ended-March-31-2024",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "b32a8fa8-ef40-5962-8725-3c7e3899a9c2",
+    "url": "https://www.businesswire.com/news/home/20240902973073/en/Yatra-Doubles-Down-on-Corporate-Travel-with-the-Acquisition-of-Globe-Travels-Solidifying-its-Leadership-Position",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "5067d301-a76a-5a76-90d8-c8122f049658",
+    "url": "https://www.businesswire.com/news/home/20250217645629/en/eDreams-ODIGEOs-Prime-Surpasses-7-Million-Members-Amid-Strong-Expansion-as-Worlds-Largest-Travel-Subscription",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "d8f71608-2e09-5ea1-8d53-960825a2311d",
+    "url": "https://www.businesswire.com/news/home/20260217777911/en/MakeMyTrip-Deepens-AI-First-Strategy-with-OpenAI-Collaboration",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "550c037b-c9e1-5964-a040-6488d59c1d8d",
+    "url": "https://www.bwhotelier.com/article/makemytrip-clocks-record-98-billion-in-gross-bookingsmakemytrip-clocks-record-98-billion-in-gross-bookings-for-fy25-for-fy25-556790",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "eaef6e9a-75cf-5e4a-85a9-cc3d8d0c33e3",
+    "url": "https://www.campusfrance.org/en/actu/2024-annee-record-pour-le-tourisme-international-en-france",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "979ee0a9-0ccb-5b2e-a39b-936abebb4a29",
+    "url": "https://www.cbinsights.com/company/skypicker/financials",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "1c928ba0-8a55-55ef-8c18-4552d3819c83",
+    "url": "https://www.cfodive.com/news/booking-uses-ai-to-slash-customer-service-costs-cfo-says/812624/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "050de30d-cc21-52db-9593-3a8ae262701a",
+    "url": "https://www.chittorgarh.com/ipo/easemytrip-ipo/1089/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "aae222b4-4b47-55d1-9b14-a0bd2fd58232",
+    "url": "https://www.chittorgarh.com/ipo/yatra-online-ipo/1507/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "ffdee869-41ef-5228-8604-d9fc70ca43e6",
+    "url": "https://www.cleartrip.com/press/releases/2024/cleartrip-charts-a-paradigm-shift-in-corporate-travel-with-the-launch-of-the-new-corporate-travel-management-product-out-of-office-ooo/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "f6afc131-ebfd-5590-bda4-354525613391",
+    "url": "https://www.costar.com/products/benchmark/resources/press-releases/us-hotel-performance-september-2024",
+    "datasets": [
+      "region_metrics"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "ee6829f7-072e-5d32-ada9-2e03d51ff6a9",
+    "url": "https://www.customerexperiencedive.com/news/airbnb-ai-assistant-resolves-customer-inquiries/819734/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "4c08d022-deea-5460-854c-18af8a803c35",
+    "url": "https://www.customerexperiencedive.com/news/airbnb-brings-ai-customer-service-agent-to-half-of-us-customers/747163/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "c20b31f7-ef3d-5ebb-af87-ceb478ec254f",
+    "url": "https://www.cvc.com/media/news/2025/cvc-welcomes-strategic-minority-partnership-investment-from-kkr-into-etraveli-group/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "9815e4ea-1b09-52d6-a840-a5844d204eb4",
+    "url": "https://www.czechtourism.cz/en-US/654488aa-7cfb-4d6a-9f80-9beca1b584ef/article/cesko-laka-vice-turistu-roste-pocet-navstevniku-ze",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "4e379860-6cd9-5df6-ae29-82a8141d882f",
+    "url": "https://www.datatur.sectur.gob.mx/RAT/RAT-2023-12(EN).pdf",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "baa2d83c-f2f8-52a5-bbcb-9aa6897f24ca",
+    "url": "https://www.datatur.sectur.gob.mx/RAT/RAT-2024-07(EN).pdf",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "53b3333a-7376-5dd8-b093-2c2ae44eb576",
+    "url": "https://www.dealstreetasia.com/stories/traveloka-2023-earnings-413631",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "5a4d649e-cbd4-5dc7-a4c9-d82c221e0ca0",
+    "url": "https://www.deccanherald.com/business/companies/makemytrip-boosts-ai-travel-assistant-myra-to-handle-full-travel-bookings-4003970",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "30213649-3924-59ce-93cb-c09b5f61f9e0",
+    "url": "https://www.destatis.de/EN/Themes/Economic-Sectors-Enterprises/Accommodation-Food-Services-Activities-Tourism/_node.html",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "f28f84d3-a3fe-50e9-ab4b-e270c42dc34d",
+    "url": "https://www.digitaltoday.co.kr/en/view/56300/yeogi-eottae-company-to-expand-globally-with-acquisition-of-japans-relux-travel-platform",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "38296893-ee4f-582e-b87b-83fd12afa841",
+    "url": "https://www.drv.de/public/Downloads_2025/Zahlen_und_Fakten_2025_ENG.pdf",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "28c9522e-dd7f-5dbf-b69e-eea3997546d8",
+    "url": "https://www.easemytrip.com/blog/ai-trip-planner-easemytrip-launches",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "778921ec-37b4-5cb7-8084-82bace806960",
+    "url": "https://www.easemytrip.com/investor-pdf/2022/Annual-Report-2021-22.pdf",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "385d7fd1-18b2-5c7b-846e-9558c9d7835e",
+    "url": "https://www.easemytrip.com/investor-pdf/2023/Annual-Report-2022-23.pdf",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "ec9c9ae6-a886-5baf-9070-17663b960116",
+    "url": "https://www.easemytrip.com/investor-pdf/2024/Investor-Presentation-13.08.2024.pdf",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "a8635541-0018-534d-9826-6baaebbabaac",
+    "url": "https://www.easemytrip.com/investor-pdf/2025/Annual-Report-2024-2025.pdf",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "1b35abdc-7d96-5274-801b-4a6fd62366b6",
+    "url": "https://www.edreamsodigeo.com/press-releases/2023/03/edreams-odigeos-prime-subscription-expands-to-canada-as-it-surpasses-4-million-member-milestone/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "c9666413-4af1-5a1a-8910-e17fc61d4a19",
+    "url": "https://www.edreamsodigeo.com/press-releases/2023/05/edreams-odigeo-achieves-all-time-record-in-bookings-and-revenues-greater-profitability-and-strong-subscriber-growth/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "f3dae17c-36b2-522c-99d8-c3f3ba051f8d",
+    "url": "https://www.edreamsodigeo.com/press-releases/2023/09/edreams-odigeos-prime-surpasses-5-million-members-and-reigns-as-worlds-fastest-growing-subscription-platform/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "281bf23f-1e41-5d66-9e7b-1991ae531f76",
+    "url": "https://www.edreamsodigeo.com/press-releases/2024/05/edreams-odigeos-subscription-model-delivers-all-around-growth-surge-in-profitability-revenues-and-subscribers/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "61f6d24a-55d4-503d-b5b5-ff98fd1cba8e",
+    "url": "https://www.edreamsodigeo.com/press-releases/2025/05/edreams-odigeo-delivers-record-profitability-revenues-and-margins-with-ambitious-3-5-year-targets-achieved/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "5ab71087-7e2e-5b3c-a961-1c5886109ee0",
+    "url": "https://www.edreamsodigeo.com/press-releases/2026/04/edreams-odigeo-further-scales-agentic-ai-ecosystem-by-integrating-conversational-planning-and-immediate-booking-fulfilment/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "e51c661b-b935-5ca1-8bec-58918c142a4f",
+    "url": "https://www.eplaneai.com/news/traveloka-harnesses-ai-to-boost-airline-partnerships",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "f5e810a1-218e-5d45-acd5-fcb23781d20a",
+    "url": "https://www.etraveligroup.com/european-commission-blocks-acquisition-of-etraveli-group-by-booking-holdings/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "6312afa6-0b41-53b7-b941-a00d5b0df082",
+    "url": "https://www.euromonitor.com/travel-in-poland/report",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "40214f68-5980-50cd-a311-e73dfd431891",
+    "url": "https://www.euromonitor.com/travel-in-the-czech-republic/report",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "0093c820-72f9-577f-8565-3a2e0f067520",
+    "url": "https://www.expedia.com/newsroom/expedia-launched-chatgpt/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "a9f31862-3369-5b40-a473-b0320dcbec16",
+    "url": "https://www.expedia.com/newsroom/spring-product-release-2024/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "85629e27-1dbb-590f-b197-4cce25519c99",
+    "url": "https://www.finsmes.com/2024/12/kkday-raises-approx-us70m-in-financing.html",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "40c1e734-cd2a-5a0d-a8eb-e4002ac135bd",
+    "url": "https://www.futuremarketinsights.com/reports/singapore-tourism-spend-analytics-forecast",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "94baf2c3-998c-5cf9-864d-3f59ccd4e608",
+    "url": "https://www.generalatlantic.com/media-article/general-atlantic-announces-strategic-partnership-with-travel-platform-kiwi-com/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "a97b2fb1-f14f-5955-b60d-dd77495d8f76",
+    "url": "https://www.germany.travel/media/pdf_5/DZT_Zahlenflyer_GTM_2025_EN_barrierefrei.pdf",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "db566edc-b2e1-591a-a27b-99d5ae30d79a",
+    "url": "https://www.googlecloudpresscorner.com/2023-05-04-eDreams-ODIGEO-to-pioneer-generative-AI-in-ecommerce-with-Google-Cloud",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "6dc9a30e-2af9-5d93-8455-0bfaf275395f",
+    "url": "https://www.googlecloudpresscorner.com/2024-10-24-Klook-Deepens-Partnership-with-Google-Cloud-to-Enhance-Travel-Experiences-and-Supercharge-Developer-Productivity-with-Generative-AI",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "0dd63119-3d6b-543e-b268-b9e914ad24ad",
+    "url": "https://www.hospitality.today/article/italys-travel-market-pushes-deeper-into-digital-growth",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "b6c415ee-b8f8-5e0c-beaf-9dd3febcacc9",
+    "url": "https://www.ibisworld.com/australia/market-size/online-travel-bookings/4163/",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "2eaec977-66cf-51b5-91da-a0e9f9101326",
+    "url": "https://www.imarcgroup.com/australia-online-travel-bookings-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "9d7823d9-c77f-592d-ac29-ffe908ed6985",
+    "url": "https://www.imarcgroup.com/egypt-travel-tourism-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "38bb6d41-448d-519d-971f-9bdd8795347a",
+    "url": "https://www.imarcgroup.com/india-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "b2b66bd9-53eb-58de-b761-4b0d51c26f1d",
+    "url": "https://www.imarcgroup.com/indonesia-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "001ff9c0-3029-5498-bfa8-42880fc4f88d",
+    "url": "https://www.imarcgroup.com/latin-america-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 5
+  },
+  {
+    "id": "278f2137-3d6e-5d25-acaf-a1c001817f83",
+    "url": "https://www.imarcgroup.com/saudi-arabia-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "3ed77c43-c292-5c7c-8fe5-c6ebc7784506",
+    "url": "https://www.imarcgroup.com/south-africa-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "3d77076d-e91d-58eb-8115-3754ee91e22e",
+    "url": "https://www.imarcgroup.com/south-korea-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "2999e4f2-31dd-59d0-8477-56a8837cdf9c",
+    "url": "https://www.imarcgroup.com/thailand-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 5
+  },
+  {
+    "id": "0e1aa821-2c21-5149-9b56-341fe81ff770",
+    "url": "https://www.ine.es/dyngs/Prensa/en/FRONTUR1224.htm",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "cf0d5226-024e-5875-8693-f31fe5681c55",
+    "url": "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=675602667&att_display=n&att_download=y",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "75ceebb4-c3ef-560c-b587-281291224c87",
+    "url": "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_destaques&DESTAQUESdest_boui=646074543&DESTAQUEStema=55581&DESTAQUESmodo=2",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "804a94af-4784-552e-bb9a-12d2767d67fe",
+    "url": "https://www.insights.visitory.io/post/nordic-tourism-in-2024-international-growth-continues",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "2c346d51-5749-52b6-bd7a-c89124022905",
+    "url": "https://www.istat.it/en/press-release/tourist-flows-fourth-quarter-2024/",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "b6aec769-fb1e-5436-af2a-eb517dd9e043",
+    "url": "https://www.kayak.com/news/kayak-chatgpt/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "9090e5ff-fb0b-5de5-9692-20a919c39d33",
+    "url": "https://www.kedglobal.com/corporate-restructuring/newsView/ked202408130019",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "527c2235-0f37-5908-9729-64a1e338d2d7",
+    "url": "https://www.kedglobal.com/travel-leisure/newsView/ked202306200022",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "dcd87f90-53c3-57c0-b52f-f9850d2373f0",
+    "url": "https://www.kenresearch.com/brazil-online-travel-aggregators-and-otas-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "2dc24e82-74ae-54c1-88f3-9198426d0ec1",
+    "url": "https://www.kenresearch.com/turkey-online-travel-booking-platforms-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "88ae0425-10bf-5356-aa0b-f4f6e17535b4",
+    "url": "https://www.klook.com/newsroom/Form-F-1-public/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "3355f091-cead-5884-9fe4-fb3701fdcd18",
+    "url": "https://www.klook.com/newsroom/funding-seriesE+/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "77699c1b-e03e-5850-9ba9-3898bfda693a",
+    "url": "https://www.klook.com/newsroom/partnership-2024-google-cloud/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "39d1c751-ed27-53d2-96b5-8b545467952a",
+    "url": "https://www.klook.com/newsroom/partnership-Google%20Cloud-2023/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "8a6cf220-2eda-5990-986a-eb080af2ff26",
+    "url": "https://www.koreaherald.com/article/3177431",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "3bc7bffc-a16c-53df-9662-d074eda7ab58",
+    "url": "https://www.koreatechdesk.com/korea-adds-5-new-unicorn-startups-in-the-first-half-of-2022-total-now-23/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "0a6070a2-4a78-544d-b3b2-7c1ee874a5f9",
+    "url": "https://www.koreatimes.co.kr/economy/20240407/can-yanolja-go-public-on-us-stock-market",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "f9d71102-8b59-5e9f-968c-97b7d67a4885",
+    "url": "https://www.latinnews.com/component/k2/item/104457-in-brief-tourism-to-argentina-down-in-2024.html",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "94572ddb-2af7-5fda-8fea-bd39673d76db",
+    "url": "https://www.marketdataforecast.com/market-reports/united-states-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "d5df81d1-39b3-58a1-a332-a451a9aabba1",
+    "url": "https://www.marketing-interactive.com/agoda-ai-generated-film-celebrate-global-exploration",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "f9cd6303-ee73-53b4-8de2-5f29b3758856",
+    "url": "https://www.marketresearchfuture.com/reports/canada-online-travel-market-45892",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 5
+  },
+  {
+    "id": "00165950-7a6c-55b1-bab8-1d9571a60d8f",
+    "url": "https://www.marketresearchfuture.com/reports/germany-online-travel-market-45890",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "51312050-78a0-591c-bb82-65f5d6480ead",
+    "url": "https://www.marketresearchfuture.com/reports/united-states-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "812a5b00-f415-5755-883b-b42f20fca6f3",
+    "url": "https://www.mastercard.com/news/ap/en-in/newsroom/press-releases/en-in/2026/march/mastercard-selects-india-to-introduce-lifestyle-navigator-its-global-ai-powered-concierge-in-collaboration-with-makemytrip-s-myra/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "c6d24207-b774-57fa-a391-c578b1156c08",
+    "url": "https://www.mintur.gob.es/en-us/gabineteprensa/notasprensa/2024/paginas/datos-llegada-turistas-gasto-2023-record.aspx",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "5753b10e-5080-5575-81a4-08776d292f4d",
+    "url": "https://www.mlit.go.jp/kankocho/en/siryou/toukei/syouhityousa.html",
+    "datasets": [
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "bcbe2720-7fc6-58af-afc6-002c0a0b67fe",
+    "url": "https://www.moet.gov.ae/en/tourism-indicators",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "ef99a999-b5ae-5326-b36a-85c52e83f1e3",
+    "url": "https://www.mordorintelligence.com/industry-reports/hospitality-industry-in-sweden",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 5
+  },
+  {
+    "id": "02dab5c0-016b-59e4-89be-332ce0668b49",
+    "url": "https://www.mordorintelligence.com/industry-reports/japan-online-accommodation-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "2d8e5c53-9954-5652-a480-c7e4dece5902",
+    "url": "https://www.mordorintelligence.com/industry-reports/online-travel-market-in-china",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "9623d9aa-cc9c-5183-9ad2-5c6a18e210f2",
+    "url": "https://www.mordorintelligence.com/industry-reports/online-travel-market-in-europe",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 5
+  },
+  {
+    "id": "760b4634-d284-5b8b-98e3-3d369dfcf65c",
+    "url": "https://www.mordorintelligence.com/industry-reports/online-travel-market-in-india",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "01307c26-7a38-5d29-bc5f-bd65dbee476a",
+    "url": "https://www.mordorintelligence.com/industry-reports/online-travel-market-in-south-america",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 6
+  },
+  {
+    "id": "26edf41c-2c2c-538b-8a98-508438c16d9c",
+    "url": "https://www.mordorintelligence.com/industry-reports/united-kingdom-online-travel-market",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "bd269f6d-fa6b-5ed4-9bc1-b9ac73a1f79b",
+    "url": "https://www.mostlymetrics.com/p/klook-ipo-s1-breakdown",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "ff8cae25-6f4c-5db3-97d5-16e0a6912706",
+    "url": "https://www.nbtc.nl/en/site/knowledge-base",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "ac36384d-0b83-5141-a7cd-02983381f237",
+    "url": "https://www.nbtc.nl/en/site/knowledge-base/themes/a-focus-on-international-visits",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "5f052558-84b1-5646-adde-0c92e97db262",
+    "url": "https://www.nexea.co/agoda-business-model-in-2024-an-in-depth-analysis/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "99a1789d-4428-545d-90c8-4bf02779f99f",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/leisureandtourism/articles/traveltrends/2024",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "a37b74ac-c38c-514d-b6e0-f07f49c43aa8",
+    "url": "https://www.passionateinmarketing.com/makemytrip-deepens-ai-first-strategy-with-openai-collaboration/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "3911d708-45fa-53bd-83ac-f90f06c7c3ec",
+    "url": "https://www.phocuswire.com/Agoda-human-approach-to-learning-and-growing-with-AI",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "03093576-2457-5667-9d25-6c710db5cb7f",
+    "url": "https://www.phocuswire.com/klook-first-public-step-us-ipo",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "ff6e5dfc-e17e-5a68-95b7-af0b4fbbb55b",
+    "url": "https://www.phocuswire.com/openai-sme-ai-accelerator-program-launch",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "a133d9dc-c442-504b-8e8e-b16d8a98ede2",
+    "url": "https://www.phocuswire.com/sharetrip-financial-infusion-digitize-Bangladesh-travel-sector",
+    "datasets": [
+      "rival_financials",
+      "strategy_events"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "b285d320-747c-5c2e-afbc-ab50d4c320b8",
+    "url": "https://www.phocuswire.com/trip-com-group-trip-planner-q2-2025",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "f0db887a-c54e-5854-b2d9-1f30d83f3d52",
+    "url": "https://www.phocuswright.com/Travel-Research/Market-Overview-Sizing/Global-Travel-Market-Report-2024",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "33816be8-09bf-52d6-9a37-51239e690d7d",
+    "url": "https://www.phocuswright.com/Travel-Research/Market-Overview-Sizing/UK-Travel-Market-Report-2020-to-2024",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "04514f2b-1c15-54ef-9be5-fc291126abbe",
+    "url": "https://www.phocuswright.com/Travel-Research/Research-Updates/2024/5-things-to-know-about-the-uk-travel-market-in-2024-and-beyond",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "8dea7cbe-17a1-5ac0-9a43-20ceeb2a74d1",
+    "url": "https://www.phocuswright.com/Travel-Research/Research-Updates/2025/how-global-travel-will-grow-shift-and-digitize-by-2027",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "5ba8accf-fdeb-5d3b-adbf-f3d7551d4472",
+    "url": "https://www.phocuswright.com/Travel-Research/Research-Updates/2025/spain-2025-where-record-breaking-demand-meets-new-competition",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "ec6f6175-d717-5b57-9dba-e3806bd45a40",
+    "url": "https://www.phocuswright.com/Travel-Research/Research-Updates/2025/uk-travel-market-sees-mobile-acceleration-and-a-shifting-infrastructure-landscape",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "44c7ffbb-b627-5e7c-b8b0-908efec43973",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2087824&reg=3&lang=2",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "2bd9f66b-13dd-5fb2-b691-2ac9d63a9153",
+    "url": "https://www.prnewswire.com/ae/news-releases/tripcom-group-expands-presence-in-the-middle-east-with-strategic-initiatives-and-new-regional-office-302139616.html",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "07e221be-36a1-5b7a-b5d0-463bd8325f33",
+    "url": "https://www.prnewswire.com/apac/news-releases/agoda-elevates-listings-with-next-gen-ai-image-enhancement-302538237.html",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "8b27c305-249a-5354-bcb0-c6bec1dbd193",
+    "url": "https://www.prnewswire.com/apac/news-releases/tourism-bureau-of-tainan-city-government-partners-with-kkday-and-klook-to-offer-exclusive-rewards-for-international-travelers-301888094.html",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "3131369b-bc16-5c33-9da2-36a583bf4111",
+    "url": "https://www.prnewswire.com/news-releases/booking-holdings-enters-into-an-agreement-with-cvc-capital-partners-to-acquire-etraveli-group-301431107.html",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "ce1b2388-68fd-5754-9bfd-3a0ef5ac051e",
+    "url": "https://www.prnewswire.com/news-releases/embarking-on-2024-tripcom-group-reveals-top-travel-trends-ai-revolution-and-sustainable-journeys-302023081.html",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "1a2108d2-e73c-5be4-9716-cf0031d7bef5",
+    "url": "https://www.prnewswire.com/news-releases/yanolja-cloud-acquires-leading-b2b-travel-solution-provider-go-global-travel-enhancing-its-global-presence-and-technology-solution-offerings-301824499.html",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "06b12966-3def-540e-a397-7dc1e627797a",
+    "url": "https://www.prnewswire.com/news-releases/yanolja-raises-usd-1-7-billion-in-new-funding-from-softbank-vision-fund-2--301334416.html",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "03628371-720b-5cfa-adc3-ce77ab17ed89",
+    "url": "https://www.prnewswire.com/news-releases/yanolja-reports-2024-financial-results-302415222.html",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "ee9ea9ec-1430-5066-bb4e-eb8dd1efcd4a",
+    "url": "https://www.prosiebensat1.com/en/newsroom/prosiebensat1-sells-etraveli-to-cvc-capital-partners-en-337797",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "6404ca9c-d26b-55ba-85e4-6f2c459219b6",
+    "url": "https://www.pymnts.com/artificial-intelligence-2/2024/pricelines-new-ai-voice-tech-allows-conversational-real-time-bookings/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "c7f22600-4a5c-5c62-a83d-73a0fc10b5d2",
+    "url": "https://www.sanews.gov.za/south-africa/increase-international-arrivals-2023",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "1d00fa79-185b-52cf-90a8-b76669812b33",
+    "url": "https://www.scmp.com/tech/big-tech/article/3228128/chinas-largest-online-travel-company-tripcom-group-creates-own-large-language-model-wendao-push-ai",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "096b6a73-ee0d-5b77-a2f8-574f31c73044",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001075531/000107553124000011/ex991123123.htm",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "15d49391-dff9-5a55-b58d-62db0e5749c9",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001075531/000107553125000050/q3-25bkngearningsrelease.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "31aea522-d310-51d1-90a7-dedc637c322e",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001269238/000119312521108290/d153020dex991.htm",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "6db62e55-1897-5bc1-be40-6d31e7a4cc11",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001269238/000119312523080422/d442074d20f.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "ed3ecaaa-34a8-598d-8dc7-1f348d60c6ca",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001269238/000119312524122196/d630811d20f.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "79cdf433-6c46-5f83-abbb-567f323e534d",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001269238/000119312525078429/d779353d20f.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "de678c25-6e6e-56ee-8556-99efa1a8a415",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001269238/000119312525285260/d17038dex991.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "c5df49a8-488b-5f79-acdf-e42437e78511",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001324424/000132442423000007/expe-20221231.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "6e70810b-a3e8-55b2-a7c2-24782738c31a",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001324424/000132442425000008/expe-20241231.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "5b85e192-b316-5507-8428-98d31f942ccf",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001495153/000095017022020691/mmyt-ex99_1.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "beb61500-54e1-5093-8600-f7c9b5c25e1f",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001495153/000095017023007170/mmyt_6k_march_2023.htm",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "4b002f8d-817c-5f3b-8001-a31523aeef21",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001495153/000095017023022340/mmyt-ex99_1.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "87620075-0959-5285-8c7b-836623cb4012",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001495153/000095017023036150/mmyt-ex99_1.htm",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "27e54977-5c5d-5386-b527-ac4bf26dfb6e",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001495153/000095017024006252/mmyt-ex99_1.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "fcaa50f8-c819-595b-a48c-b17c9d5e60f6",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001495153/000095017024080082/mmyt-20240331.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "806ba5a1-d72a-5735-856d-c94708952457",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001495153/000119312517024791/d338641dex992.htm",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "1914d042-ceb9-5c4e-bdd9-df35d860aeee",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001559720/000155972023000003/abnb-20221231.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "9d495fe9-617f-52e9-9ba1-5abcfcae9ec4",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001559720/000155972024000006/abnb-20231231.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "3d002a0f-e880-549c-8a40-387bada287b6",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001559720/000155972025000010/abnb-20241231.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "0245a51f-69a0-5af2-b7cb-00bfc5e52c79",
+    "url": "https://www.sec.gov/Archives/edgar/data/1075531/000107553125000010/bkng-20241231.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "7abfe099-7f2b-5200-a401-1af4cdc2ae3b",
+    "url": "https://www.sec.gov/Archives/edgar/data/1324424/000132442424000005/earningsrelease-q42023.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "f63737e0-e6b7-5e82-ab10-9d65f6ac26d3",
+    "url": "https://www.sec.gov/Archives/edgar/data/1516899/000149315223041111/ex99-1.htm",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "d656abae-ad5c-5111-b9e1-74df531dd113",
+    "url": "https://www.skyscanner.com/tips-and-inspiration/skyscanner-app-in-chatgpt-launches-for-flights-us",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "e5fc532b-61cf-595e-a482-a7a78af11e5e",
+    "url": "https://www.statista.com/forecasts/1001534/travel-product-online-bookings-in-spain",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "f9db1c26-a08d-5310-89c1-2a7b5f8c0892",
+    "url": "https://www.statista.com/outlook/mmo/travel-tourism/france",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "69c574fc-5da3-5768-8b51-4b4d0b02089b",
+    "url": "https://www.statista.com/outlook/mmo/travel-tourism/greece",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "c84da877-cf9f-5c55-9374-d80162c54a51",
+    "url": "https://www.statista.com/outlook/mmo/travel-tourism/japan",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "b1e48e0e-f555-5589-ba0a-027f60dda416",
+    "url": "https://www.statista.com/outlook/mmo/travel-tourism/netherlands",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 5
+  },
+  {
+    "id": "83f8a2ef-28bc-5478-9b83-45d6bc167880",
+    "url": "https://www.statista.com/outlook/mmo/travel-tourism/nigeria",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "4d9a8432-03ef-5bd8-af92-5ee60e60d187",
+    "url": "https://www.statista.com/outlook/mmo/travel-tourism/portugal",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "94d4137a-c8b4-5078-a8f2-1772d0b9af72",
+    "url": "https://www.statista.com/outlook/mmo/travel-tourism/singapore",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "8829c6e3-5346-5108-b27a-869f681accd1",
+    "url": "https://www.statista.com/statistics/1090016/guest-arrivals-travel-accommodation-germany/",
+    "datasets": [
+      "region_metrics"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "c00b6a6b-86a8-5dec-80e3-924ade65d92a",
+    "url": "https://www.statista.com/statistics/1229692/yeogi-eottae-good-choice-operating-revenue/",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "2b6cdf13-244e-52fb-88f7-0dd1096460d8",
+    "url": "https://www.statista.com/statistics/1369869/south-korea-travel-and-tourism-services-online-spending-by-service/",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "32c20c89-9577-560b-b71b-9c2e9179a8aa",
+    "url": "https://www.statista.com/statistics/195704/average-hotel-room-rate-in-the-us-since-2005/",
+    "datasets": [
+      "region_metrics"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "14924175-a0f2-5480-b091-504682a7372f",
+    "url": "https://www.statista.com/statistics/377290/number-of-international-tourist-arrivals-in-saudi-arabia/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "1802f2d9-7478-5085-a6e1-ba1794bfb5ce",
+    "url": "https://www.statista.com/statistics/413261/number-of-arrivals-spent-in-short-stay-accommodation-in-sweden/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "3237614b-0a84-5817-ad89-9632b06b51a5",
+    "url": "https://www.statista.com/statistics/422548/number-of-overnight-stays-in-sweden-by-country/",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "dafb52b3-ca46-5486-bb27-2d1496514e46",
+    "url": "https://www.statista.com/statistics/436543/number-of-inbound-overnight-visits-france/",
+    "datasets": [
+      "region_metrics"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "af35a3b5-47a7-5f64-a3bc-9ff8a4b7f80d",
+    "url": "https://www.statista.com/statistics/450022/revenue-of-china-s-online-travel-agency-market/",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "ae95d976-f83e-5b22-bfb5-823b8dacd985",
+    "url": "https://www.statista.com/statistics/500393/forecast-of-online-travel-sales-japan/",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "e959adcf-4548-5b97-8e40-f09eb26dbe23",
+    "url": "https://www.statista.com/statistics/631071/south-korea-online-travel-sales/",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "f39bd79c-6500-5850-a3fa-d18b560559d1",
+    "url": "https://www.statista.com/statistics/707699/foreign-tourist-arrivals-in-turkey/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "24338963-9c3e-50ed-8afd-f85d02fdd311",
+    "url": "https://www.statista.com/statistics/709116/south-korea-inbound-visitors/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "59e1f08f-6ab0-5fb0-86f7-4b0a1123f33b",
+    "url": "https://www.statista.com/statistics/780963/inbound-tourist-arrivals-in-italy/",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "605d26a7-dd87-5a48-9970-5f0eb6dfaafb",
+    "url": "https://www.statista.com/statistics/805683/number-international-tourist-arrivals-brazil/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "1eda6e62-8c5a-5b46-9a8f-829d1393c9cb",
+    "url": "https://www.statista.com/statistics/968265/south-korea-number-visitor-arrivals-by-origin/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "f21f7887-71b6-53a3-af70-39b9e7f7154d",
+    "url": "https://www.statista.com/statistics/970638/egypt-tourist-arrivals/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "7026cc54-be68-5563-96a0-b26997d1e53c",
+    "url": "https://www.statista.com/topics/6802/travel-and-tourism-in-argentina/",
+    "datasets": [
+      "region_metrics"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "88a701b6-72d1-5316-afa0-74746d186649",
+    "url": "https://www.statssa.gov.za/?p=19362",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "9a3b3a7f-0283-5ed9-aa81-fa9f9790cc14",
+    "url": "https://www.statssa.gov.za/publications/P0351/P0351August2023.pdf",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "034c79f4-5311-58fb-b9f1-f2ffd0b1ec2b",
+    "url": "https://www.stb.gov.sg/about-stb/media-publications/media-centre/singapore-achieves-historical-high-in-tourism-receipts-in-2024/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "28c43ded-4455-528a-ba04-be485b158c69",
+    "url": "https://www.stb.gov.sg/about-stb/media-publications/media-centre/singapore-s-tourism-sector-recovers-strongly-in-2022--visitor-numbers-expected-to-double-in-2023/",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "41b16eee-3478-5b07-86f3-08ca978784ab",
+    "url": "https://www.tatnews.org/2024/12/thailand-welcomes-over-35-million-visitors-in-2024-a-milestone-paving-the-way-for-2025/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 5
+  },
+  {
+    "id": "9fd6b85c-372c-591f-9505-b9e415f6374d",
+    "url": "https://www.thehansindia.com/business/makemytrip-unveils-myra-20-end-to-end-conversational-travel-booking-assistant-1075926",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "6b975456-75d4-51ed-804c-8ccea229a1a2",
+    "url": "https://www.theistanbulchronicle.com/post/tourism-in-t%C3%BCrkiye-statistics-skyrocket-in-2024",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "4237e4e4-0595-517a-8dd8-41d5e00fe0ab",
+    "url": "https://www.thepickool.com/yanolja-ai-platform-connects-150k-enterprise-clients-web-summit-2024/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "4588cc1d-9afb-59fc-9cca-eb8fa1a075c3",
+    "url": "https://www.tourism.australia.com/en/insights/tourism-statistics/international-visitor-arrivals.html",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "9ba6d7b3-3abe-5407-8d19-88b2603e6b94",
+    "url": "https://www.tra.gov.au/en/international/international-tourism-results",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "4873bfd9-cb7b-5955-842e-2e98127b0218",
+    "url": "https://www.trade.gov/feature-article/december-and-annual-2024-total-international-travel-volume",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "67179756-3009-57e0-bf22-f8965a054542",
+    "url": "https://www.trade.gov/feature-article/ntto-releases-international-travel-statistics-2023",
+    "datasets": [
+      "inbound_tourism"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "1c56d7aa-4b0c-527d-bf40-a64f6e85b87c",
+    "url": "https://www.travelchinaguide.com/tourism/2023-statistics/",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 3
+  },
+  {
+    "id": "60be7b10-8e19-524a-bf2f-989b8766e3f4",
+    "url": "https://www.travelchinaguide.com/tourism/2024-statistics/",
+    "datasets": [
+      "region_metrics"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "e2ea8764-1219-5052-9246-ccaa2f6194a9",
+    "url": "https://www.traveloka.com/en-id/explore/news/traveloka-marks-over-a-decade-of-innovation-with-exclusive-birthday-sale-for-millions-worldwide/506901",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "60886d8c-d89b-5fcd-bfe1-9d5fcec9edde",
+    "url": "https://www.travelweekly.com/Travel-News/Travel-Technology/Kayak-launches-a-ChatGPT-plug-in",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "499e1035-425b-5732-acb5-644d78747e85",
+    "url": "https://www.travix.com/press/travix-part-of-trip-com-group/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "a428612a-c022-57d0-9cf3-2f20ed0c6060",
+    "url": "https://www.trip.com/newsroom/introducing-tripgenie-groundbreaking-ai-travel-assistant/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "08e7ebd3-f533-5e1b-b269-b0a786300347",
+    "url": "https://www.trip.com/newsroom/trip-com-group-envision-2024/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "07620b6c-e23a-52a3-9b7e-ceaed46fd230",
+    "url": "https://www.trip.com/newsroom/trip-com-group-middle-east-expansion-new-office/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "5e5de020-8d5f-5095-bc3d-c3cd82179b16",
+    "url": "https://www.ttgasia.com/2024/05/17/skyscanner-unveils-new-generative-ai-travel-planning-tool/",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "f69bafa5-588d-58b0-8f66-dc2d7b1ca985",
+    "url": "https://www.ttgasia.com/2025/05/06/trip-com-group-expands-in-middle-east-with-key-partnerships/",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "a26faf9f-10c0-541a-896b-f57d8e5221b1",
+    "url": "https://www.turismodeportugal.pt/en/Turismo_Portugal/visao_geral/Pages/default.aspx",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "a7c4458f-2234-58eb-abfa-fab702349498",
+    "url": "https://www.visitbritain.org/research-insights/inbound-visits-and-spend-annual-uk",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "8f6083d3-bce5-54df-a621-91ba2c88a6c8",
+    "url": "https://www.wam.ae/en/article/b4e0sbe-dubai-welcomes-record-931-million-visitors-2024",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "171e4e81-f64b-5c3b-885c-ec07f7e8c57c",
+    "url": "https://www.webintravel.com/ai-at-hyperspeed-tripgenie-goes-multi-modal-launches-live-translation/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "0b978b77-f63f-5d8a-a0fd-3d24da6cd81f",
+    "url": "https://www.webintravel.com/indonesias-online-travel-market-eyes-17-billion-future/",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 2
+  },
+  {
+    "id": "25afb135-4c42-5bbc-a121-bd468cbae169",
+    "url": "https://www.webintravel.com/otas-in-uae-set-for-double-digit-growth-in-both-air-and-hotel-categories/",
+    "datasets": [
+      "market_growth"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "0dc1f9ee-0dd4-5637-9551-367e1e6898a4",
+    "url": "https://www.webintravel.com/tripgenie-turns-two-expands-ai-capabilities-to-enhance-travel-assistance/",
+    "datasets": [
+      "ai_features"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "718e8721-9849-5c22-9a41-6881a9acce0a",
+    "url": "https://www.yanolja.in/en/newsroom/pressrelease/view/?idx=890",
+    "datasets": [
+      "rival_financials"
+    ],
+    "fact_count": 1
+  },
+  {
+    "id": "a9b48d9f-8636-5a62-a222-0f514d3ff4f8",
+    "url": "https://www.yanoljagroup.com/en/press_release/view?id=1465",
+    "datasets": [
+      "ai_features",
+      "strategy_events"
+    ],
+    "fact_count": 4
+  },
+  {
+    "id": "3997e47b-9e1f-599e-a031-d419f00ff465",
+    "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/250530/dq250530d-eng.htm",
+    "datasets": [
+      "inbound_tourism",
+      "region_metrics"
+    ],
+    "fact_count": 5
+  },
+  {
+    "id": "16ac9a52-ed02-5b5c-aa5d-3f8090a29a46",
+    "url": "https://yourstory.com/2023/08/with-a-2x-growth-since-flipkart-acquisition-cleartrip",
+    "datasets": [
+      "strategy_events"
+    ],
+    "fact_count": 1
+  }
+]

@@ -1,0 +1,328 @@
+[
+  {
+    "id": "55cb4629-328b-5a3d-b907-7d7f51740deb",
+    "name": "Booking.com",
+    "parent": "Booking Holdings",
+    "ticker": "BKNG",
+    "exchange": "NASDAQ",
+    "hq_country": "Netherlands",
+    "hq_iso": "NL",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "Online hotel and accommodation marketplace; merchant and agency models.",
+    "ai_strategy": "AI-powered pricing, personalised search, Smart Filter, generative travel assistants.",
+    "website": "https://www.booking.com"
+  },
+  {
+    "id": "6f1fe034-f8e1-533c-8cbe-929e48dd4f06",
+    "name": "Expedia",
+    "parent": "Expedia Group",
+    "ticker": "EXPE",
+    "exchange": "NASDAQ",
+    "hq_country": "United States",
+    "hq_iso": "US",
+    "categories": [
+      "B2C",
+      "B2B"
+    ],
+    "business_model": "Full-service OTA (consumer) plus Expedia Partner Solutions (B2B distribution).",
+    "ai_strategy": "Romie conversational trip planner; ChatGPT plugin; AI Trip Matching for social Reels.",
+    "website": "https://www.expedia.com"
+  },
+  {
+    "id": "cc12ac7f-f1fb-505c-b341-4b81f8b48499",
+    "name": "Trip.com",
+    "parent": "Trip.com Group",
+    "ticker": "TCOM",
+    "exchange": "NASDAQ/HKEX",
+    "hq_country": "China",
+    "hq_iso": "CN",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "Asia-first full-service OTA; expanding globally through acquisitions.",
+    "ai_strategy": "TripGenie AI assistant; demand-forecasting for flash sales; multilingual AI agent.",
+    "website": "https://www.trip.com"
+  },
+  {
+    "id": "11295560-66c5-5384-afe6-c98919491751",
+    "name": "Airbnb",
+    "parent": "Airbnb",
+    "ticker": "ABNB",
+    "exchange": "NASDAQ",
+    "hq_country": "United States",
+    "hq_iso": "US",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "P2P short-term rental marketplace; host + guest fee model.",
+    "ai_strategy": "AI-generated listings, smart pricing for hosts, experience recommendations, AI Customer Service Agent.",
+    "website": "https://www.airbnb.com"
+  },
+  {
+    "id": "2452466d-d20d-5598-9e01-323d8bf1170d",
+    "name": "Agoda",
+    "parent": "Booking Holdings",
+    "ticker": "BKNG-sub",
+    "exchange": "NASDAQ",
+    "hq_country": "Singapore",
+    "hq_iso": "SG",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "Asia-Pacific hotel specialist; subsidiary of Booking Holdings.",
+    "ai_strategy": "ML-driven competitive rate parity; personalised deal engine; Agoda AI travel assistant.",
+    "website": "https://www.agoda.com"
+  },
+  {
+    "id": "6b72fa12-27d2-5a3f-b278-bcf2c4f0dff0",
+    "name": "MakeMyTrip",
+    "parent": "MakeMyTrip Group",
+    "ticker": "MMYT",
+    "exchange": "NASDAQ",
+    "hq_country": "India",
+    "hq_iso": "IN",
+    "categories": [
+      "B2C",
+      "B2B"
+    ],
+    "business_model": "Indian full-service OTA dominating domestic flights and hotels; owns Goibibo and redBus.",
+    "ai_strategy": "Myra AI chatbot for support; predictive fare alerts; myBiz corporate AI insights.",
+    "website": "https://www.makemytrip.com"
+  },
+  {
+    "id": "0eaebe7b-0a67-5359-bdea-5749bb5d9d0d",
+    "name": "ShareTrip",
+    "parent": "ShareTrip",
+    "ticker": "private",
+    "exchange": "",
+    "hq_country": "Bangladesh",
+    "hq_iso": "BD",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "Bangladesh-first OTA; flights and hotels for the South Asian market.",
+    "ai_strategy": "Visa AI assistant and predictive pricing for the Dhaka market.",
+    "website": "https://www.sharetrip.net"
+  },
+  {
+    "id": "ebf7afd6-c830-5c7d-8029-6ed8d1c5f604",
+    "name": "Kayak",
+    "parent": "Booking Holdings",
+    "ticker": "BKNG-sub",
+    "exchange": "NASDAQ",
+    "hq_country": "United States",
+    "hq_iso": "US",
+    "categories": [
+      "B2C",
+      "Meta"
+    ],
+    "business_model": "Travel meta-search and price-comparison; subsidiary of Booking Holdings.",
+    "ai_strategy": "PriceCheck AI, ChatGPT integration, AI-powered itinerary scanner.",
+    "website": "https://www.kayak.com"
+  },
+  {
+    "id": "431daa8c-aab9-5a18-a7e3-abf2f5bc1a08",
+    "name": "Traveloka",
+    "parent": "Traveloka",
+    "ticker": "private",
+    "exchange": "",
+    "hq_country": "Indonesia",
+    "hq_iso": "ID",
+    "categories": [
+      "B2C",
+      "B2B"
+    ],
+    "business_model": "Southeast-Asian travel super-app with Traveloka for Business arm.",
+    "ai_strategy": "Personalised recommendations, dynamic-bundle pricing, AI customer service across SEA markets.",
+    "website": "https://www.traveloka.com"
+  },
+  {
+    "id": "7d12f1d2-a460-5054-a5b4-2c7523f5a68e",
+    "name": "Kiwi.com",
+    "parent": "Kiwi.com",
+    "ticker": "private",
+    "exchange": "",
+    "hq_country": "Czech Republic",
+    "hq_iso": "CZ",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "Virtual interlining — combining tickets across carriers into one booking.",
+    "ai_strategy": "Graph-based route optimisation; AI disruption management; ML pricing.",
+    "website": "https://www.kiwi.com"
+  },
+  {
+    "id": "c01c0c90-a2b0-54ee-883d-e6974b08d296",
+    "name": "Etraveli",
+    "parent": "Etraveli Group",
+    "ticker": "private",
+    "exchange": "",
+    "hq_country": "Sweden",
+    "hq_iso": "SE",
+    "categories": [
+      "B2C",
+      "B2B"
+    ],
+    "business_model": "Flight-first OTA (Mytrip, GoToGate) with white-label B2B distribution.",
+    "ai_strategy": "Dynamic ancillary upsell using ML models; AI fraud detection.",
+    "website": "https://www.etraveli.com"
+  },
+  {
+    "id": "c0515206-17ea-5d08-9e0c-475f0cb58942",
+    "name": "eDreams ODIGEO",
+    "parent": "eDreams ODIGEO",
+    "ticker": "EDR",
+    "exchange": "BME",
+    "hq_country": "Spain",
+    "hq_iso": "ES",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "Subscription-based OTA (Prime programme); flights & hotels.",
+    "ai_strategy": "AI subscription churn prevention; personalised offer engine; generative AI itinerary builder.",
+    "website": "https://www.edreams.com"
+  },
+  {
+    "id": "b9dbbd2a-b650-5667-bc3d-2f76892a6367",
+    "name": "KKday",
+    "parent": "KKday",
+    "ticker": "private",
+    "exchange": "",
+    "hq_country": "Taiwan",
+    "hq_iso": "TW",
+    "categories": [
+      "B2C",
+      "B2B"
+    ],
+    "business_model": "Asian-focused tours and experiences marketplace.",
+    "ai_strategy": "AI-powered local guide recommendations; multilingual GenAI support.",
+    "website": "https://www.kkday.com"
+  },
+  {
+    "id": "375b8060-54cf-597c-8a5f-f2958eda48a8",
+    "name": "Goibibo",
+    "parent": "MakeMyTrip Group",
+    "ticker": "MMYT-sub",
+    "exchange": "NASDAQ",
+    "hq_country": "India",
+    "hq_iso": "IN",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "Indian consumer OTA; subsidiary of MakeMyTrip Group.",
+    "ai_strategy": "Shared MMT Myra AI stack; AI-powered hotel ranking.",
+    "website": "https://www.goibibo.com"
+  },
+  {
+    "id": "4420bc80-12ed-531a-8cda-b7eac6a28387",
+    "name": "Klook",
+    "parent": "Klook",
+    "ticker": "private",
+    "exchange": "",
+    "hq_country": "Hong Kong",
+    "hq_iso": "HK",
+    "categories": [
+      "B2C",
+      "B2B"
+    ],
+    "business_model": "Asia-Pacific experiences and tours marketplace; activities + transport.",
+    "ai_strategy": "GenAI itinerary generator; AI translation for inventory; smart recommendations.",
+    "website": "https://www.klook.com"
+  },
+  {
+    "id": "2ad2aae5-14d6-5546-8470-7beab6ceabb0",
+    "name": "Cleartrip",
+    "parent": "Flipkart",
+    "ticker": "Flipkart-sub",
+    "exchange": "Walmart-NYSE",
+    "hq_country": "India",
+    "hq_iso": "IN",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "Indian OTA; owned by Flipkart/Walmart; flights & hotels.",
+    "ai_strategy": "Flipkart-shared ML personalisation stack; chatbot self-service.",
+    "website": "https://www.cleartrip.com"
+  },
+  {
+    "id": "f38721ba-a9cf-5f2e-bd0e-1baa54017861",
+    "name": "EaseMyTrip",
+    "parent": "Easy Trip Planners",
+    "ticker": "EASEMYTRIP",
+    "exchange": "NSE/BSE",
+    "hq_country": "India",
+    "hq_iso": "IN",
+    "categories": [
+      "B2C",
+      "B2B"
+    ],
+    "business_model": "Indian no-convenience-fee OTA; flights, hotels, holidays.",
+    "ai_strategy": "Voice-AI booking; predictive fare alerts; GenAI corporate trip planner.",
+    "website": "https://www.easemytrip.com"
+  },
+  {
+    "id": "c37adc7d-7da9-5849-b1ac-16f3a469e780",
+    "name": "Yatra.com",
+    "parent": "Yatra Online",
+    "ticker": "YTRA",
+    "exchange": "NSE/BSE",
+    "hq_country": "India",
+    "hq_iso": "IN",
+    "categories": [
+      "B2C",
+      "B2B"
+    ],
+    "business_model": "Indian OTA with strong corporate-travel (MICE) business after Globe Travels acquisition.",
+    "ai_strategy": "MICE-focused AI trip planning; predictive analytics for corporate travel managers.",
+    "website": "https://www.yatra.com"
+  },
+  {
+    "id": "7787ea38-d159-5dd9-87c2-0e4f79836427",
+    "name": "yanolja",
+    "parent": "Yanolja",
+    "ticker": "private",
+    "exchange": "",
+    "hq_country": "South Korea",
+    "hq_iso": "KR",
+    "categories": [
+      "B2C",
+      "B2B"
+    ],
+    "business_model": "Korean travel super-app + Yanolja Cloud B2B hospitality SaaS.",
+    "ai_strategy": "Yanolja Cloud GenAI: AI concierge, dynamic pricing, demand forecasting for hotel partners.",
+    "website": "https://www.yanolja.com"
+  },
+  {
+    "id": "06bc3d2e-d668-5ff4-b1df-021a2b545e10",
+    "name": "Yeogi (GoodChoice)",
+    "parent": "GC Company",
+    "ticker": "private",
+    "exchange": "",
+    "hq_country": "South Korea",
+    "hq_iso": "KR",
+    "categories": [
+      "B2C"
+    ],
+    "business_model": "Korean accommodation OTA; rebrand from \"Yeogi Eottae\" / Good Choice.",
+    "ai_strategy": "AI-powered booking funnel and review summarisation.",
+    "website": "https://www.goodchoice.kr"
+  },
+  {
+    "id": "276071f8-c093-50ae-91bf-87a2b44b1d8c",
+    "name": "Skyscanner",
+    "parent": "Trip.com Group",
+    "ticker": "TCOM-sub",
+    "exchange": "NASDAQ/HKEX",
+    "hq_country": "United Kingdom",
+    "hq_iso": "GB",
+    "categories": [
+      "B2C",
+      "Meta"
+    ],
+    "business_model": "Global flight, hotel, and car-hire meta-search; subsidiary of Trip.com Group.",
+    "ai_strategy": "AI-powered travel insights; Savings Generator; conversational trip planning.",
+    "website": "https://www.skyscanner.com"
+  }
+]

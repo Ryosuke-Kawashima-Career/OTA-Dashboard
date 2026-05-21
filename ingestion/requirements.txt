@@ -1,0 +1,29 @@
+# Phase 7 — ingestion pipeline skeleton (FR-08)
+# Install with: pip install -r ingestion/requirements.txt
+# (The ingestion runtime is decoupled from backend/requirements.txt so the
+#  dashboard image stays slim; the two share a database connection and the
+#  SQLAlchemy models via backend on PYTHONPATH.)
+
+# Orchestration — Prefect 3 flows + scheduling
+prefect>=3.0,<4
+
+# Raw payload store — S3 (production) + boto3 stub for typing.
+# Local-filesystem backend is used by default in dev/test, so boto3 is
+# only required when STORE_BACKEND=s3.
+boto3>=1.35
+
+# HTML / DOM-skeleton fingerprinting (T-7.4) + IR-page scraping (Phase 8)
+beautifulsoup4>=4.12
+
+# HTTP client used by the robots.txt + rate-limit middleware (T-7.7).
+# Already pulled in transitively by prefect, but pinned explicitly to make
+# the dependency obvious to anyone reading this file.
+requests>=2.31
+
+# Financial parsing (Phase 8) — pinned here so `pip install -r` produces a
+# ready-to-run environment for the next phase as well.
+pdfplumber>=0.11
+python-xbrl>=1.1
+
+# LLM client for strategy summaries + chart narratives (Phases 9, 12).
+anthropic>=0.39
