@@ -1,7 +1,7 @@
 import uuid
 from datetime import date
 
-from sqlalchemy import Date, Float, ForeignKey, String
+from sqlalchemy import Date, Float, ForeignKey, String, UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -18,6 +18,14 @@ class OwnRegionalFinancial(Base):
     """
 
     __tablename__ = "own_regional_financial"
+    __table_args__ = (
+        UniqueConstraint(
+            "region_iso",
+            "period_end",
+            "source_id",
+            name="uq_own_regional_financial_region_period_source",
+        ),
+    )
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     region_iso: Mapped[str] = mapped_column(

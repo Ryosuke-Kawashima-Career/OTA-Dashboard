@@ -1,0 +1,1 @@
+{"fixture_path":"data/market/market_growth.csv","publisher":"Market Data Forecast","rows":[{"growth_rate_pct":9.1,"is_estimated":false,"market_size_usd_millions":240000.0,"notes":"Phocuswright/Market Data Forecast US online travel market 2024","region_iso":"US","source_url":"https://www.marketdataforecast.com/market-reports/united-states-online-travel-market","year":2024}]}

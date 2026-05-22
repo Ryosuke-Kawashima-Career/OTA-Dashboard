@@ -1,0 +1,1 @@
+{"fixture_path":"data/market/market_growth.csv","publisher":"Deutscher Reiseverband","rows":[{"growth_rate_pct":17.1,"is_estimated":false,"market_size_usd_millions":41000.0,"notes":"DRV German travel market 2023; converted from EUR at ~1.08 USD/EUR","region_iso":"DE","source_url":"https://www.drv.de/public/Downloads_2025/Zahlen_und_Fakten_2025_ENG.pdf","year":2023}]}
