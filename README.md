@@ -1,20 +1,22 @@
 # OTA Competitive Intelligence Dashboard
 
-A world-map-based dashboard for monitoring rival Online Travel Agencies (OTAs) and regional travel market characteristics.
+A world-map-based dashboard that lets an Online Travel Agency (OTA) and its broader organization benchmark themselves against rivals and against each regional market's growth rate, with full source provenance behind every figure. Built end-to-end on real, public OTA data — no mock numbers in the warehouse.
 
-## Status
+## Architecture at a Glance
 
-| Phase | Feature | Status |
-| --- | --- | --- |
-| 0 | Monorepo scaffold, DB migrations, seed data, CI | **Complete** |
-| 1 | Interactive world map, KPI choropleth, hover tooltips (FR-01) | **Complete** |
-| 2 | Rival company marker overlay (FR-02) | **Complete** |
-| 3 | Regional characteristics panel (FR-03) | **Complete** |
-| 4 | KPI header + multi-region comparison view (FR-04, FR-05) | **Complete** |
-| 4b | Multi-category (B2C + B2B) rivals; comparison cap removed | **Complete** |
-| 5 | Time-period filter, global rival rank, CSV export, "last updated" badge (FR-06) | **Complete** |
+The system follows a four-layer pipeline so that **every figure shown to a user is derived from a real, traceable, public source** (FR-08, FR-08.6):
 
-See [docs/walkthrough.md](docs/walkthrough.md) for per-phase progress notes.
+```text
+External Public Sources  ──►  Ingestion  ──►  Storage  ──►  Backend API  ──►  Frontend
+  SEC EDGAR · HKEX           Prefect flows    Postgres +     FastAPI         React +
+  UNWTO · JNTO               + adapters       PostGIS        services        Leaflet +
+  World Bank · IMF           + provenance     warehouse                      Recharts
+  Statista · Phocuswright    recorder         (v2 fact
+  Booking / Expedia /        + raw-payload    tables +
+  Airbnb IR pages            store            sources)
+```
+
+Every fact row in the warehouse carries a `source_id` foreign key into a central `sources` registry (one row per `(url, content_hash)`). Estimated values carry an `is_estimated` flag plus a `calculation_method` string — the View-Source modal will surface both. See [specs/design.md](specs/design.md) for the full architecture diagram, data model, KPI catalog, and ingestion design.
 
 ## Tech Stack
 
@@ -26,7 +28,11 @@ See [docs/walkthrough.md](docs/walkthrough.md) for per-phase progress notes.
 | State | Zustand |
 | Backend | Python 3.12 + FastAPI |
 | Database | PostgreSQL 16 + PostGIS 3.4 |
-| Migrations | Alembic |
+| Migrations | Alembic (0001 → 0009) |
+| Ingestion orchestration | Prefect 3 |
+| Raw payload store | Local FS (dev) / S3-compatible (prod), content-addressed by SHA-256 |
+| Financial parsing toolkit | `pdfplumber`, `beautifulsoup4`, `python-xbrl` (XBRL > regex > LLM fallback chain) |
+| HTTP ingestion middleware | `requests` + `urllib.robotparser` + token-bucket rate limiter (per-host, honours `Crawl-delay`) |
 | Container | Docker Compose |
 
 ---
@@ -89,7 +95,7 @@ Smoke-check the stack in a fourth terminal:
 ```bash
 curl -s http://localhost:8000/healthz                                  # → {"status":"ok"}
 curl -s http://localhost:8000/api/regions | jq '.features | length'    # → 233
-curl -s http://localhost:8000/api/rivals  | jq '.count'                # → 15
+curl -s http://localhost:8000/api/rivals  | jq '.count'                # → 20 (curated roster minus 1 HQ without map coords)
 curl -s http://localhost:8000/api/snapshots                            # → {"months":[…5 years…], "latest":"2026-04-01"}
 curl -s http://localhost:8000/api/kpis/global | jq '{markets_covered, tracked_rivals, snapshot_month}'
 curl -s http://localhost:8000/api/regions/FR | jq '.name, .demand_index'   # → "France", 83
@@ -166,13 +172,15 @@ pip install -r requirements-dev.txt
 # Configure environment
 cp .env.example .env              # edit if your DB credentials differ
 
-# Apply database migrations (0001 schema, 0002 categories[] array)
+# Apply database migrations (0001 schema → 0009 Phase-8 upsert constraints)
 alembic upgrade head
 
-# Seed initial data:
-#   15 rivals (10 B2C, 8 B2B — 3 are categorized as both),
-#   30 countries, and 5 yearly KPI snapshots (2022 → 2026) →
-#   150 region_metrics rows, 875 rival_region_snapshots rows.
+# Seed the warehouse with the real curated OTA dataset:
+#   30 regions, 21 rivals (B2C + B2B), 50 rival financials,
+#   139 market-growth rows, 60 region metrics, 90 inbound-tourism rows,
+#   58 AI features, 93 strategy events, 288 source rows (provenance registry),
+#   880 rival_region_snapshots (interim, Phase 1–5 compat).
+# All sourced from data/*.csv with publisher URLs preserved in `sources`.
 python ../data/seeds/seed.py
 
 # Start the API server
@@ -203,98 +211,115 @@ Once all three services are up, these user actions should produce the following 
 
 | Action | Expected result |
 | --- | --- |
-| Page load at `:3000` | Top app header (title + year slider + compare picker + category chips + KPI selector), KPI tile bar (Markets Covered / Tracked Rivals / Hottest Growth / Last Updated + Export CSV), and the world map centered at [20, 0] zoom 2. 233 country boundaries, 30 color-shaded (Phase 1). 15 violet rival pins, clustered at zoom < 5 (Phase 2). |
-| Click a rival pin | Violet summary card slides in top-right with name, HQ, categories (e.g. "B2C / B2B" for Expedia), business model, AI strategy, website. (Phase 2 + 4b) |
-| **Click a country** (e.g. France) | Left-side panel slides in within ~320 ms showing KPIs (Demand Index, Avg Booking Value), a 12-month demand bar chart peaking in July, a demographics donut summing to 100%, top routes, and the rival ranking table with **local share + worldwide rank** per rival. (Phase 3 + 5) |
+| Page load at `:3000` | Top app header (title + year slider + compare picker + category chips + KPI selector), KPI tile bar (Markets Covered / Tracked Rivals / Hottest Growth / Last Updated + Export CSV), and the world map centered at [20, 0] zoom 2. 233 country boundaries, 30 color-shaded . 15 violet rival pins, clustered at zoom < 5 . |
+| Click a rival pin | Violet summary card slides in top-right with name, HQ, categories (e.g. "B2C / B2B" for Expedia), business model, AI strategy, website. |
+| **Click a country** (e.g. France) | Left-side panel slides in within ~320 ms showing KPIs (Demand Index, Avg Booking Value), a 12-month demand bar chart peaking in July, a demographics donut summing to 100%, top routes, and the rival ranking table with **local share + worldwide rank** per rival. |
 | Click Australia / Brazil | Same panel — demand chart peaks in **January** (Southern-hemisphere seasonality). |
 | Press Esc or click × | Panel closes; map retains current zoom/pan. |
 | Switch KPI in header dropdown | Choropleth colors and hover tooltips update atomically. |
-| Toggle a category chip (B2C / B2B) | Rival pins with at least one matching category stay; the *Tracked Rivals* tile re-counts live without a refetch. (Phase 4 + 4b) |
-| Pick 2+ regions from the **Compare** dropdown | A floating comparison panel appears bottom-right with 5 metric rows × N region columns; the highest cell in each row is highlighted green. Picker has no upper cap and disables only when every seeded region is selected. (Phase 4 + 4b) |
-| Drag the **Year** slider (2022 → 2026) | World map choropleth, KPI tiles, open region panel, comparison table, and *Last Updated* badge all re-fetch against the chosen year. (Phase 5) |
-| Click **Export CSV** | Browser downloads `ota-export-<YYYY-MM-DD>.csv` with one row per region for the active snapshot. (Phase 5) |
+| Toggle a category chip (B2C / B2B) | Rival pins with at least one matching category stay; the *Tracked Rivals* tile re-counts live without a refetch. |
+| Pick 2+ regions from the **Compare** dropdown | A floating comparison panel appears bottom-right with 5 metric rows × N region columns; the highest cell in each row is highlighted green. Picker has no upper cap and disables only when every seeded region is selected. |
+| Drag the **Year** slider (2022 → 2026) | World map choropleth, KPI tiles, open region panel, comparison table, and *Last Updated* badge all re-fetch against the chosen year. |
+| Click **Export CSV** | Browser downloads `ota-export-<YYYY-MM-DD>.csv` with one row per region for the active snapshot. |
 
 ## Project Structure
 
 ```text
 OTA-Worldmap/
-├── frontend/                          # React 19 + TypeScript (Vite)
-│   ├── index.html                     # Vite entry document
+├── frontend/                          # React 19 + TypeScript (Vite) — Phase 1–5 UI
+│   ├── index.html
 │   ├── src/
-│   │   ├── main.tsx                   # React root + global CSS import
-│   │   ├── App.tsx                    # Layout shell (header + map + panels)
-│   │   ├── index.css                  # App styles + Leaflet/MarkerCluster CSS
-│   │   ├── types.ts                   # KPI, Rival, RegionDetail types
-│   │   ├── api/
-│   │   │   ├── regions.ts             # fetch wrapper for /api/regions (accepts snapshot_month)
-│   │   │   ├── regionDetail.ts        # fetch wrapper for /api/regions/{iso} (snapshot_month)
-│   │   │   ├── rivals.ts              # fetch wrapper for /api/rivals
+│   │   ├── main.tsx · App.tsx · index.css · types.ts
+│   │   ├── api/                       # fetch wrappers for the Phase 1–5 endpoints
+│   │   │   ├── regions.ts · regionDetail.ts · rivals.ts
 │   │   │   ├── globalKpis.ts          # /api/kpis/global + exportCsvUrl helper
-│   │   │   └── snapshots.ts           # /api/snapshots (slider data source)
-│   │   ├── components/
-│   │   │   ├── WorldMap.tsx           # Leaflet map + choropleth + click handler
-│   │   │   ├── KpiSelector.tsx        # KPI dropdown
-│   │   │   ├── KpiHeaderBar.tsx       # Global KPIs + Last Updated badge + Export CSV (Phase 4 + 5)
-│   │   │   ├── RivalMarkersLayer.tsx  # leaflet.markercluster rival pins
-│   │   │   ├── RivalSummaryCard.tsx   # Floating card on marker click
-│   │   │   ├── RivalCategoryFilter.tsx # Category chip filter (B2C / B2B)
-│   │   │   ├── RegionPanel.tsx        # Phase-3 side-panel shell
-│   │   │   ├── DemandChart.tsx        # 12-month Recharts BarChart
-│   │   │   ├── DemographicsDonut.tsx  # Recharts PieChart donut
-│   │   │   ├── RivalRankingTable.tsx  # Market-share ranking + global rank (Phase 3 + 5)
-│   │   │   ├── ComparisonPicker.tsx   # Region chip multi-select for comparison (Phase 4)
-│   │   │   ├── ComparisonPanel.tsx    # Floating side-by-side comparison table (Phase 4)
-│   │   │   └── TimePeriodFilter.tsx   # Year slider over available snapshots (Phase 5)
-│   │   ├── stores/
-│   │   │   ├── kpiStore.ts            # Zustand (selected KPI)
-│   │   │   ├── rivalStore.ts          # Zustand (rivals, active categories, selection)
-│   │   │   ├── regionDetailStore.ts   # Zustand (region-panel state + snapshot refresh)
-│   │   │   ├── comparisonStore.ts     # Zustand (compare selections + per-snapshot detail cache)
-│   │   │   └── timePeriodStore.ts     # Zustand (available snapshot months + current selection)
-│   │   └── utils/
-│   │       ├── colorScale.ts          # Choropleth color interpolation
-│   │       ├── colorScale.test.ts     # Vitest unit tests
-│   │       ├── demographics.ts        # Donut-share normalizer
-│   │       ├── demographics.test.ts   # Vitest unit tests
-│   │       ├── comparison.ts          # buildComparisonRows + findWinnerIndex helpers
-│   │       └── comparison.test.ts     # Vitest unit tests for winner-highlighting
-│   ├── e2e/
-│   │   └── rivals.spec.ts             # Playwright smoke test (FR-02)
-│   ├── playwright.config.ts
-│   ├── vite.config.ts
-│   └── package.json
-├── backend/                           # FastAPI + SQLAlchemy (async)
+│   │   │   └── snapshots.ts           # /api/snapshots (year slider)
+│   │   ├── components/                # WorldMap, RegionPanel, ComparisonPanel,
+│   │   │                              # RivalMarkersLayer, KpiHeaderBar, etc.
+│   │   ├── stores/                    # Zustand stores (kpi, rival, region, comparison, timePeriod)
+│   │   └── utils/                     # colorScale, demographics, comparison + Vitest tests
+│   ├── e2e/rivals.spec.ts             # Playwright smoke test (FR-02)
+│   └── package.json · vite.config.ts · playwright.config.ts
+├── backend/                           # FastAPI + SQLAlchemy
 │   ├── app/
 │   │   ├── main.py                    # FastAPI app + router registration
-│   │   ├── config.py                  # Pydantic settings
-│   │   ├── database.py                # Async engine + session factory
-│   │   ├── base.py                    # SQLAlchemy declarative base
-│   │   ├── snapshot.py                # Shared parse_snapshot_month / resolve helpers (Phase 5)
-│   │   ├── models/
+│   │   ├── config.py · database.py · base.py · snapshot.py
+│   │   ├── models/                    # ── v2 provenance-backed schema (Phase 6 + 7b) ──
 │   │   │   ├── region.py              # Region, RegionMetrics
-│   │   │   └── rival.py               # Rival (categories: ARRAY(String)), RivalRegionSnapshot
-│   │   └── routers/
-│   │       ├── regions.py             # /api/regions + /api/regions/{iso} + /api/snapshots
-│   │       ├── rivals.py              # /api/rivals (roster + HQ coords; ?category= overlap filter)
-│   │       ├── kpis.py                # /api/kpis/global (Phase 4)
-│   │       └── export.py              # /api/export — CSV download (Phase 5)
-│   ├── migrations/
-│   │   └── versions/
-│   │       ├── 0001_initial_schema.py
-│   │       └── 0002_rival_multi_category.py   # category VARCHAR → categories VARCHAR[]
+│   │   │   ├── rival.py               # Rival (+ parent, hq_iso, ticker, exchange) +
+│   │   │   │                          #   RivalRegionSnapshot (interim, Phase 1–5 compat)
+│   │   │   ├── market_growth.py       # MarketGrowth (TAM + growth rate per region/year)
+│   │   │   ├── rival_financial.py     # RivalFinancial (revenue, take rate, op margin, segments)
+│   │   │   ├── own_financial.py       # OwnRegionalFinancial
+│   │   │   ├── market_share.py        # MarketShareEstimate (FR-08.4, is_estimated flag)
+│   │   │   ├── strategy_event.py      # StrategyEvent + AIFeature (categorised)
+│   │   │   ├── inbound_tourism.py     # Inbound arrivals + receipts per region/year
+│   │   │   ├── job_posting.py         # JobPostingSnapshot (Phase 9 leading indicator)
+│   │   │   └── source.py              # Source registry (FR-08.6 provenance)
+│   │   ├── routers/                   # /api/regions, /api/regions/{iso}, /api/snapshots,
+│   │   │                              # /api/rivals, /api/kpis/global, /api/export
+│   │   │                              # (FR-04b/06/07/08.6 routers land in Phase 10–13)
+│   │   └── services/                  # ── Backend services ──
+│   │       └── share_estimator.py     # FR-08.4 — derives MarketShareEstimate rows
+│   ├── migrations/versions/           # Alembic chain 0001 → 0009
+│   │   ├── 0001_initial_schema.py
+│   │   ├── 0002_rival_multi_category.py    # category VARCHAR → categories VARCHAR[]
+│   │   ├── 0003_source_registry.py         # sources(url, publisher, content_hash, …)
+│   │   ├── 0004_financials.py              # market_growth, rival_financial, own_regional_financial
+│   │   ├── 0005_market_share.py            # market_share_estimate (is_estimated, method)
+│   │   ├── 0006_strategy.py                # strategy_event, ai_feature, job_posting_snapshot
+│   │   ├── 0007_rival_metadata.py          # ticker, exchange, strategy_summary, summary_updated_at
+│   │   ├── 0008_curated_data_schema.py     # parent, hq_iso, is_estimated/notes pair, inbound_tourism
+│   │   └── 0009_phase8_upsert_constraints.py  # unique constraints rival_financial / own_regional
+│   ├── scripts/
+│   │   └── validate_provenance.py     # Asserts every fact row carries a non-null source_id
 │   ├── alembic.ini
 │   └── requirements.txt
+├── ingestion/                         # ── Phase 7 + 8 ingestion pipeline (FR-08) ──
+│   ├── __init__.py · db.py · requirements.txt
+│   ├── adapters/                      # One module per external source
+│   │   ├── _base.py                   # AdapterExtraction / FactRow / run_adapter()
+│   │   ├── _http.py                   # HttpClient (robots.txt + token bucket, FR-08.5)
+│   │   ├── _financials_fixture.py     # Shared rival_financials.csv reader for SEC/HKEX/IR
+│   │   ├── echo.py                    # Synthetic adapter — proves the pipeline (T-7.5)
+│   │   ├── unwto.py                   # UNWTO tourism stats → inbound_tourism
+│   │   ├── jnto.py                    # JNTO Japan inbound → inbound_tourism (JP slice)
+│   │   ├── world_bank.py              # ST.INT.RCPT.CD API → inbound_tourism
+│   │   ├── imf.py                     # SDMX-JSON FX rates (parse_rates exposed)
+│   │   ├── industry_research.py       # Statista / Phocuswright / Mordor / IMARC / …
+│   │   ├── sec_edgar.py               # Booking, Expedia, Airbnb, MMYT, DESP, Yatra → rival_financial
+│   │   ├── hkex.py                    # Trip.com HKEX filings → rival_financial
+│   │   ├── ir_page.py                 # Generic HTML IR pages → rival_financial
+│   │   └── pdf_report.py              # PDF earnings reports (pdfplumber)
+│   ├── flows/                         # Prefect 3 flows
+│   │   ├── echo_flow.py               # End-to-end pipeline canary
+│   │   ├── monthly_market.py          # NFR-01 monthly — UNWTO + JNTO + 16 research publishers
+│   │   └── daily_filings.py           # NFR-01 24h SLA — SEC + HKEX + IR + share_estimator
+│   ├── normalizer/schema.py           # upsert(session, target, natural_key, payload, …)
+│   ├── provenance/recorder.py         # ON-CONFLICT-DO-NOTHING sources upsert
+│   ├── monitor/                       # layout_change_detector.py + alerts.py
+│   ├── raw_store/s3_client.py         # LocalRawPayloadStore / S3RawPayloadStore
+│   └── tests/                         # 32 pytest cases (raw store, HTTP, layout, Phase 8, echo)
 ├── data/
-│   ├── geo/
-│   │   └── countries.simplified.geo.json   # Boundaries for 233 countries
-│   └── seeds/
-│       └── seed.py                    # Rivals (15), regions (30), 5 yearly snapshots 2022→2026
-├── docs/
-│   └── walkthrough.md                 # Per-phase implementation log
+│   ├── geo/countries.simplified.geo.json    # Boundaries for 233 countries
+│   ├── market/market_growth.csv             # 139 rows · 16 publishers
+│   ├── regions/region_metrics.csv           # 60 rows
+│   ├── regions/inbound_tourism.csv          # 90 rows
+│   ├── rivals/rivals.csv                    # 21 rivals (real, sourced)
+│   ├── rivals/rival_financials.csv          # 50 rows · SEC + HKEX + IR
+│   ├── strategy/ai_features.csv             # 58 AI features (7 categories)
+│   ├── strategy/strategy_events.csv         # 93 events
+│   ├── sources.csv                          # 288 distinct source URLs
+│   ├── README.md
+│   └── seeds/seed.py                        # Loads every CSV into the v2 warehouse (idempotent)
+├── docs/walkthrough.md                # Per-phase implementation log
 ├── specs/
-│   ├── user_story.md
-│   └── implementation_plan.md
-└── docker-compose.yml
+│   ├── user_story.md                  # 知彼知己 vision (president feedback)
+│   ├── requirements.md                # FR-01 → FR-08 + NFR-01/02
+│   ├── design.md                      # 4-layer architecture · KPI catalog · synthesis rules
+│   └── implementation_plan.md         # 14-phase roadmap (0–8 ✅, 9–14 planned)
+├── docker-compose.yml
+└── pytest.ini · conftest.py
 ```
 
 ---
@@ -302,6 +327,8 @@ OTA-Worldmap/
 ## API Endpoints
 
 All read endpoints that touch metrics accept an optional `?snapshot_month=YYYY-MM-DD` query parameter. Omit it to get the latest snapshot present in the database; a malformed value returns `400` with an explanatory `detail` message.
+
+> **Phase 6–8 expanded the warehouse (provenance-backed fact tables + real ingestion) but did not yet add new routers.** The user-facing endpoints below still drive the Phase 1–5 UI. The Phase 10–13 endpoints (`/api/benchmark`, `/api/share-trajectory`, `/api/win-loss`, `/api/strategy/{id}`, `/api/narrative`, `/api/sources/{id}`) are scaffolded in [specs/design.md](specs/design.md) and will land alongside their React components.
 
 | Method | Path | Purpose | Response |
 | --- | --- | --- | --- |
@@ -387,6 +414,28 @@ docker compose stop db        # stop DB (keeps data)
 docker compose down -v        # stop DB and delete volume
 psql -h localhost -U ota -d ota_worldmap   # open psql shell
 ```
+
+### Ingestion (Phase 7 + 8 — refreshes the warehouse from real public data)
+
+```bash
+# Run the two production flows in fixture mode (no network calls; the curated
+# CSVs in data/ are the regression baseline for live HTTP mode).
+PYTHONPATH=backend:. python -m ingestion.flows.monthly_market   # UNWTO + JNTO + 16 research publishers
+PYTHONPATH=backend:. python -m ingestion.flows.daily_filings    # SEC EDGAR + HKEX + IR + share_estimator
+
+# Both flows are idempotent — re-running upserts onto the same source_ids
+# (no duplicate fact rows). Expect on first run:
+#   MonthlyMarketRunSummary(total_fact_rows=232, …)
+#   DailyFilingsRunSummary(total_financial_rows=50, derived_share_rows=112, …)
+
+# Provenance contract — must exit 0 (every fact row carries a source_id):
+(cd backend && python scripts/validate_provenance.py)
+
+# Full ingestion test suite (raw store + HTTP + layout detector + Phase 8 adapters + echo):
+pytest ingestion/tests -v
+```
+
+Each adapter ships in two modes: `fetch_via_http(http_client, …)` for live production and `fetch_from_curated()` / `fetch_from_fixture()` for the offline regression baseline used by the test suite and the flow defaults above.
 
 ---
 

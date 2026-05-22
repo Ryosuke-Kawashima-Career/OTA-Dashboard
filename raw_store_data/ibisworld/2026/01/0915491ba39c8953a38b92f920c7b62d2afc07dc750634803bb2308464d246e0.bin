@@ -1,0 +1,1 @@
+{"fixture_path":"data/market/market_growth.csv","publisher":"IBISWorld","rows":[{"growth_rate_pct":null,"is_estimated":true,"market_size_usd_millions":8500.0,"notes":"IBISWorld AU online travel; partial recovery from COVID","region_iso":"AU","source_url":"https://www.ibisworld.com/australia/market-size/online-travel-bookings/4163/","year":2022}]}
